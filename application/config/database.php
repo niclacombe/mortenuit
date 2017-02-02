@@ -75,9 +75,9 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'mysql.niclacombe.ca',
-	'username' => 'mortenuit',
-	'password' => 'UZlzuGCe.Zg^',
+	'hostname' => 'localhost',
+	'username' => 'root',
+	'password' => '',
 	'database' => 'mortenuit',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
