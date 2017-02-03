@@ -40,7 +40,7 @@ class User extends CI_Controller {
 	public function addUser() {
 		$this->form_validation->set_rules('prenom', 'Prénom', 'trim|required');
 		$this->form_validation->set_rules('nom', 'Nom', 'trim|required');
-		$this->form_validation->set_rules('courriel', 'Courriel', 'trim|required|is_unique|valid_email');
+		$this->form_validation->set_rules('courriel', 'Courriel', 'trim|required|is_unique[users.courriel]|valid_email');
 		$this->form_validation->set_rules('password', 'Mot de passe', 'trim|required|min_length[5]|max_length[15]|alpha_numeric');
 		$this->form_validation->set_rules('password2', 'Mot de passe', 'trim|matches[password]');
 
@@ -50,6 +50,8 @@ class User extends CI_Controller {
 			$this->load->view('template/footer');
 		}
 		else{
+
+			$this->load->library('encryption');
 
 			$this->load->model('user_model');
 			$data['register'] = $this->user_model->addUser();

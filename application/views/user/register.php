@@ -40,7 +40,7 @@
 
 					echo form_label('Mot de Passe : ');
 					$data = array(
-						'type'	=> 'text',
+						'type'	=> 'password',
 						'name'	=> 'password',
 						'class'	=> 'form-control',
 						'placeholder'	=> 'Mot de Passe',
@@ -49,7 +49,7 @@
 
 					echo form_label('Confirmation du Mot de Passe : ');
 					$data = array(
-						'type'	=> 'text',
+						'type'	=> 'password',
 						'name'	=> 'password2',
 						'class'	=> 'form-control',
 						'placeholder'	=> 'Mot de Passe',

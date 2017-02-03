@@ -16,19 +16,18 @@ class User_model extends CI_Model{
     }
     
     public function addUser(){
+
+        $encryptedPW = $this->encryption->encrypt($this->input->post('password'));
         
         $infoNewUser = array(
-            'identifiant' => $this->input->post('register_id'),
-            'mot_de_passe' => md5($this->input->post('register_pw')),
-            'prenom' => $this->input->post('register_prenom'),
-            'nom' => $this->input->post('register_nom'),
-            'adresse' => $this->input->post('register_adresse'),
-            'categorie' => $this->input->post('categorie'),
+            'prenom'        => $this->input->post('prenom'),
+            'nom'           => $this->input->post('nom'),
+            'password'      => $encryptedPW,
+            'courriel'      => $this->input->post('courriel'),
+            'created_at'    => time(),
         );
         
-        $query = $this->db->insert('users', $infoNewUser);
-        
-        return $query/*->result()*/;
+        $this->db->insert('users', $infoNewUser);
         
     }
     
