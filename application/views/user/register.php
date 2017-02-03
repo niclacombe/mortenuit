@@ -3,6 +3,8 @@
 		<div class="col-xs-12">
 			<h2>Inscription</h2>
 
+			<?php echo validation_errors(); ?>
+
 			<?php 
 				$data = array(
 					'class'	=> 'col-md-8 col-xs-12',
@@ -63,7 +65,9 @@
 					echo form_label("En m'inscrivant, je comprends que cette activité est réservée au 18 ans et plus.");
 
 					$data = array(
-						'class'	=> 'btn btn-primary',
+						'class'		=> 'btn btn-primary',
+						'id'		=> 'btnSubmit',
+						'disabled'	=> 'disabled',
 					);
 					echo form_submit($data,'Soumettre');
 
@@ -72,3 +76,14 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	$('#confirmationAge').on('click',function(){
+		if($('#btnSubmit').attr('disabled')){
+			$('#btnSubmit').removeAttr('disabled');
+		}
+		else{
+			$('#btnSubmit').attr('disabled','disabled');
+		}
+	});
+</script>
