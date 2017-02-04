@@ -25,6 +25,9 @@ class User extends CI_Controller {
 		//$this->load->model('user_model');
 		$this->load->helper('form');
 		$this->load->library('form_validation');
+		$this->load->library('email');
+
+		$data = [];
 		
 	}
 
@@ -54,13 +57,23 @@ class User extends CI_Controller {
 			$this->load->library('encryption');
 
 			$this->load->model('user_model');
-			$data['register'] = $this->user_model->addUser();
+			$data['registerSuccess'] = $this->user_model->addUser();
 
+			$this->email->from('niclacombe@gmail.com', 'Nicolas Lacombe');
+			$this->email->to( $this->input->post('courriel') );
+
+			$this->email->subject('La Morte Nuit - Confirmation d\'Inscription');
+			$this->email->message("Vous recevez ce courriel parce que vous vous êtes inscrit à l'activité La Morte Nuit.\nPour valider votre compte, veuillez cliquer sur le lien suivant : " . base_url() . "/user/validateUser/" .$this->input->post('courriel'));
+
+			$this->email->send();
 
 			$this->load->view('template/header');
-			$this->load->view('user/register');
+			$this->load->view('user/register',$data);
 			$this->load->view('template/footer');
 		}
+	}
 
+	public function validateUser($userEmail) {
+		
 	}
 }

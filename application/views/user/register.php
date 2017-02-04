@@ -6,6 +6,17 @@
 			<?php echo validation_errors(); ?>
 
 			<?php 
+				
+				if( $registerSuccess == true ):
+			?>
+					<div class="row">
+						<div class="col-xs-12">
+							<h4><span class="fa fa-thumb-up"></span> Veuillez consulter vos courriels pour confirmer votre inscription.</h4>
+						</div>
+					</div>
+			<?php		
+				endif;
+
 				$data = array(
 					'class'	=> 'col-md-8 col-xs-12',
 				);

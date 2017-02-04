@@ -28,6 +28,8 @@ class User_model extends CI_Model{
         );
         
         $this->db->insert('users', $infoNewUser);
+
+        return true;
         
     }
     
