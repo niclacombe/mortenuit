@@ -88,8 +88,18 @@ class User extends CI_Controller {
 	public function logIn(){
 
 		$returned = $this->user_model->logIn();
+		$data = array();
 
-		$data['userInfo'] = $returned;
+		$this->load->library('encryption');
+
+		if ($returned != NULL){
+			if ( $this->encryption->decrypt( $returned->password ) == $this->input->post('logIn_password') ) {
+				$data['userInfo'] = $returned;
+			} 
+		} 
+		else {
+			$data['userInfo'] = false;
+		}
 
 		$this->load->view('template/header');
 		$this->load->view('template/nav');

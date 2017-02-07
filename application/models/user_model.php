@@ -45,14 +45,7 @@ class User_model extends CI_Model{
 
         $returned = $row->row();
 
-        if ($returned != NULL) {
-            return $returned;
-        } else {
-            $returned = false;
-            return $returned;
-        }
-
-        
+        return $returned;        
     }
     
 }

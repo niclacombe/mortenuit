@@ -5,8 +5,15 @@
 				<h1>Accueil</h1>
 
 				<?php 
-					if (isset($userInfo)) {
-						echo var_dump($userInfo);
+					if (isset($userInfo) && $userInfo != NULL) {
+				?>
+						<h2>Bonjour <?php echo $userInfo->prenom; ?></h2>
+				<?php
+					}
+					if (isset($userInfo) && $userInfo == false){
+				?>
+						<h2>Erreur de connexion</h2>
+				<?php 
 					}
 				?>
 
