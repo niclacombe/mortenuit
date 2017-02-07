@@ -41,13 +41,18 @@ class User_model extends CI_Model{
 
     public function logIn(){
         $this->db->where('courriel',$this->input->post('logIn_courriel'));
-        /*$query = "SELECT * FROM users WHERE courriel = '" . $this->input->post('logIn_courriel') . "';";
-        $row = $this->db->query($query);*/
         $row = $this->db->get('users');
 
         $returned = $row->row();
 
-        return $returned;
+        if ($returned != NULL) {
+            return $returned;
+        } else {
+            $returned = false;
+            return $returned;
+        }
+
+        
     }
     
 }
