@@ -20,15 +20,11 @@ class Home extends CI_Controller {
 	 */
 	public function index()
 	{
-		if ( !isset( $_SESSION['is_logged_in'] ) ) {
-			$this->load->view('template/header');
-			$this->load->view('home/login');
-			$this->load->view('template/footer');
-		} else {
-			$this->load->view('template/header');
-			$this->load->view('template/nav');
-			$this->load->view('home/home', $data);
-			$this->load->view('template/footer');
-		}
+		$data = array();
+
+		$this->load->view('template/header');
+		$this->load->view('template/nav');
+		$this->load->view('home/home', $data);
+		$this->load->view('template/footer');
 	}
 }

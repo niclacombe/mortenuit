@@ -14,6 +14,40 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    <?php
+                        $args = array(
+                            'class' => 'form-inline',
+                        );
+                        echo form_open('user/logIn',$args);
+
+                        echo '<div class="form-group">';
+                            $args = array(
+                                'type'  => 'text',
+                                'name'  => 'logIn_courriel',
+                                'class' => 'form-control',
+                                'placeholder'   => 'Courriel',
+                            );
+                            echo form_input($args);
+
+                            $args = array(
+                                'type'  => 'password',
+                                'name'  => 'logIn_password',
+                                'class' => 'form-control',
+                                'placeholder'   => 'Mot de Passe',
+                            );
+                            echo form_input($args);
+
+                            $args = array(
+                                'class'     => 'btn btn-default'
+                            );
+                            echo form_submit($args,'Connexion');
+
+                        echo '</div>';
+
+                        echo form_close();
+                    ?>
+                </li>
                 <li><a href="<?php echo base_url(); ?>/user/register">Inscription</a></li>
                 <!--<li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">

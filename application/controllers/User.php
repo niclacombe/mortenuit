@@ -22,8 +22,7 @@ class User extends CI_Controller {
 	public function __construct() {
 		
 		parent::__construct();
-		//$this->load->model('user_model');
-		$this->load->helper('form');
+		$this->load->model('user_model');
 		$this->load->library('form_validation');
 		$this->load->library('email');
 
@@ -58,7 +57,6 @@ class User extends CI_Controller {
 
 			$this->load->library('encryption');
 
-			$this->load->model('user_model');
 			$data['registerSuccess'] = $this->user_model->addUser();
 
 			$this->email->from('niclacombe@gmail.com', 'Nicolas Lacombe');
@@ -84,6 +82,18 @@ class User extends CI_Controller {
 		$this->load->view('template/header');
 		$this->load->view('template/nav');
 		$this->load->view('user/register',$data);
+		$this->load->view('template/footer');
+	}
+
+	public function logIn(){
+
+		$returned = $this->user_model->logIn();
+
+		$data['userInfo'] = $returned;
+
+		$this->load->view('template/header');
+		$this->load->view('template/nav');
+		$this->load->view('home/home',$data);
 		$this->load->view('template/footer');
 
 

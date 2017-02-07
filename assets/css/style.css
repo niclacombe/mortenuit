@@ -36,7 +36,6 @@ html,body{
 
 body{
 	font-family: "Josefin", Helvetica, Arial, sans-serif;
-	color: #ddd;
 }
 
 h1,h2,h3,h4,h5{
@@ -44,7 +43,6 @@ h1,h2,h3,h4,h5{
 }
 
 #login{
-	margin: 0;
-	background-image: url('../img/escheresque_ste.png');
+	margin: 0;	
 	height: 100%;
 }
