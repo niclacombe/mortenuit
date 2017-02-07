@@ -1,0 +1,50 @@
+@font-face{
+	font-family: "Cargo";
+	src: url('../fonts/Cardo-Regular.ttf');
+}
+
+@font-face{
+	font-family: "Cargo";
+	font-style: italic;
+	src: url('../fonts/Cardo-Italic.ttf');
+}
+
+@font-face{
+	font-family: "Cargo";
+	font-weight: bold;
+	src: url('../fonts/Cardo-Bold.ttf');
+}
+
+@font-face{
+	font-family: "Josefin";
+	src: url('../fonts/JosefinSans-Regular.ttf');
+}
+@font-face{
+	font-family: "Josefin";
+	font-style: italic;
+	src: url('../fonts/JosefinSans-Italic.ttf');
+}
+@font-face{
+	font-family: "Josefin";
+	font-weight: bold;
+	src: url('../fonts/JosefinSans-Bold.ttf');
+}
+
+html,body{
+	height: 100%;
+}
+
+body{
+	font-family: "Josefin", Helvetica, Arial, sans-serif;
+	color: #ddd;
+}
+
+h1,h2,h3,h4,h5{
+	font-family: "Cargo", serif;
+}
+
+#login{
+	margin: 0;
+	background-image: url('../img/escheresque_ste.png');
+	height: 100%;
+}

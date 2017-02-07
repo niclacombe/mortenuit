@@ -36,6 +36,7 @@ class User extends CI_Controller {
 
 	public function register() {
 		$this->load->view('template/header');
+		$this->load->view('template/nav');
 		$this->load->view('user/register');
 		$this->load->view('template/footer');
 	}
@@ -49,6 +50,7 @@ class User extends CI_Controller {
 
 		if($this->form_validation->run() == FALSE){
 			$this->load->view('template/header');
+			$this->load->view('template/nav');
 			$this->load->view('user/register');
 			$this->load->view('template/footer');
 		}
@@ -63,17 +65,27 @@ class User extends CI_Controller {
 			$this->email->to( $this->input->post('courriel') );
 
 			$this->email->subject('La Morte Nuit - Confirmation d\'Inscription');
-			$this->email->message("Vous recevez ce courriel parce que vous vous êtes inscrit à l'activité La Morte Nuit.\nPour valider votre compte, veuillez cliquer sur le lien suivant : " . base_url() . "/user/validateUser/" .$this->input->post('courriel'));
+			$this->email->message("Vous recevez ce courriel parce que vous vous êtes inscrit à l'activité La Morte Nuit.\nPour valider votre compte, veuillez cliquer sur le lien suivant : \n" . base_url() . "/user/validateUser/" .$this->input->post('courriel'));
 
 			$this->email->send();
 
 			$this->load->view('template/header');
+			$this->load->view('template/nav');
 			$this->load->view('user/register',$data);
 			$this->load->view('template/footer');
 		}
 	}
 
 	public function validateUser($userEmail) {
-		
+
+		$this->load->model('user_model');
+		$data['validateSuccess'] = $this->user_model->validateUser($userEmail);
+
+		$this->load->view('template/header');
+		$this->load->view('template/nav');
+		$this->load->view('user/register',$data);
+		$this->load->view('template/footer');
+
+
 	}
 }

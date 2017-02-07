@@ -32,6 +32,12 @@ class User_model extends CI_Model{
         return true;
         
     }
+
+    public function validateUser($userEmail){
+        $this->db->set('is_confirmed',1);
+        $this->db->where('courriel',$userEmail);
+        $this->db->update('users');
+    }
     
 }
 
