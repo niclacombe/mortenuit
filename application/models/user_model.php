@@ -54,7 +54,20 @@ class User_model extends CI_Model{
 
         return $row->row();
     }
-    
+
+    public function updateEmail($idUser) {
+        $this->db->where('id', $idUser);
+        $args = array(
+            'courriel' => $this->input->post('new_courriel'),
+        );
+        $row = $this->db->update('users',$args);
+
+        
+        $this->db->where('id', $idUser);
+        $row = $this->db->get('users');
+
+        return $row->row();
+    }    
 }
 
 ?>

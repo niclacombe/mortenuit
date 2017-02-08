@@ -128,6 +128,22 @@ class User extends CI_Controller {
 		$this->load->view('user/readProfile',$data);
 		$this->load->view('template/footer');
 
-
 	}
+
+	public function updateEmail($idUser) {
+		$this->form_validation->set_rules('new_courriel', 'Nouveau Courriel', 'trim|required|is_unique[users.courriel]|valid_email');
+
+		if($this->form_validation->run() == FALSE){
+			$this->load->view('template/header');
+			$this->load->view('template/nav');
+			$this->load->view('user/register');
+			$this->load->view('template/footer');
+		}
+		else{
+			$data['userInfo'] = $this->user_model->updateEmail($idUser);
+
+			redirect('user/readProfile/' . $idUser, 'refresh');
+		}
+
+    }
 }
