@@ -61,14 +61,14 @@
 					$args = array(
 						'class'	=> 'col-xs-12',
 					);
-					echo form_open('user/updateEmail/' . $userInfo->id, $args);
+					echo form_open('user/updatePassword/' . $userInfo->id, $args);
 
 					echo '<div class="form-group">';
 
 					echo form_label('Ancien Mot de Passe : ');
 					$args = array(
 	                    'type'  => 'text',
-	                    'name'  => 'old_courriel',
+	                    'name'  => 'old_password',
 	                    'class' => 'form-control',
 	                    'placeholder'   => 'Ancien Mot de Passe',
 	                );
