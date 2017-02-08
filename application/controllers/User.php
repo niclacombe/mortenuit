@@ -94,16 +94,38 @@ class User extends CI_Controller {
 
 		if ($returned != NULL){
 			if ( $this->encryption->decrypt( $returned->password ) == $this->input->post('logIn_password') ) {
-				$data['userInfo'] = $returned;
+				$array = array(
+					'is_logged_in'	=> true,
+					'user_info'		=> $returned
+				);
+				
+				$this->session->set_userdata( $array );
+				$data['returned'] = true;
 			} 
 		} 
 		else {
-			$data['userInfo'] = false;
+			$data['returned'] = false;
 		}
 
 		$this->load->view('template/header');
 		$this->load->view('template/nav');
 		$this->load->view('home/home',$data);
+		$this->load->view('template/footer');
+
+
+	}
+
+	public function logOut(){
+		session_destroy();
+		redirect('home','refresh');
+	}
+
+	public function readProfile($idUser) {
+		$data['userInfo'] = $this->user_model->readProfile($idUser);
+
+		$this->load->view('template/header');
+		$this->load->view('template/nav');
+		$this->load->view('user/readProfile',$data);
 		$this->load->view('template/footer');
 
 

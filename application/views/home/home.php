@@ -5,9 +5,9 @@
 				<h1>Accueil</h1>
 
 				<?php 
-					if (isset($userInfo) && $userInfo != NULL) {
+					if (isset($_SESSION) && $this->session->userdata('is_logged_in') != NULL) {
 				?>
-						<h2>Bonjour <?php echo $userInfo->prenom; ?></h2>
+						<h2>Bonjour <?php echo $this->session->userdata['user_info']->prenom; ?></h2>
 				<?php
 					}
 					if (isset($userInfo) && $userInfo == false){

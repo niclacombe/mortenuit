@@ -14,6 +14,7 @@
             <!-- /.navbar-header -->
 
             <ul class="nav navbar-top-links navbar-right">
+                <?php if  ($this->session->is_logged_in == false ) : ?>
                 <li>
                     <?php
                         $args = array(
@@ -49,6 +50,9 @@
                     ?>
                 </li>
                 <li><a href="<?php echo base_url(); ?>/user/register">Inscription</a></li>
+                <?php else: ?>
+                    <li><a href="<?php echo base_url(); ?>/user/logOut"><span class="fa fa-sign-out"></span>Déconnexion</a></li>
+                <?php endif; ?>
                 <!--<li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -253,6 +257,9 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
+                        <?php if ($this->session->is_logged_in == true) : ?>
+                            <li><a href="<?php echo base_url(); ?>user/readProfile/<?php echo $this->session->userdata['user_info']->id; ?>"><span class="fa fa-user"></span> Mon Profil</a></li>
+                        <?php endif; ?>
                         <li>
                             <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
