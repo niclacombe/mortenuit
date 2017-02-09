@@ -152,25 +152,34 @@ class User extends CI_Controller {
 		$this->form_validation->set_rules('password_confirm', 'Mot de passe', 'trim|matches[new_password]');
 
 		if($this->form_validation->run() == FALSE){
-			$this->load->view('template/header');
-			$this->load->view('template/nav');
-			$this->load->view('user/readProfile/' . $idUser);
-			$this->load->view('template/footer');
+			$data['success'] = 'fail1';
+				$this->load->view('template/header');
+				$this->load->view('template/nav');
+				$this->load->vars($idUser);
+				$this->load->view('user/readProfile', $data);
+				$this->load->view('template/footer');
 		}
 		else{
 			$this->load->library('encryption');
-			if (  $this->input->post('old_password') == $this->encryption->decrypt(  $userInfo->password ) ) {
-				$data['success'] = $this->user_model->updatePassword($idUser);
+			if (  $this->input->post('old_password') == $this->encryption->decrypt( $this->session->user_info->password ) ) {
+				$this->user_model->updatePassword($idUser);
+
+				$data['success'] = 'true';
 
 
 				$this->load->view('template/header');
 				$this->load->view('template/nav');
-				$this->load->vars($data);
+				$this->load->vars($idUser);
 				$this->load->view('user/readProfile', $data);
 				$this->load->view('template/footer');
 			}
 			else {
-				redirect('user/readProfile/' . $idUser, 'refresh');
+				$data['success'] = 'fail2';
+				$this->load->view('template/header');
+				$this->load->view('template/nav');
+				$this->load->vars($idUser);
+				$this->load->view('user/readProfile', $data);
+				$this->load->view('template/footer');
 			}
 
 		}

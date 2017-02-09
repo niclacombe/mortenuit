@@ -1,11 +1,16 @@
 <div id="page-wrapper">
 	<div class="page-wrapper">
+		<?php $userInfo = $this->session->user_info; ?>
 		<div class="row">
 			<h2>Profil de <?php echo $userInfo->prenom . ' ' . $userInfo->nom; ?></h2>
 		</div>
 		<div class="row">
 			<div class="col-md-6 col-xs-12">
 				<h3>Modifier le courriel</h3>
+
+				<?php if (isset($success)) {
+					echo var_dump($success);
+				} ?>
 
 				<?php echo validation_errors(); ?>
 

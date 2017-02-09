@@ -72,7 +72,7 @@ class User_model extends CI_Model{
         $this->db->where('id', $idUser);
         $this->load->library('encryption');
         $args = array(
-            'password' => $this->encryption->encrypt($this->input->post('new_courriel')),
+            'password' => $this->encryption->encrypt($this->input->post('new_password')),
         );
         $row = $this->db->update('users',$args);
     }    
