@@ -79,7 +79,7 @@
 
 	                echo form_label('Nouveau Mot de Passe : ');
 	                $args = array(
-	                    'type'  => 'text',
+	                    'type'  => 'password',
 	                    'name'  => 'new_password',
 	                    'class' => 'form-control',
 	                    'placeholder'   => 'Nouveau Mot de Passe',
@@ -92,8 +92,8 @@
 
 	                echo form_label('Confirmation : ');
 	                $args = array(
-	                    'type'  => 'text',
-	                    'name'  => 'new_courriel',
+	                    'type'  => 'password',
+	                    'name'  => 'password_confirm',
 	                    'class' => 'form-control',
 	                    'placeholder'   => 'Confirmation',
 	                );

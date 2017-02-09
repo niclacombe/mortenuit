@@ -136,7 +136,7 @@ class User extends CI_Controller {
 		if($this->form_validation->run() == FALSE){
 			$this->load->view('template/header');
 			$this->load->view('template/nav');
-			$this->load->view('user/register');
+			$this->load->view('user/readProfile/' . $idUser);
 			$this->load->view('template/footer');
 		}
 		else{
@@ -144,6 +144,39 @@ class User extends CI_Controller {
 
 			redirect('user/readProfile/' . $idUser, 'refresh');
 		}
+
+    }
+
+    public function updatePassword($idUser) {
+    	$this->form_validation->set_rules('new_password', 'Mot de passe', 'trim|required|min_length[5]|max_length[15]|alpha_numeric');
+		$this->form_validation->set_rules('password_confirm', 'Mot de passe', 'trim|matches[new_password]');
+
+		if($this->form_validation->run() == FALSE){
+			$this->load->view('template/header');
+			$this->load->view('template/nav');
+			$this->load->view('user/readProfile/' . $idUser);
+			$this->load->view('template/footer');
+		}
+		else{
+			$this->load->library('encryption');
+			if (  $this->input->post('old_password') == $this->encryption->decrypt(  $userInfo->password ) ) {
+				$data['success'] = $this->user_model->updatePassword($idUser);
+
+
+				$this->load->view('template/header');
+				$this->load->view('template/nav');
+				$this->load->vars($data);
+				$this->load->view('user/readProfile', $data);
+				$this->load->view('template/footer');
+			}
+			else {
+				redirect('user/readProfile/' . $idUser, 'refresh');
+			}
+
+		}
+		
+
+		
 
     }
 }
