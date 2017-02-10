@@ -63,7 +63,7 @@ class User extends CI_Controller {
 			$this->email->to( $this->input->post('courriel') );
 
 			$this->email->subject('La Morte Nuit - Confirmation d\'Inscription');
-			$this->email->message("Vous recevez ce courriel parce que vous vous êtes inscrit à l'activité La Morte Nuit.\nPour valider votre compte, veuillez cliquer sur le lien suivant : \n" . base_url() . "/user/validateUser/" .$this->input->post('courriel'));
+			$this->email->message("Vous recevez ce courriel parce que vous vous êtes inscrit à l'activité La Morte Nuit.\nPour valider votre compte, veuillez cliquer sur le lien suivant : \n" . "http://www.niclacombe.ca/mortenuit/index.php/user/validateUser/" .$this->input->post('courriel'));
 
 			$this->email->send();
 
@@ -112,12 +112,14 @@ class User extends CI_Controller {
 		$this->load->view('home/home',$data);
 		$this->load->view('template/footer');
 
-
 	}
 
 	public function logOut(){
 		session_destroy();
-		redirect('home','refresh');
+		$this->load->view('template/header');
+		$this->load->view('template/nav');
+		$this->load->view('home/home', $data);
+		$this->load->view('template/footer');
 	}
 
 	public function readProfile($idUser) {

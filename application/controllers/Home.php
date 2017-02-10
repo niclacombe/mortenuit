@@ -22,6 +22,9 @@ class Home extends CI_Controller {
 	{
 		$data = array();
 
+		$this->load->model('news_model');
+		$data['news'] = $this->news_model->getNews();
+
 		$this->load->view('template/header');
 		$this->load->view('template/nav');
 		$this->load->view('home/home', $data);

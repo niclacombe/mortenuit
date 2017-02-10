@@ -260,11 +260,7 @@
                         <?php if ($this->session->is_logged_in == true) : ?>
                             <li><a href="<?php echo base_url(); ?>user/readProfile/<?php echo $this->session->userdata['user_info']->id; ?>"><span class="fa fa-user"></span> Mon Profil</a></li>
                         <?php endif; ?>
-
-                        <?php if($this->session->user_info->is_admin) : ?>
-                            <li><a href="<?php echo base_url(); ?>user/readProfile/<?php echo $this->session->userdata['user_info']->id; ?>"><span class="fa fa-newspaper-o"></span> Nouvelles</a></li>
-                        <?php endif; ?>
-                        <!--<li>
+                        <li>
                             <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
                         <li>
@@ -277,6 +273,7 @@
                                     <a href="morris.html">Morris.js Charts</a>
                                 </li>
                             </ul>
+                            <!-- /.nav-second-level -->
                         </li>
                         <li>
                             <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
@@ -306,6 +303,7 @@
                                     <a href="grid.html">Grid</a>
                                 </li>
                             </ul>
+                            <!-- /.nav-second-level -->
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span class="fa arrow"></span></a>
@@ -332,8 +330,10 @@
                                             <a href="#">Third Level Item</a>
                                         </li>
                                     </ul>
+                                    <!-- /.nav-third-level -->
                                 </li>
                             </ul>
+                            <!-- /.nav-second-level -->
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span class="fa arrow"></span></a>
@@ -345,7 +345,8 @@
                                     <a href="login.html">Login Page</a>
                                 </li>
                             </ul>
-                        </li>-->
+                            <!-- /.nav-second-level -->
+                        </li>
                     </ul>
                 </div>
                 <!-- /.sidebar-collapse -->
