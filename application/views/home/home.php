@@ -20,8 +20,11 @@
 						foreach ($news as $new) { 
 				?>
 						<div class="panel panel-default">
-							<div class="panel-heading"><?php echo $new->title; ?></div>
-							<div class="panel-body"><?php echo $new->content ?></div>
+							<div class="panel-heading"><h4><?php echo $new->title; ?><span style="float: right;"><?php echo date('j M Y',$new->date); ?></span></h4></div>
+							<div class="panel-body">
+								<em>Par <?php echo $new->id_author; ?></em>
+								<p><?php echo $new->content ?></p>
+							</div>
 						</div>
 				<?php 
 						} //endForeach
