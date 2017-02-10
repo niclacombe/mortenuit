@@ -17,14 +17,16 @@ class News_model extends CI_Model{
 
     public function getNews(){
         $this->db->order_by('id', 'desc');
-        $this->db->get('news', 5);
+        $news = $this->db->get('news', 5);
+
+        return $news->result();
     }
     
-    public function addNews(){
+    public function createNews(){
         $args = array(
             'title'     => $this->input->post('title'),
             'content'   => $this->input->post('content'),
-            'author'    => $this->session->user_info->id,
+            'id_author'    => $this->session->user_info->id,
             'date'      => time(),
         );
 

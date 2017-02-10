@@ -36,6 +36,9 @@
     <!-- bPopup -->
     <script src="/mortenuit/assets/js/bpopup.js"></script>
 
+    <!-- bPopup_Manager -->
+    <script src="/mortenuit/assets/js/popup_manager.js"></script>
+
     <!-- Bootstrap Core JavaScript -->
     <script src="/mortenuit/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
 

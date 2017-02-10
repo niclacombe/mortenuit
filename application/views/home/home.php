@@ -19,5 +19,18 @@
 
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-md-6 col-xs-12">
+				<?php 
+					if (isset($news)): 
+						foreach ($news as $new) { 
+				?>
+						<?php echo $new->title; ?>	
+				<?php 
+						} //endForeach
+					endif; 
+				?>
+			</div>
+		</div>
 	</div>
 </div>

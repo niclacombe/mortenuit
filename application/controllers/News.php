@@ -14,10 +14,16 @@ class News extends CI_Controller {
 	}
 
 	public function addNews() {
-		$this->news_model->addNews();
+		$this->load->view('template/header');
+		$this->load->view('template/nav');
+		$this->load->view('news/addNews');
+		$this->load->view('template/footer');
+	}
 
-		rediect('home','refresh');
+	public function createNews(){
+		$this->news_model->createNews();
 
+		redirect('home','refresh');
 	}
 
 }

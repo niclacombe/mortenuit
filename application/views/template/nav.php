@@ -256,14 +256,18 @@
 
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
-                    <ul class="nav" id="side-menu">
-                        <?php if ($this->session->is_logged_in == true) : ?>
-                            <li><a href="<?php echo base_url(); ?>user/readProfile/<?php echo $this->session->userdata['user_info']->id; ?>"><span class="fa fa-user"></span> Mon Profil</a></li>
-                        <?php endif; ?>
-
-                        <?php if($this->session->user_info->is_admin) : ?>
-                            <li><a href="<?php echo base_url(); ?>user/readProfile/<?php echo $this->session->userdata['user_info']->id; ?>"><span class="fa fa-newspaper-o"></span> Nouvelles</a></li>
-                        <?php endif; ?>
+                    <?php if ($this->session->is_logged_in == true) : ?>
+                        <ul class="nav" id="side-menu">                        
+                            <li><a href="<?php echo base_url(); ?>user/readProfile/<?php echo $this->session->userdata['user_info']->id; ?>"><span class="fa fa-user"></span> Mon Profil</a></li>                        
+                        <li>
+                            <a href="#"><span class="fa fa-newspaper-o"></span> Nouvelles</a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="#"><span class="fa fa-newspaper-o"></span> Lire les Nouvelles</a></li>
+                                <?php if($this->session->user_info->is_admin) : ?>
+                                    <li><a href="<?php echo base_url(); ?>news/addNews"><span class="fa fa-file-o"></span> Ajouter une Nouvelle</a></li>
+                                <?php endif; ?>
+                            </ul>
+                        </li>
                         <!--<li>
                             <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
@@ -347,6 +351,7 @@
                             </ul>
                         </li>-->
                     </ul>
+                    <?php endif; ?>
                 </div>
                 <!-- /.sidebar-collapse -->
             </div>
