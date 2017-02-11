@@ -106,6 +106,8 @@ class User extends CI_Controller {
 		else {
 			$data['returned'] = false;
 		}
+		$this->load->model('news_model');
+		$data['news'] = $this->news_model->getNews();
 
 		$this->load->view('template/header');
 		$this->load->view('template/nav');
@@ -116,6 +118,8 @@ class User extends CI_Controller {
 
 	public function logOut(){
 		session_destroy();
+
+		$data = [];
 		$this->load->view('template/header');
 		$this->load->view('template/nav');
 		$this->load->view('home/home', $data);

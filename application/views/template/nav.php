@@ -49,9 +49,9 @@
                         echo form_close();
                     ?>
                 </li>
-                <li><a href="<?php echo base_url(); ?>/user/register">Inscription</a></li>
+                <li><a href="<?php echo base_url(); ?>user/register">Inscription</a></li>
                 <?php else: ?>
-                    <li><a href="<?php echo base_url(); ?>/user/logOut"><span class="fa fa-sign-out"></span>Déconnexion</a></li>
+                    <li><a href="<?php echo base_url(); ?>user/logOut"><span class="fa fa-sign-out"></span>Déconnexion</a></li>
                 <?php endif; ?>
                 <!--<li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -268,6 +268,12 @@
                                 <?php endif; ?>
                             </ul>
                         </li>
+                        <li>
+                            <a href="#"><span class="fa fa-child"></span> Mon Personnage</a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="<?php echo base_url(); ?>perso/newPerso"><span class="fa fa-user-plus"></span> Nouveau Personnage</a></li>
+                            </ul>
+                        </li>
                         <!--<li>
                             <a href="index.html"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                         </li>
@@ -357,4 +363,22 @@
             </div>
             <!-- /.navbar-static-side -->
         </nav>
+
+        <div id="confirmCancel" class="col-md-6 col-xs-12 modal">
+            <div class="row">
+                <h3>Êtes-vous sûr de vouloir supprimer cette nouvelle ?</h3>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <a href="<?php echo base_url(); ?>">
+                        <button class="btn btn-block btn-danger"><span class="fa fa-remove fa-reverse"> Non</span></button>
+                    </a>
+                </div>
+                <div class="col-xs-6">
+                    <a id="confirmLink" href="<?php echo base_url(); ?>news/deleteNews">
+                        <button class="btn btn-block btn-success"><span class="fa fa-check fa-reverse"> Oui</span></button>
+                    </a>
+                </div>
+            </div>
+        </div>
         

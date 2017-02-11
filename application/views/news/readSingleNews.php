@@ -2,7 +2,7 @@
 	<div class="page-wrapper">
 		<?php $userInfo = $this->session->user_info; ?>
 		<div class="row">
-			<h2>Ajouter une Nouvelle</h2>
+			<h2>Modifier une Nouvelle</h2>
 		</div>
 
 		<div class="row">
@@ -10,14 +10,14 @@
 				$data = array(
 						'class'	=> 'col-md-8 col-xs-12',
 					);
-					echo form_open('news/createNews',$data );
+					echo form_open('news/updateNews',$data );
 
 						echo form_label('Titre : ');
 						$data = array(
 							'type'	=> 'text',
 							'name'	=> 'title',
 							'class'	=> 'form-control',
-							'placeholder'	=> 'Titre',
+							'value'	=> $new->title,
 						);
 						echo form_input($data);
 
@@ -26,18 +26,14 @@
 							'type'	=> 'text',
 							'name'	=> 'content',
 							'class'	=> 'form-control',
-							'placeholder'	=> 'Contenu',
+							'value'	=> $new->content,
 						);
 						echo form_textarea($data);
 			?>
 						<p class="charCounter">Nombre de caractère restant : <span>1000</span></p>
 			<?php
 
-						$data = array(
-							'name'	=> 'id_author',
-							'value'	=> $userInfo->id,
-						);
-						echo form_hidden($data);
+						echo form_hidden('id', $new->id);
 
 						$data = array(
 							'class'		=> 'btn btn-primary',
@@ -51,6 +47,7 @@
 		</div>
 	</div>
 </div>
+
 <script>
 	$(function(){
 		nbChar = parseInt($('.charCounter span').html());

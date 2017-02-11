@@ -26,6 +26,27 @@ class News extends CI_Controller {
 		redirect('home','refresh');
 	}
 
+	public function readSingleNews($id){
+		$data['new'] = $this->news_model->readSingleNews($id);
+
+		$this->load->view('template/header');
+		$this->load->view('template/nav');
+		$this->load->view('news/readSingleNews', $data);
+		$this->load->view('template/footer');
+	}
+
+	public function updateNews(){
+		$this->news_model->updateNews();
+
+		redirect('home','refresh');
+	}
+
+	public function deleteNews($id){
+		$this->news_model->deleteNews($id);
+
+		redirect('home','refresh');
+	}
+
 }
 
 /* End of file News.php */

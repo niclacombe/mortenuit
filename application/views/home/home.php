@@ -20,12 +20,27 @@
 						foreach ($news as $new) { 
 				?>
 						<div class="panel panel-default">
-							<div class="panel-heading"><h4><?php echo $new->title; ?><span style="float: right;"><?php echo date('j M Y',$new->date); ?></span></h4></div>
+							<div class="panel-heading">
+							<?php 
+								if( $new->modified ) {
+									$date = 'Modifiée le ' . date('j M Y',$new->modified); 
+								} else {
+									$date = date('j M Y',$new->date);
+								}
+							?>
+								<h4><?php echo $new->title; ?><div style="float: right;display:inline;"><?php echo $date; ?>
+									<?php if ($this->session->userdata['user_info']->is_admin) : ?>
+										<a href="<?php echo base_url(); ?>news/readSingleNews/<?php echo $new->id; ?>"><button class="btn btn-primary"><span class="fa fa-edit"></span></button></a>
+										<a id="btn-confirmCancel" data-cancel="<?php echo $new->id; ?>" href="#"><button class="btn btn-danger"><span class="fa fa-remove"></span></button></a>
+									<?php endif; ?>
+								</div></h4>
+							</div>
 							<div class="panel-body">
-								<em>Par <?php echo $new->id_author; ?></em>
+								<em>Par <?php echo $new->prenom . ' ' .$new->nom; ?></em>
 								<p><?php echo $new->content ?></p>
 							</div>
 						</div>
+						
 				<?php 
 						} //endForeach
 					endif; 

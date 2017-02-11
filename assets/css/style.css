@@ -47,6 +47,9 @@ h1,h2,h3,h4,h5{
 	height: 100%;
 }
 
-div.panel div.panel-heading span.date {
-	float: right;
+.modal{
+	border-radius: 4px;
+	background-color: #ffffff;
+	max-height: 30%;
+	text-align: center;
 }
