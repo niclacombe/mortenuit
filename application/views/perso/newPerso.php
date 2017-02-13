@@ -7,55 +7,57 @@
 
 		<div class="row"><?php echo validation_errors(); ?></div>
 
+		<?php 
+			$data = array(
+				'class'	=> 'col-md-6 col-xs-12',
+			);
+			echo form_open('perso/CreatePerso',$data );
+		?>
 		<div class="row">
+			<div class="col-md-6 col-xs-12">
 
-			<?php 
-				$data = array(
-					'class'	=> 'col-md-6 col-xs-12',
-				);
-				echo form_open('perso/CreatePerso',$data );
+			
+				<div class="form-group col-md-6 col-xs-12">
+					<label for="nom">Nom :</label>
+					<input type="text" name="nom" class="form-control" placeholder="Nom">
+				</div>
 
-				echo '<div class="form-group col-md-6 col-xs-12">';
+				<div class="form-group col-md-6 col-xs-12">
+					<label for="concept">Concept :</label>
+					<input type="text" name="concept" class="form-control" placeholder="Concept">
+				</div>
 
-				echo form_label('Nom : ');
-				$data = array(
-					'type'	=> 'text',
-					'name'	=> 'nom',
-					'class'	=> 'form-control',
-					'placeholder'	=> 'Nom',
-				);
-				echo form_input($data);
+				<div class="form-group col-md-6 col-xs-12">
+					<label for="clan">Clan :</label>
+					<select name="clan" class="form-control" id="select_clan">
+						<option value="brujah">Brujah</option>
+						<option value="malkavian">Malkavian</option>
+						<option value="nosferatu">Nosferatu</option>
+						<option value="toreador">Toreador</option>
+						<option value="tremere">Tremere</option>
+						<option value="ventrue">Ventrue</option>
+					</select>
 
-				echo '</div><div class="form-group col-md-6 col-xs-12">';
-
-				echo form_label('Concept : ');
-				$data = array(
-					'type'	=> 'text',
-					'name'	=> 'concept',
-					'class'	=> 'form-control ',
-					'placeholder'	=> 'Concept',
-				);
-				echo form_input($data);
-
-				echo '</div><div class="form-group col-md-6 col-xs-12">';
-
-				echo form_label('Clan : ');
-				$options = array(
-					'brujah'	=> 'Brujah',
-					'malkavian'	=> 'Malkavian',
-					'nosferatu'	=> 'Nosferatu',
-					'toreador'	=> 'Toreador',
-					'tremere'	=> 'Tremere',
-					'ventrue'	=> 'Ventrue',
-				);
-				echo form_dropdown('clan', $options, '', $args = ['class'=>'form-control']);
-
-				echo '</div>';
-
-			?>
+				</div>
+			</div>
 		</div>
 
-		<div class="row"></div>
+		<div class="row">
+			<div class="col-md-6 col-xs-12">
+				<div class="form-group col-md-4 col-xs-12">
+					<label for=""></label>
+					<input type="text" class="form-control">
+				</div>
+				<div class="form-group col-md-4 col-xs-12">
+					<label for=""></label>
+					<input type="text" class="form-control">
+				</div>
+				<div class="form-group col-md-4 col-xs-12">
+					<label for=""></label>
+					<input type="text" class="form-control">
+				</div>
+			</div>
+		</div>
 		<div class="row"></div>
 		<div class="row">
 			<?php
