@@ -15,6 +15,8 @@
 
 		public function newPerso() {
 			$data = array();
+			$data['clans'] = $this->perso_model->newPerso();
+			
 			$this->load->view('template/header');
 			$this->load->view('template/nav');
 			$this->load->view('perso/newPerso',$data);

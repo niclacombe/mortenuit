@@ -30,12 +30,9 @@
 				<div class="form-group col-md-6 col-xs-12">
 					<label for="clan">Clan :</label>
 					<select name="clan" class="form-control" id="select_clan">
-						<option value="brujah">Brujah</option>
-						<option value="malkavian">Malkavian</option>
-						<option value="nosferatu">Nosferatu</option>
-						<option value="toreador">Toreador</option>
-						<option value="tremere">Tremere</option>
-						<option value="ventrue">Ventrue</option>
+						<?php foreach ($clans as $clan) { ?>
+							<option value="$clan->id"><?php echo $clan->name ?></option>
+						<?php } //end Foreach ?>
 					</select>
 
 				</div>
