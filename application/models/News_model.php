@@ -16,12 +16,8 @@ class News_model extends CI_Model{
     }
 
     public function getNews(){
-        $this->db->select('n.*, u.prenom, u.nom');
-        $this->db->from('news n');
-        $this->db->join('users u', 'u.id = n.id_author');
-        $this->db->order_by('id', 'desc');
-        
-        $news = $this->db->get('news', 5);
+        $query = "SELECT n.*, u.prenom, u.nom FROM news n LEFT JOIN users u ON n.id_author = u.id ORDER BY n.id DESC LIMIT 5;";
+        $news = $this->db->query($query);
 
         return $news->result();
     }
