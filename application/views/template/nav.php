@@ -260,7 +260,7 @@
                         <ul class="nav" id="side-menu">                        
                             <li><a href="<?php echo base_url(); ?>user/readProfile/<?php echo $this->session->userdata['user_info']->id; ?>"><span class="fa fa-user"></span> Mon Profil</a></li>                        
                         <li>
-                            <a href="#"><span class="fa fa-newspaper-o"></span> Nouvelles</a>
+                            <a href="#"><span class="fa fa-newspaper-o"></span> Nouvelles<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li><a href="#"><span class="fa fa-newspaper-o"></span> Lire les Nouvelles</a></li>
                                 <?php if($this->session->user_info->is_admin) : ?>
@@ -269,7 +269,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="#"><span class="fa fa-child"></span> Mon Personnage</a>
+                            <a href="#"><span class="fa fa-child"></span> Mon Personnage<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li><a href="<?php echo base_url(); ?>perso/newPerso"><span class="fa fa-user-plus"></span> Nouveau Personnage</a></li>
                             </ul>

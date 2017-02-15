@@ -1,5 +1,5 @@
 <div id="page-wrapper">
-	<div class="page-wrapper">
+	<div class="page-wrapper container-fluid">
 		<?php $userInfo = $this->session->user_info; ?>
 		<div class="row">
 			<h2>Créer un Personnage</h2>
@@ -9,7 +9,7 @@
 
 		<?php 
 			$data = array(
-				'class'	=> 'col-md-6 col-xs-12',
+				'class'	=> 'col-xs-12',
 			);
 			echo form_open('perso/CreatePerso',$data );
 		?>
@@ -40,22 +40,81 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-6 col-xs-12">
-				<div class="form-group col-md-4 col-xs-12">
-					<label for=""></label>
-					<input type="text" class="form-control">
-				</div>
-				<div class="form-group col-md-4 col-xs-12">
-					<label for=""></label>
-					<input type="text" class="form-control">
-				</div>
-				<div class="form-group col-md-4 col-xs-12">
-					<label for=""></label>
-					<input type="text" class="form-control">
-				</div>
+			<h3>Attributs</h3>
+			<div class="form-group col-md-4 col-xs-12">
+				<label for="">Attibuts Primaires</label>
+				<select name="prim_attr" id="">
+					<option value="physique">Physique</option>
+					<option value="social">Social</option>
+					<option value="mental">Mental</option>
+				</select>
+			</div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label for="">Attibuts Secondaires</label>
+				<select name="prim_attr" id="">
+					<option value="physique">Physique</option>
+					<option value="social">Social</option>
+					<option value="mental">Mental</option>
+				</select>
+			</div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label for="">Attibuts Tertiaires</label>
+				<select name="prim_attr" id="">
+					<option value="physique">Physique</option>
+					<option value="social">Social</option>
+					<option value="mental">Mental</option>
+				</select>
 			</div>
 		</div>
-		<div class="row"></div>
+		<div class="row">
+			<h3>Habiletés</h3>
+			<div class="form-group col-md-4 col-xs-12">
+				<h4>Physiques</h4>
+				<ul class="list-unstyled">
+					<li>a</li>
+					<li>b</li>
+					<li>c</li>
+					<li>d</li>
+					<li>e</li>
+				</ul>
+			</div>
+			<div class="form-group col-md-4 col-xs-12">
+				<h4>Sociales</h4>
+				<ul class="list-unstyled">
+					<li>a</li>
+					<li>b</li>
+					<li>c</li>
+					<li>d</li>
+					<li>e</li>
+				</ul>
+			</div>
+			<div class="form-group col-md-4 col-xs-12">
+				<h4>Mentales</h4>
+				<ul class="list-unstyled">
+					<li>a</li>
+					<li>b</li>
+					<li>c</li>
+					<li>d</li>
+					<li>e</li>
+				</ul>
+			</div>
+		</div>
+		<div class="row">
+			<h3>Disciplines</h3>
+			<div class="form-group col-md-4 col-xs-12">
+				<label for="">Discipline I</label>
+				<input type="text" class="form-control" disabled="disabled" placeholder="random">
+			</div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label for="">Discipline II</label>
+				<input type="text" class="form-control" disabled="disabled" placeholder="random">
+			</div>
+			<div class="form-group col-md-4 col-xs-12">
+				<label for="">Discipline III</label>
+				<input type="text" class="form-control" disabled="disabled" placeholder="random">
+			</div>
+			<button class="btn btn-primary"><span class="fa fa-refresh"></span> Relancer les disciplines</button>
+		</div>
 		<div class="row">
 			<?php
 
