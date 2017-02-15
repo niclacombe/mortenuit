@@ -22,6 +22,21 @@
 			$this->load->view('perso/newPerso',$data);
 			$this->load->view('template/footer');
 		}
+
+		public function getRandDiscipline(){
+			$disciplines = [];
+			for ($i=0; count($disciplines) <= 2 ; $i++) { 
+				$discipline = rand(0,24);
+
+
+
+				if( array_search($discipline, $disciplines) === FALSE) {
+					$disciplines [] = $discipline;
+				}
+			}
+
+			return $disciplines;
+		}
 	
 	}
 	
