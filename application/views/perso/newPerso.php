@@ -139,16 +139,10 @@
 <script type="text/javascript">
     $(function(){
         
-        /*var controller = 'Inscriptions',
-            base_url = '<?php echo site_url();?>', 
-            data;
-        
         $('#btn-rerollDiscipline').on('click', function(event){            
             event.preventDefault(); 
-            idActivite = $('#selectActivite :selected').val();
-            prenom = $('#prenom').val()
-            getRandDiscipline (idActivite, prenom);            
-        });*/
+            getRandNumbers();        
+        });
 
 
         $(document).ready(function(){
@@ -159,41 +153,43 @@
         	var disciplines = [];
         	var numbers = [];
 
+        	var j = 0
+
         	for (var i = 0; disciplines.length <= 2; i++) {
 
         		var number = Math.floor(Math.random() * 23);
 
-        		if (number >= 0 && number <= 3) { discipline = 1 };//Dominate
-        		if (number >= 4 && number <= 6) { discipline = 2 };//Presence
-        		if (number >= 7 && number <= 9) { discipline = 3 };//Potence
-        		if (number >= 10 && number <= 12) { discipline = 4 };//Auspex
-        		if (number >= 13 && number <= 14) { discipline = 5 };//Celerity
-        		if (number >= 15 && number <= 16) { discipline = 6 };//Animalism
-        		if (number >= 17 && number <= 18) { discipline = 7 };//Fortitude
-        		if (number >= 19 && number <= 20) { discipline = 8 };//Obfuscate
-        		if (number == 21) { discipline = 9 };//Protean
-        		if (number == 22) { discipline = 10 };//Obtenebration
-        		if (number == 23) { discipline = 11 };//Thaumaturgy
+        		if ( numbers.indexOf(number) == -1 ) {
 
-        		if ( disciplines.indexOf(discipline) == -1 ) {
-        			disciplines[i] = discipline;
-        		}
+	        		if (number >= 0 && number <= 3) { discipline = 1 };//Dominate
+	        		if (number >= 4 && number <= 6) { discipline = 2 };//Presence
+	        		if (number >= 7 && number <= 9) { discipline = 3 };//Potence
+	        		if (number >= 10 && number <= 12) { discipline = 4 };//Auspex
+	        		if (number >= 13 && number <= 14) { discipline = 5 };//Celerity
+	        		if (number >= 15 && number <= 16) { discipline = 6 };//Animalism
+	        		if (number >= 17 && number <= 18) { discipline = 7 };//Fortitude
+	        		if (number >= 19 && number <= 20) { discipline = 8 };//Obfuscate
+	        		if (number == 21) { discipline = 9 };//Protean
+	        		if (number == 22) { discipline = 10 };//Obtenebration
+	        		if (number == 23) { discipline = 11 };//Thaumaturgy
+
+	        		if ( disciplines.indexOf(discipline) == -1 ) {
+	        			disciplines[j] = discipline;
+	        			j++;
+	        		}
+	        	}
         	}
 
-        	console.log(disciplines);
-
-        	//getRandDiscipline(numbers[0],numbers[1],numbers[2]);
+        	getRandDiscipline(disciplines[0],disciplines[1],disciplines[2]);
     	}
-        
-      
-        /*function getRandDiscipline (idActivite, prenom){    
-            $('#listInscriptions').html('<i class="fa fa-cog fa-spin fa-3x fa-fw"></i>');        
-            $.ajax({
-                'url' : base_url + '/' + controller + '/getInscriptions', 
+
+    	function getRandDiscipline(discipline1, discipline2, discipline3) {
+    		$.ajax({
+                'url' : '/perso/getRandDiscipline', 
                 'type' : 'POST',
-                'data' : {'idActivite' : idActivite, 'prenom' : prenom},
-                'success' : function(data){ 
-                    var container = $('#listInscriptions');
+                'data' : {'discipline1' : discipline1, 'discipline2' : discipline2, 'discipline3' : discipline3},
+                'success' : function(data){
+                	console.log('AAA');
                     if(data){
                         container.html(data);
                     }
@@ -202,8 +198,7 @@
                     console.log(err);
                 }
             });
-           
-        }*/
+    	}
      });
 </script>
 

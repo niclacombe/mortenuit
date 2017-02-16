@@ -15,6 +15,11 @@ class Perso_model extends CI_Model {
 		return $results->result();
 
 	}
+
+	public function getRandDiscipline($discipline1, $discipline2, $discipline3){
+		
+
+	}
 	public function createPerso(){
 		
 	}

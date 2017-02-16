@@ -24,18 +24,11 @@
 		}
 
 		public function getRandDiscipline(){
-			$disciplines = [];
-			for ($i=0; count($disciplines) <= 2 ; $i++) { 
-				$discipline = rand(0,24);
+			$discipline1 = $_POST['discipline1'];
+			$discipline2 = $_POST['discipline2'];
+			$discipline3 = $_POST['discipline3'];
 
-
-
-				if( array_search($discipline, $disciplines) === FALSE) {
-					$disciplines [] = $discipline;
-				}
-			}
-
-			return $disciplines;
+			$data['randDiscipline'] = $this->perso_model->getRandDiscipline($discipline1, $discipline2, $discipline3);
 		}
 	
 	}
