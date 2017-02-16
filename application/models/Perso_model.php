@@ -9,21 +9,30 @@ class Perso_model extends CI_Model {
 		$this->db->db_select('mn_systeme');
 	}
 
-	public function newPerso(){
+	public function newPerso($discipline1, $discipline2, $discipline3){
 		$this->db->order_by('name', 'asc');
-		$results = $this->db->get('clans');
-		return $results->result();
+		$clans = $this->db->get('clans');
+		$results['clans'] = $clans->result();
+
+
+		$this->db->where('id',$discipline1);
+		$this->db->or_where('id',$discipline2);
+		$this->db->or_where('id',$discipline3);
+		$disciplines = $this->db->get('disciplines');
+		$results['disciplines'] = $disciplines->result();
+
+		return $results;
 
 	}
 
 	public function getRandDiscipline($discipline1, $discipline2, $discipline3){
-		
+		$this->db->where('id',$discipline1);
+		$this->db->or_where('id',$discipline2);
+		$this->db->or_where('id',$discipline3);
 
-	}
-	public function createPerso(){
-		
-	}
-	
+		$results = $this->db->get('disciplines');
+		return $results->result();
+	}	
 
 }
 

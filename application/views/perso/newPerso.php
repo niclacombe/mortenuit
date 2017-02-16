@@ -30,7 +30,7 @@
 				<div class="form-group col-md-6 col-xs-12">
 					<label for="clan">Clan :</label>
 					<select name="clan" class="form-control" id="select_clan">
-						<?php foreach ($clans as $clan) { ?>
+						<?php foreach ($systeme['clans'] as $clan) { ?>
 							<option value="$clan->id"><?php echo $clan->name ?></option>
 						<?php } //end Foreach ?>
 					</select>
@@ -101,52 +101,37 @@
 		</div>
 		<div class="row">
 			<h3>Disciplines</h3>
-			<div class="form-group col-md-4 col-xs-12">
-				<label for="">Discipline I</label>
-				<input type="text" class="form-control" disabled="disabled" placeholder="random">
+			<div class="col-md-8 col-xs-12" id="disciplineContainer">
+				<?php foreach ($systeme['disciplines'] as $key => $discipline) { ?>
+					<div class="form-group col-md-4 col-xs-12">
+						<label for="">Discipline <?php echo $key+1; ?></label>
+						<input type="text" class="form-control" disabled="disabled" placeholder="<?php echo $discipline->name; ?>">
+					</div>
+				<?php } ?>
 			</div>
-			<div class="form-group col-md-4 col-xs-12">
-				<label for="">Discipline II</label>
-				<input type="text" class="form-control" disabled="disabled" placeholder="random">
+			<div class="col-md-4 col-xs-12">
+				<button type="button" class="btn btn-primary btn-rerollDiscipline"><span class="fa fa-refresh"></span> Relancer les disciplines</button>
 			</div>
-			<div class="form-group col-md-4 col-xs-12">
-				<label for="">Discipline III</label>
-				<input type="text" class="form-control" disabled="disabled" placeholder="random">
-			</div>
-			<button class="btn btn-primary" id="btn-rerollDiscipline"><span class="fa fa-refresh"></span> Relancer les disciplines</button>
 		</div>
 		<div class="row">
+		<button type="submit" class="btn btn-success" disabled="disabled"><span class="fa fa-check"></span> Créer le personnage</button>
+
 			<?php
-
-				$data = array(
-					'class'		=> 'btn btn-danger',
-					'id'		=> 'btnSubmit',
-					'disabled'	=> 'disabled',
-				);
-
-				echo form_submit($data,'Soumettre');
-
 				echo form_close(); 
 			?>
 			
 		</div>
 
 
-		</div>
 	</div>
 </div>
 
 <script type="text/javascript">
     $(function(){
         
-        $('#btn-rerollDiscipline').on('click', function(event){            
-            event.preventDefault(); 
-            getRandNumbers();        
-        });
-
-
-        $(document).ready(function(){
-        	getRandNumbers();
+        $('.btn-rerollDiscipline').click(function(event){
+        	event.preventDefault();            
+            getRandNumbers();
         });
 
         function getRandNumbers(){
@@ -185,13 +170,13 @@
 
     	function getRandDiscipline(discipline1, discipline2, discipline3) {
     		$.ajax({
-                'url' : '/perso/getRandDiscipline', 
+                'url' : '/mortenuit/index.php/perso/getRandDiscipline', 
                 'type' : 'POST',
                 'data' : {'discipline1' : discipline1, 'discipline2' : discipline2, 'discipline3' : discipline3},
                 'success' : function(data){
-                	console.log('AAA');
+                	var container = $('#disciplineContainer');
                     if(data){
-                        container.html(data);
+                    	container.html(data);
                     }
                 },
                 'error' : function(err){
@@ -201,4 +186,3 @@
     	}
      });
 </script>
-
