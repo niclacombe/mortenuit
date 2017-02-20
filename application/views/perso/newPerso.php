@@ -101,6 +101,7 @@
 		</div>
 		<div class="row">
 			<h3>Disciplines</h3>
+			<p>La Malédiction du Sang frappe tous les Kindred. Nul ne peut savoir quelles seront les Disciplines de son infant. <em>Vous n'avez que 5 relances.</em></p>
 			<div class="col-md-8 col-xs-12" id="disciplineContainer">
 				<?php foreach ($systeme['disciplines'] as $key => $discipline) { ?>
 					<div class="form-group col-md-4 col-xs-12">
@@ -108,10 +109,13 @@
 						<input type="text" class="form-control" disabled="disabled" placeholder="<?php echo $discipline->name; ?>">
 					</div>
 				<?php } ?>
+				<input type="hidden" value="<?php echo $systeme['disciplines'][0]->id . '-' . $systeme['disciplines'][1]->id . '-' . $systeme['disciplines'][2]->id; ?>">
 			</div>
-			<div class="col-md-4 col-xs-12">
-				<button type="button" class="btn btn-primary btn-rerollDiscipline"><span class="fa fa-refresh"></span> Relancer les disciplines</button>
-			</div>
+			<?php if( !isset($_SESSION['nbReroll']) ) : ?>
+				<div class="col-md-4 col-xs-12">
+					<button type="button" class="btn btn-primary btn-rerollDiscipline"><span class="fa fa-refresh"></span> Relancer les disciplines ( <span class="nbReroll"></span> )</button>
+				</div>
+			<?php endif; ?>
 		</div>
 		<div class="row">
 		<button type="submit" class="btn btn-success" disabled="disabled"><span class="fa fa-check"></span> Créer le personnage</button>
@@ -128,6 +132,13 @@
 
 <script type="text/javascript">
     $(function(){
+
+    	$('document').ready(function(){
+    		var nbReroll = 5;
+    		if ($('span.nbReroll').length ) {
+    			$('span.nbReroll').html( nbReroll );
+    		}
+    	});
         
         $('.btn-rerollDiscipline').click(function(event){
         	event.preventDefault();            
@@ -163,20 +174,29 @@
 	        			j++;
 	        		}
 	        	}
+
+	        	var nbReroll = $('span.nbReroll').html();
         	}
 
-        	getRandDiscipline(disciplines[0],disciplines[1],disciplines[2]);
+        	getRandDiscipline(disciplines[0],disciplines[1],disciplines[2], nbReroll);
     	}
 
-    	function getRandDiscipline(discipline1, discipline2, discipline3) {
+    	function getRandDiscipline(discipline1, discipline2, discipline3, nbReroll) {
     		$.ajax({
                 'url' : '/mortenuit/index.php/perso/getRandDiscipline', 
                 'type' : 'POST',
-                'data' : {'discipline1' : discipline1, 'discipline2' : discipline2, 'discipline3' : discipline3},
+                'data' : {'discipline1' : discipline1, 'discipline2' : discipline2, 'discipline3' : discipline3, 'nbReroll' : nbReroll},
                 'success' : function(data){
                 	var container = $('#disciplineContainer');
                     if(data){
                     	container.html(data);
+                    	nbReroll--;
+                    	if( nbReroll != 0 ){
+                    		$('span.nbReroll').html( nbReroll );
+                		} else {
+                			$('span.nbReroll').html( nbReroll );
+                			$('button.btn-rerollDiscipline').attr('disabled', 'disabled');
+                		}
                     }
                 },
                 'error' : function(err){

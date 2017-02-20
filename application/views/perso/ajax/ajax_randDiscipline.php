@@ -4,3 +4,4 @@
 		<input type="text" class="form-control" disabled="disabled" placeholder="<?php echo $discipline->name; ?>">
 	</div>
 <?php } ?>
+<input type="hidden" value="<?php echo $randDiscipline[0]->id . '-' . $randDiscipline[1]->id . '-' . $randDiscipline[2]->id; ?>">

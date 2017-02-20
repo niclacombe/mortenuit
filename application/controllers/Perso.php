@@ -57,6 +57,10 @@
 			$discipline2 = $_POST['discipline2'];
 			$discipline3 = $_POST['discipline3'];
 
+			if($_POST['nbReroll'] == 1 ){
+				$_SESSION['nbReroll'] = false;
+			};
+
 			$data['randDiscipline'] = $this->perso_model->getRandDiscipline($discipline1, $discipline2, $discipline3);
 
 
