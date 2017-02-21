@@ -108,6 +108,20 @@
 						<label for="">Discipline <?php echo $key+1; ?></label>
 						<input type="text" class="form-control" disabled="disabled" placeholder="<?php echo $discipline->name; ?>">
 					</div>
+
+					<?php 
+
+					$sub_disciplines = array_shift($systeme['sub_disciplines']);
+
+					foreach ($sub_disciplines as $sub) {
+					?>
+
+					<pre><?php echo var_dump($sub); ?></pre>
+
+					<?php
+						}
+					?>
+						
 				<?php } ?>
 				<input type="hidden" value="<?php echo $systeme['disciplines'][0]->id . '-' . $systeme['disciplines'][1]->id . '-' . $systeme['disciplines'][2]->id; ?>">
 			</div>
