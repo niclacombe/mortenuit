@@ -103,33 +103,32 @@
 			<h3>Disciplines</h3>
 			<p>La Malédiction du Sang frappe tous les Kindred. Nul ne peut savoir quelles seront les Disciplines de son infant. <em>Vous n'avez que 5 relances.</em></p>
 			<div class="col-md-8 col-xs-12" id="disciplineContainer">
-				<?php foreach ($systeme['disciplines'] as $key => $discipline) { ?>
 					<div class="form-group col-md-4 col-xs-12">
 						<label for="">Discipline <?php echo $key+1; ?></label>
-						<input type="text" class="form-control" disabled="disabled" placeholder="<?php echo $discipline->name; ?>">
+						<input type="text" class="form-control" disabled="disabled" placeholder="<?php echo $discipline[$key]->name; ?>">
+
+						<?php 
+						foreach ($systeme['sub_disciplines'][$key] as $sub) {
+						?>
+
+							<p><?php echo $sub->name; ?></p>
+
+						<?php
+							}
+						?>
 					</div>
-
-					<?php 
-
-					$sub_disciplines = array_shift($systeme['sub_disciplines']);
-
-					foreach ($sub_disciplines as $sub) {
-					?>
-
-					<pre><?php echo var_dump($sub); ?></pre>
-
-					<?php
-						}
-					?>
-						
-				<?php } ?>
-				<input type="hidden" value="<?php echo $systeme['disciplines'][0]->id . '-' . $systeme['disciplines'][1]->id . '-' . $systeme['disciplines'][2]->id; ?>">
 			</div>
 			<?php if( !isset($_SESSION['nbReroll']) ) : ?>
 				<div class="col-md-4 col-xs-12">
 					<button type="button" class="btn btn-primary btn-rerollDiscipline"><span class="fa fa-refresh"></span> Relancer les disciplines ( <span class="nbReroll"></span> )</button>
 				</div>
 			<?php endif; ?>
+			
+		</div>
+		<div class="row">
+			<?php echo "<pre>" . print_r($systeme['sub_disciplines'][0]) . "</pre>"; ?>
+			<hr>
+			<?php echo "<pre>" . print_r($systeme['disciplines'][0]) . "</pre>"; ?>
 		</div>
 		<div class="row">
 		<button type="submit" class="btn btn-success" disabled="disabled"><span class="fa fa-check"></span> Créer le personnage</button>
