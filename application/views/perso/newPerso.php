@@ -113,8 +113,8 @@
 						<div class="form-group col-md-6 col-xs-12">
 							<?php $j = 1; ?>
 							<?php foreach ($systeme['sub_disciplines'][$i-1] as $sub_discipline) { ?>
-								<label class="checkbox-inline">
-									<input type="checkbox" value="<?php echo $sub_discipline->id ?>"> <?php echo $j; ?>
+								<label class="checkbox-inline sub_discipline" data-sudDiscipline="<?php echo $j ?>">
+									<input type="checkbox" class="sub_discipline" value="<?php echo $sub_discipline->id ?>"> <?php echo $j; ?>
 								</label>
 							<?php $j++; ?>
 							<?php } ?>
@@ -220,8 +220,30 @@
             });
     	}
 
-    	function displinesMngr(){
-    		$('input ')
-    	}
+    	
+		$(document).ready(function(){
+    		$('label.sub_discipline').each(function(){
+    			if( $(this).attr('data-sudDiscipline') > 1 ){
+    				$(this).children('input').attr('disabled','disabled');
+    			}
+    		});
+		});
+
+		$('input.sub_discipline').on('click',function(){
+			$(this).parent().next().children('input').removeAttr('disabled');
+
+			subDisciplineMgr();
+		});
+
+		function subDisciplineMgr(){
+			var i = 0;
+			$('input.sub_discipline:checked').each(function(){
+				i++;
+				if(i == 3){
+					$('input.sub_discipline:not(":checked")').attr('disabled','disabled');
+				}
+			});
+		}
+
      });
 </script>
