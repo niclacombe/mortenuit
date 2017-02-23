@@ -45,10 +45,16 @@ class Perso_model extends CI_Model {
 
 	public function getRandDiscipline($discipline1, $discipline2, $discipline3){
 		$this->db->where('id',$discipline1);
-		$this->db->or_where('id',$discipline2);
-		$this->db->or_where('id',$discipline3);
+		$disciplines = $this->db->get('disciplines');
+		$results['disciplines'][] = $disciplines->result();
 
-		$results['disciplines'] = $this->db->get('disciplines');
+		$this->db->where('id',$discipline2);
+		$disciplines = $this->db->get('disciplines');
+		$results['disciplines'][] = $disciplines->result();
+
+		$this->db->where('id',$discipline3);
+		$disciplines = $this->db->get('disciplines');
+		$results['disciplines'][] = $disciplines->result();
 
 		$this->db->where('id_parent',$discipline1);
 		$sub_disciplines = $this->db->get('sub_disciplines');
@@ -62,7 +68,7 @@ class Perso_model extends CI_Model {
 		$sub_disciplines = $this->db->get('sub_disciplines');
 		$results['sub_disciplines'][] = $sub_disciplines->result();
 
-		return $results->result();
+		return $results;
 	}
 
 		

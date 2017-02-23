@@ -102,22 +102,28 @@
 		<div class="row">
 			<h3>Disciplines</h3>
 			<p>La Malédiction du Sang frappe tous les Kindred. Nul ne peut savoir quelles seront les Disciplines de son infant. <em>Vous n'avez que 5 relances.</em></p>
-			<div class="col-md-8 col-xs-12" id="disciplineContainer">
-					<div class="form-group col-md-4 col-xs-12">
-						<label for="">Discipline <?php echo $key+1; ?></label>
-						<input type="text" class="form-control" disabled="disabled" placeholder="<?php echo $discipline[$key]->name; ?>">
-
-						<?php 
-						foreach ($systeme['sub_disciplines'][$key] as $sub) {
-						?>
-
-							<p><?php echo $sub->name; ?></p>
-
-						<?php
-							}
-						?>
+			<div id="disciplineContainer">
+					<?php $i = 1 ?>
+					<?php foreach ($systeme['disciplines'] as $discipline) { ?>
+					<div class="col-md-8 col-xs-12">
+						<div class="form-group col-md-6 col-xs-12">
+							<label for="">Discipline <?php echo $i; ?></label>
+							<input type="text" class="form-control" disabled="disabled" placeholder="<?php echo $discipline[0]->name; ?>">							
+						</div>
+						<div class="form-group col-md-6 col-xs-12">
+							<?php $j = 1; ?>
+							<?php foreach ($systeme['sub_disciplines'][$i-1] as $sub_discipline) { ?>
+								<label class="checkbox-inline">
+									<input type="checkbox" value="<?php echo $sub_discipline->id ?>"> <?php echo $j; ?>
+								</label>
+							<?php $j++; ?>
+							<?php } ?>
+						</div>
 					</div>
-			</div>
+					<?php	$i++;
+					} ?>
+			</div>		
+			
 			<?php if( !isset($_SESSION['nbReroll']) ) : ?>
 				<div class="col-md-4 col-xs-12">
 					<button type="button" class="btn btn-primary btn-rerollDiscipline"><span class="fa fa-refresh"></span> Relancer les disciplines ( <span class="nbReroll"></span> )</button>
@@ -125,11 +131,7 @@
 			<?php endif; ?>
 			
 		</div>
-		<div class="row">
-			<?php echo "<pre>" . print_r($systeme['sub_disciplines'][0]) . "</pre>"; ?>
-			<hr>
-			<?php echo "<pre>" . print_r($systeme['disciplines'][0]) . "</pre>"; ?>
-		</div>
+
 		<div class="row">
 		<button type="submit" class="btn btn-success" disabled="disabled"><span class="fa fa-check"></span> Créer le personnage</button>
 
@@ -216,6 +218,10 @@
                     console.log(err);
                 }
             });
+    	}
+
+    	function displinesMngr(){
+    		$('input ')
     	}
      });
 </script>
