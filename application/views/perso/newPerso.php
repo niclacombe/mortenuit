@@ -13,237 +13,189 @@
 			);
 			echo form_open('perso/CreatePerso',$data );
 		?>
-		<div class="row">
-			<div class="col-md-6 col-xs-12">
-
-			
-				<div class="form-group col-md-6 col-xs-12">
-					<label for="nom">Nom :</label>
-					<input type="text" name="nom" class="form-control" placeholder="Nom">
-				</div>
-
-				<div class="form-group col-md-6 col-xs-12">
-					<label for="concept">Concept :</label>
-					<input type="text" name="concept" class="form-control" placeholder="Concept">
-				</div>
-
-				<div class="form-group col-md-6 col-xs-12">
-					<label for="clan">Clan :</label>
-					<select name="clan" class="form-control" id="select_clan">
-						<?php foreach ($systeme['clans'] as $clan) { ?>
-							<option value="$clan->id"><?php echo $clan->name ?></option>
-						<?php } //end Foreach ?>
-					</select>
-
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<h3>Attributs</h3>
-			<div class="form-group col-md-4 col-xs-12">
-				<label for="">Attibuts Primaires</label>
-				<select name="prim_attr" id="">
-					<option value="physique">Physique</option>
-					<option value="social">Social</option>
-					<option value="mental">Mental</option>
-				</select>
-			</div>
-			<div class="form-group col-md-4 col-xs-12">
-				<label for="">Attibuts Secondaires</label>
-				<select name="prim_attr" id="">
-					<option value="physique">Physique</option>
-					<option value="social">Social</option>
-					<option value="mental">Mental</option>
-				</select>
-			</div>
-			<div class="form-group col-md-4 col-xs-12">
-				<label for="">Attibuts Tertiaires</label>
-				<select name="prim_attr" id="">
-					<option value="physique">Physique</option>
-					<option value="social">Social</option>
-					<option value="mental">Mental</option>
-				</select>
-			</div>
-		</div>
-		<div class="row">
-			<h3>Habiletés</h3>
-			<div class="form-group col-md-4 col-xs-12">
-				<h4>Physiques</h4>
-				<ul class="list-unstyled">
-					<li>a</li>
-					<li>b</li>
-					<li>c</li>
-					<li>d</li>
-					<li>e</li>
-				</ul>
-			</div>
-			<div class="form-group col-md-4 col-xs-12">
-				<h4>Sociales</h4>
-				<ul class="list-unstyled">
-					<li>a</li>
-					<li>b</li>
-					<li>c</li>
-					<li>d</li>
-					<li>e</li>
-				</ul>
-			</div>
-			<div class="form-group col-md-4 col-xs-12">
-				<h4>Mentales</h4>
-				<ul class="list-unstyled">
-					<li>a</li>
-					<li>b</li>
-					<li>c</li>
-					<li>d</li>
-					<li>e</li>
-				</ul>
-			</div>
-		</div>
-		<div class="row">
-			<h3>Disciplines</h3>
-			<p>La Malédiction du Sang frappe tous les Kindred. Nul ne peut savoir quelles seront les Disciplines de son infant. <em>Vous n'avez que 5 relances.</em></p>
-			<div id="disciplineContainer">
-					<?php $i = 1 ?>
-					<?php foreach ($systeme['disciplines'] as $discipline) { ?>
-					<div class="col-md-8 col-xs-12">
-						<div class="form-group col-md-6 col-xs-12">
-							<label for="">Discipline <?php echo $i; ?></label>
-							<input type="text" class="form-control" disabled="disabled" placeholder="<?php echo $discipline[0]->name; ?>">							
-						</div>
-						<div class="form-group col-md-6 col-xs-12">
-							<?php $j = 1; ?>
-							<?php foreach ($systeme['sub_disciplines'][$i-1] as $sub_discipline) { ?>
-								<label class="checkbox-inline sub_discipline" data-sudDiscipline="<?php echo $j ?>">
-									<input type="checkbox" class="sub_discipline" value="<?php echo $sub_discipline->id ?>"> <?php echo $j; ?>
-								</label>
-							<?php $j++; ?>
-							<?php } ?>
-						</div>
+		<div class="row owl-carousel">
+			<div class="item">
+				<div class="col-xs-12">
+					<h3>Informations de base</h3>
+					<div class="form-group col-md-4 col-xs-12">
+						<label for="nom">Nom :</label>
+						<input type="text" name="nom" class="form-control" placeholder="Nom">
 					</div>
-					<?php	$i++;
-					} ?>
-			</div>		
-			
-			<?php if( !isset($_SESSION['nbReroll']) ) : ?>
-				<div class="col-md-4 col-xs-12">
-					<button type="button" class="btn btn-primary btn-rerollDiscipline"><span class="fa fa-refresh"></span> Relancer les disciplines ( <span class="nbReroll"></span> )</button>
+
+					<div class="form-group col-md-4 col-xs-12">
+						<label for="concept">Concept :</label>
+						<input type="text" name="concept" class="form-control" placeholder="Concept">
+					</div>
+
+					<div class="form-group col-md-4 col-xs-12">
+						<label for="clan">Clan :</label>
+						<select name="clan" class="form-control" id="select_clan">
+							<?php foreach ($systeme['clans'] as $clan) { ?>
+								<option value="$clan->id"><?php echo $clan->name ?></option>
+							<?php } //end Foreach ?>
+						</select>
+
+					</div>
 				</div>
-			<?php endif; ?>
-			
+				<div class="col-xs-12">
+					<h3>Attributs</h3>
+					<h4>En sélectionnant votre attribut primaire, vous lui attribuerez 7 points. Le secondaire, 5 points et le tertiaire, 3 points.</h4>
+					<div class="form-group col-md-4 col-xs-12">
+						<label for="">Attibuts Primaires</label>
+						<select class="form-control" name="prim_attr" id="">
+							<option value="physique">Physique</option>
+							<option value="social">Social</option>
+							<option value="mental">Mental</option>
+						</select>
+					</div>
+					<div class="form-group col-md-4 col-xs-12">
+						<label for="">Attibuts Secondaires</label>
+						<select class="form-control" name="prim_attr" id="">
+							<option value="physique">Physique</option>
+							<option value="social">Social</option>
+							<option value="mental">Mental</option>
+						</select>
+					</div>
+					<div class="form-group col-md-4 col-xs-12">
+						<label for="">Attibuts Tertiaires</label>
+						<select class="form-control" name="prim_attr" id="">
+							<option value="physique">Physique</option>
+							<option value="social">Social</option>
+							<option value="mental">Mental</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="col-xs-12">
+					<h3>Habiletés</h3>
+					<div class="form-group col-md-4 col-xs-12">
+						<h4>Physiques</h4>
+						<ul class="list-unstyled">
+							<li>a</li>
+							<li>b</li>
+							<li>c</li>
+							<li>d</li>
+							<li>e</li>
+							<li>f</li>
+							<li>g</li>
+							<li>h</li>
+							<li>i</li>
+							<li>j</li>
+						</ul>
+					</div>
+					<div class="form-group col-md-4 col-xs-12">
+						<h4>Sociales</h4>
+						<ul class="list-unstyled">
+							<li>a</li>
+							<li>b</li>
+							<li>c</li>
+							<li>d</li>
+							<li>e</li>
+							<li>f</li>
+							<li>g</li>
+							<li>h</li>
+							<li>i</li>
+							<li>j</li>
+						</ul>
+					</div>
+					<div class="form-group col-md-4 col-xs-12">
+						<h4>Mentales</h4>
+						<ul class="list-unstyled">
+							<li>a</li>
+							<li>b</li>
+							<li>c</li>
+							<li>d</li>
+							<li>e</li>
+							<li>f</li>
+							<li>g</li>
+							<li>h</li>
+							<li>i</li>
+							<li>j</li>
+						</ul>
+					</div>
+				</div>
+				
+			</div>
+			<div class="item">
+				<div class="col-xs-12">
+					<h3>Disciplines</h3>
+					<h4>La Malédiction du Sang frappe tous les Kindreds. Nul ne peut savoir quelles seront les Disciplines de son infant. <em>Vous n'avez que 5 relances.</em></h4>
+					<div id="disciplineContainer">
+						<?php foreach ($systeme['disciplines'] as $key => $discipline) : ?>
+							<div class="form-group col-md-8 col-xs-6">
+								<label for="<?php echo 'discipline' .$key; ?>"></label>
+								<input type="text" name="<?php echo 'discipline' .$key; ?>" readonly class="form-control" placeholder="<?php echo $discipline->name; ?>">
+							</div>
+
+							<div class="subDisciplineContainer col-md-3 col-xs-5">
+								<label for="" class="checkbox-inline">
+									<input type="checkbox" name="<?php echo 'niveauDiscipline' .$key; ?>">1
+								</label>
+								<label for="" class="checkbox-inline">
+									<input type="checkbox" name="<?php echo 'niveauDiscipline' .$key; ?>">2
+								</label>
+								<label for="" class="checkbox-inline">
+									<input type="checkbox" name="<?php echo 'niveauDiscipline' .$key; ?>">3
+								</label>
+								<label for="" class="checkbox-inline">
+									<input type="checkbox" name="<?php echo 'niveauDiscipline' .$key; ?>">4
+								</label>
+								<label for="" class="checkbox-inline">
+									<input type="checkbox" name="<?php echo 'niveauDiscipline' .$key; ?>">5
+								</label>
+							</div>
+							<div class="col-xs-1 disciplineHelp">
+								<button type="button" class="btn btn-default popUpToggler" data-toPopup="<?php echo 'discipline' .$key; ?>">
+									<span class="fa fa-question-circle"></span>
+								</button>
+							</div>
+							<div class="col-md-6 col-xs-12 toPopup <?php echo 'discipline' .$key; ?>">
+								<h3><?php echo $discipline->name; ?></h3>
+								<p><?php echo $discipline->description; ?></p>
+							</div>						
+						<?php endforeach; ?>
+					</div>
+				</div>
+				<pre><?php echo var_dump($systeme['disciplines'][0]); ?></pre>
+			</div>
 		</div>
 
-		<div class="row">
-		<button type="submit" class="btn btn-success" disabled="disabled"><span class="fa fa-check"></span> Créer le personnage</button>
 
 			<?php
 				echo form_close(); 
 			?>
 			
-		</div>
+
 
 
 	</div>
 </div>
 
-<script type="text/javascript">
-    $(function(){
+<script>
+	$(document).ready(function(){
+		$('.toPopup').hide();
 
-    	$('document').ready(function(){
-    		var nbReroll = 5;
-    		if ($('span.nbReroll').length ) {
-    			$('span.nbReroll').html( nbReroll );
-    		}
-    	});
-        
-        $('.btn-rerollDiscipline').click(function(event){
-        	event.preventDefault();            
-            getRandNumbers();
-        });
-
-        function getRandNumbers(){
-        	var disciplines = [];
-        	var numbers = [];
-
-        	var j = 0
-
-        	for (var i = 0; disciplines.length <= 2; i++) {
-
-        		var number = Math.floor(Math.random() * 23);
-
-        		if ( numbers.indexOf(number) == -1 ) {
-
-	        		if (number >= 0 && number <= 3) { discipline = 1 };//Dominate
-	        		if (number >= 4 && number <= 6) { discipline = 2 };//Presence
-	        		if (number >= 7 && number <= 9) { discipline = 3 };//Potence
-	        		if (number >= 10 && number <= 12) { discipline = 4 };//Auspex
-	        		if (number >= 13 && number <= 14) { discipline = 5 };//Celerity
-	        		if (number >= 15 && number <= 16) { discipline = 6 };//Animalism
-	        		if (number >= 17 && number <= 18) { discipline = 7 };//Fortitude
-	        		if (number >= 19 && number <= 20) { discipline = 8 };//Obfuscate
-	        		if (number == 21) { discipline = 9 };//Protean
-	        		if (number == 22) { discipline = 10 };//Obtenebration
-	        		if (number == 23) { discipline = 11 };//Thaumaturgy
-
-	        		if ( disciplines.indexOf(discipline) == -1 ) {
-	        			disciplines[j] = discipline;
-	        			j++;
-	        		}
-	        	}
-
-	        	var nbReroll = $('span.nbReroll').html();
-        	}
-
-        	getRandDiscipline(disciplines[0],disciplines[1],disciplines[2], nbReroll);
-    	}
-
-    	function getRandDiscipline(discipline1, discipline2, discipline3, nbReroll) {
-    		$.ajax({
-                'url' : '/mortenuit/index.php/perso/getRandDiscipline', 
-                'type' : 'POST',
-                'data' : {'discipline1' : discipline1, 'discipline2' : discipline2, 'discipline3' : discipline3, 'nbReroll' : nbReroll},
-                'success' : function(data){
-                	var container = $('#disciplineContainer');
-                    if(data){
-                    	container.html(data);
-                    	nbReroll--;
-                    	if( nbReroll != 0 ){
-                    		$('span.nbReroll').html( nbReroll );
-                		} else {
-                			$('span.nbReroll').html( nbReroll );
-                			$('button.btn-rerollDiscipline').attr('disabled', 'disabled');
-                		}
-                    }
-                },
-                'error' : function(err){
-                    console.log(err);
-                }
-            });
-    	}
-
-    	
-		$(document).ready(function(){
-    		$('label.sub_discipline').each(function(){
-    			if( $(this).attr('data-sudDiscipline') > 1 ){
-    				$(this).children('input').attr('disabled','disabled');
-    			}
-    		});
+		$(".owl-carousel").owlCarousel({
+			loop: false,
+			margin: 0,
+			nav: true,
+			dots: true,
+			navElement: 'span',
+			navText: ['<span class="fa fa-chevron-left"></span>&nbsp;&nbsp;Précédent','Suivant&nbsp;&nbsp;<span class="fa fa-chevron-right"></span>'],
+			responsive:{
+				0:{
+					items:1
+				},
+			} 
 		});
+	});
 
-		$('input.sub_discipline').on('click',function(){
-			$(this).parent().next().children('input').removeAttr('disabled');
+	$(function () {
+	  $('.popUpToggler').on('click', function(){
+	  	var target = $(this).attr('data-toPopup');
+	  	$('.' +target).bPopup({
 
-			subDisciplineMgr();
-		});
-
-		function subDisciplineMgr(){
-			var i = 0;
-			$('input.sub_discipline:checked').each(function(){
-				i++;
-				if(i == 3){
-					$('input.sub_discipline:not(":checked")').attr('disabled','disabled');
-				}
-			});
-		}
-
-     });
+	  	});
+	  })
+	})
 </script>
