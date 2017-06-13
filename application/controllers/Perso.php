@@ -14,8 +14,31 @@
 		}
 
 		public function newPerso() {
+
 			$data = array();
 
+			$disciplines = $this->rollDisciplines();
+
+			$data['systeme'] = $this->perso_model->newPerso($disciplines[0], $disciplines[1], $disciplines[2]); 
+			
+			$this->load->view('template/header');
+			$this->load->view('template/nav');
+			$this->load->view('perso/newPerso',$data);
+			$this->load->view('template/footer');
+		}
+
+		public function rerollDisciplines(){
+
+			$data = array();
+
+			$disciplines = $this->rollDisciplines();
+
+			$data['disciplines'] = $this->perso_model->getRandDisciplines($disciplines[0], $disciplines[1], $disciplines[2]); 
+			
+			$this->load->view('perso/ajax/rerollDiscipline',$data);
+		}
+
+		public function rollDisciplines(){
 			$disciplines = [];
 			$numbers = [];
 
@@ -44,12 +67,7 @@
 				}
 			}
 
-			$data['systeme'] = $this->perso_model->newPerso($disciplines[0], $disciplines[1], $disciplines[2]); 
-			
-			$this->load->view('template/header');
-			$this->load->view('template/nav');
-			$this->load->view('perso/newPerso',$data);
-			$this->load->view('template/footer');
+			return $disciplines;
 		}
 
 	}
