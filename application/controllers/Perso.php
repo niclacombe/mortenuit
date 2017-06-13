@@ -44,7 +44,7 @@
 				}
 			}
 
-			$data['systeme'] = $this->perso_model->newPerso($disciplines[0], $disciplines[1], $disciplines[2]);
+			$data['systeme'] = $this->perso_model->newPerso($disciplines[0], $disciplines[1], $disciplines[2]); 
 			
 			$this->load->view('template/header');
 			$this->load->view('template/nav');
@@ -52,20 +52,6 @@
 			$this->load->view('template/footer');
 		}
 
-		public function getRandDiscipline(){
-			$discipline1 = $_POST['discipline1'];
-			$discipline2 = $_POST['discipline2'];
-			$discipline3 = $_POST['discipline3'];
-
-			if($_POST['nbReroll'] == 1 ){
-				$_SESSION['nbReroll'] = false;
-			};
-
-			$data['randDiscipline'] = $this->perso_model->getRandDiscipline($discipline1, $discipline2, $discipline3);
-
-
-			$this->load->view('perso/ajax/ajax_randDiscipline',$data);
-		}	
 	}
 	
 	/* End of file Perso.php */

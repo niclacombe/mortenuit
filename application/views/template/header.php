@@ -20,6 +20,9 @@
     <!-- Custom CSS -->
     <link href="/mortenuit/assets/css/style.css" rel="stylesheet">
 
+    <!-- OwlCarousel CSS -->    
+    <link href="/mortenuit/assets/css/owl.carousel.min.css" rel="stylesheet">
+
     <!-- Custom Fonts -->
     <script src="https://use.fontawesome.com/d06d2e2d30.js"></script>
 
@@ -38,6 +41,9 @@
 
     <!-- bPopup_Manager -->
     <script src="/mortenuit/assets/js/popup_manager.js"></script>
+
+    <!-- OwlCarousel JS --> 
+    <script src="/mortenuit/assets/js/owl.carousel.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="/mortenuit/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
