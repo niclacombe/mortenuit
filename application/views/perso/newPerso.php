@@ -31,7 +31,7 @@
 					<div class="form-group col-md-4 col-xs-12">
 						<label for="clan">Clan :</label>
 						<select name="clan" class="form-control" id="select_clan">
-							<?php foreach ($systeme['clans'] as $clan) { ?>
+							<?php foreach ($clans as $clan) { ?>
 								<option value="$clan->id"><?php echo $clan->name ?></option>
 							<?php } //end Foreach ?>
 						</select>
@@ -122,61 +122,49 @@
 					<div class="col-xs-12">
 						<h3>2/?</h3>
 						<h3>Disciplines</h3>
-						<h4>La Malédiction du Sang frappe tous les Kindreds. Nul ne peut savoir quelles seront les Disciplines de son infant. <em>Vous n'avez que 3 relances.</em></h4>
+						<h4>Trois "points" à distribuer</h4>
 						<div id="disciplineContainer">
-							<h4>relances restantes</h4>
-							<?php foreach ($systeme['disciplines'] as $key => $discipline) : ?>
-								<div class="form-group col-md-8 col-xs-6">
-									<label for="<?php echo 'discipline' .$key; ?>"></label>
-									<input type="text" name="<?php echo 'discipline' .$key; ?>" readonly class="form-control" placeholder="<?php echo $discipline->name; ?>">
-								</div>
-
-								<div class="subDisciplineContainer col-md-3 col-xs-5">
-									<label for="" class="checkbox-inline">
-										<input type="checkbox" name="<?php echo 'niveauDiscipline' .$key; ?>">1
-									</label>
-									<label for="" class="checkbox-inline">
-										<input type="checkbox" name="<?php echo 'niveauDiscipline' .$key; ?>">2
-									</label>
-									<label for="" class="checkbox-inline">
-										<input type="checkbox" name="<?php echo 'niveauDiscipline' .$key; ?>">3
-									</label>
-									<label for="" class="checkbox-inline">
-										<input type="checkbox" name="<?php echo 'niveauDiscipline' .$key; ?>">4
-									</label>
-									<label for="" class="checkbox-inline">
-										<input type="checkbox" name="<?php echo 'niveauDiscipline' .$key; ?>">5
-									</label>
-								</div>
-								<div class="col-xs-1 disciplineHelp">
-									<button type="button" class="btn btn-default popUpToggler" data-toPopup="<?php echo 'discipline' .$key; ?>">
-										<span class="fa fa-question-circle"></span>
-									</button>
-								</div>
-								<div class="col-md-6 col-xs-12 toPopup <?php echo 'discipline' .$key; ?>">
-									<h3><?php echo $discipline->name; ?></h3>
-									<p><?php echo $discipline->description; ?></p>
-									<h4>Évolution de la Discipline</h4>
-									<ul class="list-unstyled">
-										<?php foreach ($discipline->sub_disciplines as $sub_discipline) : ?>
-											<li>
-												<p><strong><?php echo $sub_discipline->sub_name; ?></strong></p>
-												<p><?php echo $sub_discipline->sub_desc; ?></p>
-											</li>
+							<?php foreach ($startDisciplines as $key => $startDiscipline) : ?>
+								<div class="col-md-4 col-xs-12">
+									<div class="form-group">
+										<label for="">Discipline 1
+											<a href="#" data-toggle="popover" 
+														title="<?php echo $startDiscipline['name']; ?>" 
+														data-content="<?php echo $startDiscipline['description']; ?>" data-trigger="focus" 
+														data-placement="right">
+												<span class="fa fa-question-circle"`></span>
+											</a>
+										</label>
+										<input type="text" name="<?php echo 'disc' .$key ?>" class="form-control" readonly value="<?php echo $startDiscipline['name']; ?>">
+									</div>
+									<div class="form-group">
+										<h4>Détails</h4>
+										<?php foreach ($startDiscipline['subDiscipline'] as $key2 => $subDisc) : ?>
+											<div class="form-check">
+												<label for="" class="form-check-label">
+													<input type="checkbox" 
+															value="<?php echo $subDisc->id_parent .'-' .$subDisc->id ?>" class="form-check-input subDisc"
+															<?php if($key2 > 0): ?>
+																disabled="disabled"
+															<?php endif; ?>
+													>
+													<?php echo $subDisc->sub_name; ?>
+													&nbsp
+													<a href="#" data-toggle="popover" 
+																title="<?php echo $subDisc->sub_name; ?>" 
+																data-content="<?php echo $subDisc->sub_desc; ?>" data-trigger="focus" 
+																data-placement="right">
+														<span class="fa fa-question-circle"`></span>
+													</a>
+												</label>
+											</div>
 										<?php endforeach; ?>
-									</ul>
-								</div>						
+									</div>
+								</div>
 							<?php endforeach; ?>
 						</div>
 					</div>
-					<div class="col-md-offset-3 col-md-6 col-xs-12">
-						<button type="button" id="refreshDiscipline" class="btn btn-primary btn-lg btn-block" >
-							Relancer les disciplines <span class="fa fa-refresh"></span>
-						</button>
-					</div>
 				</div>
-				<!--<pre><?php echo var_dump($systeme['disciplines'][0]); ?></pre>-->
-				<pre><?php echo var_dump($_SESSION); ?></pre>
 			</div>
 			<div class="item">
 				<div class="col-xs-12">
@@ -214,6 +202,32 @@
 </div>
 
 <script>
+	// Enable Question popup
+	$(function(){
+		$('.fa-question-circle').parent('a').popover();
+	});
+
+	//Manage Sub-Discipline
+
+	$(function(){
+		$('.subDisc').click(function(){
+			var checked = $('.subDisc:checkbox:checked'),
+				notChecked = $('.subDisc:checkbox:not(:checked)');		
+
+			if(checked.length >= 3){
+				$('.subDisc:checkbox:not(:checked)').attr('disabled','disabled');
+			} else{
+				if($(this).prop('checked')){
+					$(this).closest('.form-check').next('.form-check').children('label').children('input').removeAttr('disabled');
+					$(this).closest('.form-check').next('.form-check').children('label').children('input:first').removeAttr('disabled');
+				}
+			}
+
+		});
+	});
+
+
+	//Others
 	$(document).ready(function(){
 		$('.toPopup').hide();
 
@@ -239,29 +253,6 @@
 	  		position: ['auto',($(window).height()*0.1)]
 	  	});
 	  })
-	})
-
-	$('#refreshDiscipline').on('click',function(){
-		var controller = 'Perso',
-            base_url = '<?php echo site_url();?>', 
-            data;
-
-
-        var container = $('#disciplineContainer');
-
-        $.ajax({
-            'url' : base_url + controller + '/rerollDisciplines',
-            'type' : 'POST',
-            'data' : {},
-            'success' : function(data){
-                if(data){
-                    container.html(data);
-                }
-            },
-            'error' : function(err){
-                console.log(err);
-            }
-        });
 	})
 
 

@@ -8,40 +8,40 @@ class Perso_model extends CI_Model {
 		$this->db->db_select('mn_systeme');
 	}
 
-	public function newPerso($idDiscipline1, $idDiscipline2, $idDiscipline3){
+	public function getClans(){
 
 		$this->db->order_by('name', 'asc');
-		$clans = $this->db->get('clans');
-		$results['clans'] = $clans->result();
+		$query = $this->db->get('clans');
 
-		$results['disciplines'] = $this->getRandDisciplines($idDiscipline1, $idDiscipline2, $idDiscipline3);
+		return $query->result();
+	}
 
-		foreach ($results['disciplines'] as $discipline) {
-			$this->db->where('id_parent', $discipline->id);
+	public function getStartDisciplines($idClan){
+		$results = [];
+		$this->db->select('start_discipline1, start_discipline2, start_discipline3');
+		$this->db->where('id', $idClan);
+		$query = $this->db->get('clans');
+		$arrStartDisc = $query->row();
+
+		$this->db->where('id', $arrStartDisc->start_discipline1);
+		$this->db->or_where('id', $arrStartDisc->start_discipline2);
+		$this->db->or_where('id', $arrStartDisc->start_discipline3);
+		$query = $this->db->get('disciplines');
+		$discParents = $query->result_array();
+
+		foreach ($discParents as $key => $discParent) {
+
+			$this->db->where('id_parent', $discParent['id']);
 			$query = $this->db->get('sub_disciplines');
-			$discipline->sub_disciplines = $query->result();
+			
+			$results[$key]['id'] = $discParent['id'];
+			$results[$key]['name'] = $discParent['name'];
+			$results[$key]['description'] = $discParent['description'];
+			$results[$key]['subDiscipline'] = $query->result(); 
 		}
-
 		return $results;
 	}
 
-
-	public function getRandDisciplines($idDiscipline1, $idDiscipline2, $idDiscipline3){
-		$this->db->where('id', $idDiscipline1);
-		$this->db->or_where('id', $idDiscipline2);
-		$this->db->or_where('id', $idDiscipline3);
-		$disciplines = $this->db->get('disciplines');
-
-		$disciplines = $disciplines->result();
-
-		foreach ($disciplines as $discipline) {
-			$this->db->where('id_parent', $discipline->id);
-			$query = $this->db->get('sub_disciplines');
-			$discipline->sub_disciplines = $query->result();
-		}
-		
-		return $disciplines;
-	}
 
 }
 
