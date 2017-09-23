@@ -66,6 +66,10 @@ h1,h2,h3,h4,h5{
 	text-decoration: underline;
 }
 
+.owl-nav > span.disabled {
+	color: #999999;
+}
+
 .subDisciplineContainer{
 	margin-top: 2em;
 	display: flex;
@@ -76,4 +80,12 @@ h1,h2,h3,h4,h5{
 	background-color: #ffffff;
 	border-radius: 4px;
 	max-height: 50%;
+}
+
+.disciplineHelp{
+	margin-top: 1.5em;
+}
+
+.toPopup{
+	display:none;
 }

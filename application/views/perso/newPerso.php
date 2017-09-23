@@ -16,6 +16,7 @@
 		<div class="row owl-carousel">
 			<div class="item">
 				<div class="col-xs-12">
+					<h3>1/?</h3>
 					<h3>Informations de base</h3>
 					<div class="form-group col-md-4 col-xs-12">
 						<label for="nom">Nom :</label>
@@ -30,7 +31,7 @@
 					<div class="form-group col-md-4 col-xs-12">
 						<label for="clan">Clan :</label>
 						<select name="clan" class="form-control" id="select_clan">
-							<?php foreach ($systeme['clans'] as $clan) { ?>
+							<?php foreach ($clans as $clan) { ?>
 								<option value="$clan->id"><?php echo $clan->name ?></option>
 							<?php } //end Foreach ?>
 						</select>
@@ -117,46 +118,75 @@
 				
 			</div>
 			<div class="item">
-				<div class="col-xs-12">
-					<h3>Disciplines</h3>
-					<h4>La Malédiction du Sang frappe tous les Kindreds. Nul ne peut savoir quelles seront les Disciplines de son infant. <em>Vous n'avez que 5 relances.</em></h4>
-					<div id="disciplineContainer">
-						<?php foreach ($systeme['disciplines'] as $key => $discipline) : ?>
-							<div class="form-group col-md-8 col-xs-6">
-								<label for="<?php echo 'discipline' .$key; ?>"></label>
-								<input type="text" name="<?php echo 'discipline' .$key; ?>" readonly class="form-control" placeholder="<?php echo $discipline->name; ?>">
-							</div>
-
-							<div class="subDisciplineContainer col-md-3 col-xs-5">
-								<label for="" class="checkbox-inline">
-									<input type="checkbox" name="<?php echo 'niveauDiscipline' .$key; ?>">1
-								</label>
-								<label for="" class="checkbox-inline">
-									<input type="checkbox" name="<?php echo 'niveauDiscipline' .$key; ?>">2
-								</label>
-								<label for="" class="checkbox-inline">
-									<input type="checkbox" name="<?php echo 'niveauDiscipline' .$key; ?>">3
-								</label>
-								<label for="" class="checkbox-inline">
-									<input type="checkbox" name="<?php echo 'niveauDiscipline' .$key; ?>">4
-								</label>
-								<label for="" class="checkbox-inline">
-									<input type="checkbox" name="<?php echo 'niveauDiscipline' .$key; ?>">5
-								</label>
-							</div>
-							<div class="col-xs-1 disciplineHelp">
-								<button type="button" class="btn btn-default popUpToggler" data-toPopup="<?php echo 'discipline' .$key; ?>">
-									<span class="fa fa-question-circle"></span>
-								</button>
-							</div>
-							<div class="col-md-6 col-xs-12 toPopup <?php echo 'discipline' .$key; ?>">
-								<h3><?php echo $discipline->name; ?></h3>
-								<p><?php echo $discipline->description; ?></p>
-							</div>						
-						<?php endforeach; ?>
+				<div id="disciplinesStepContainer">
+					<div class="col-xs-12">
+						<h3>2/?</h3>
+						<h3>Disciplines</h3>
+						<h4>Trois "points" à distribuer</h4>
+						<div id="disciplineContainer">
+							<?php foreach ($startDisciplines as $key => $startDiscipline) : ?>
+								<div class="col-md-4 col-xs-12">
+									<div class="form-group">
+										<label for="">Discipline 1
+											<a href="#" data-toggle="popover" 
+														title="<?php echo $startDiscipline['name']; ?>" 
+														data-content="<?php echo $startDiscipline['description']; ?>" data-trigger="focus" 
+														data-placement="right">
+												<span class="fa fa-question-circle"`></span>
+											</a>
+										</label>
+										<input type="text" name="<?php echo 'disc' .$key ?>" class="form-control" readonly value="<?php echo $startDiscipline['name']; ?>">
+									</div>
+									<div class="form-group">
+										<h4>Détails</h4>
+										<?php foreach ($startDiscipline['subDiscipline'] as $key2 => $subDisc) : ?>
+											<div class="form-check">
+												<label for="" class="form-check-label">
+													<input type="checkbox" 
+															value="<?php echo $subDisc->id_parent .'-' .$subDisc->id ?>" class="form-check-input subDisc"
+															<?php if($key2 > 0): ?>
+																disabled="disabled"
+															<?php endif; ?>
+													>
+													<?php echo $subDisc->sub_name; ?>
+													&nbsp
+													<a href="#" data-toggle="popover" 
+																title="<?php echo $subDisc->sub_name; ?>" 
+																data-content="<?php echo $subDisc->sub_desc; ?>" data-trigger="focus" 
+																data-placement="right">
+														<span class="fa fa-question-circle"`></span>
+													</a>
+												</label>
+											</div>
+										<?php endforeach; ?>
+									</div>
+								</div>
+							<?php endforeach; ?>
+						</div>
 					</div>
 				</div>
-				<pre><?php echo var_dump($systeme['disciplines'][0]); ?></pre>
+			</div>
+			<div class="item">
+				<div class="col-xs-12">
+					<h3>3/?</h3>
+					<h3>Historique</h3>
+					<div class="col-md-6 col-xs-12">
+						<ul class="list-unstyled">
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+							<li></li>
+						</ul>
+					</div>
+					<div class="col-md-6 col-xs-12">
+						<h4>Histoire de votre personnage</h4>
+						<textarea class="form-control" name="background_text" id="background_text" cols="30" rows="10"></textarea>
+					</div>
+				</div>
 			</div>
 		</div>
 
@@ -172,6 +202,32 @@
 </div>
 
 <script>
+	// Enable Question popup
+	$(function(){
+		$('.fa-question-circle').parent('a').popover();
+	});
+
+	//Manage Sub-Discipline
+
+	$(function(){
+		$('.subDisc').click(function(){
+			var checked = $('.subDisc:checkbox:checked'),
+				notChecked = $('.subDisc:checkbox:not(:checked)');		
+
+			if(checked.length >= 3){
+				$('.subDisc:checkbox:not(:checked)').attr('disabled','disabled');
+			} else{
+				if($(this).prop('checked')){
+					$(this).closest('.form-check').next('.form-check').children('label').children('input').removeAttr('disabled');
+					$(this).closest('.form-check').next('.form-check').children('label').children('input:first').removeAttr('disabled');
+				}
+			}
+
+		});
+	});
+
+
+	//Others
 	$(document).ready(function(){
 		$('.toPopup').hide();
 
@@ -194,8 +250,10 @@
 	  $('.popUpToggler').on('click', function(){
 	  	var target = $(this).attr('data-toPopup');
 	  	$('.' +target).bPopup({
-
+	  		position: ['auto',($(window).height()*0.1)]
 	  	});
 	  })
 	})
+
+
 </script>

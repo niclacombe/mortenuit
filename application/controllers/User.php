@@ -117,7 +117,7 @@ class User extends CI_Controller {
 	}
 
 	public function logOut(){
-		session_destroy();
+		$this->session->set_userdata( array('is_logged_in' => false) );
 
 		$data = [];
 		$this->load->view('template/header');
