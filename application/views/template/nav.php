@@ -71,12 +71,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a href="#"><span class="fa fa-child"></span> Mon Personnage (à venir)<span class="fa arrow"></span></a>
-                            <?php if ($this->session->userdata['user_info']->is_admin) : ?>
-                            <ul class="nav nav-second-level">
-                                <li><a href="<?php echo base_url(); ?>perso/newPerso"><span class="fa fa-user-plus"></span> Nouveau Personnage</a></li>
-                            </ul>
-                        <?php endif; ?>
+                            <a href="<?php echo site_url('perso/index') . '/' .$this->session->user_info->id; ?>"><span class="fa fa-child"></span> Mes Personnages (à venir)<span class="fa arrow"></span></a>
                         </li>
                     </ul>
                     <?php endif; ?>

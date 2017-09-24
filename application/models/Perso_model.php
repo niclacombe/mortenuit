@@ -5,10 +5,11 @@ class Perso_model extends CI_Model {
 	
 	public function __construct()	{
 		parent::__construct();
-		$this->db->db_select('mn_systeme');
+		$this->db->db_select('mn_personnages');
 	}
 
 	public function getClans(){
+		$this->db->db_select('mn_systeme');
 
 		$this->db->order_by('name', 'asc');
 		$query = $this->db->get('clans');
@@ -16,30 +17,25 @@ class Perso_model extends CI_Model {
 		return $query->result();
 	}
 
-	public function getStartDisciplines($idClan){
-		$results = [];
-		$this->db->select('start_discipline1, start_discipline2, start_discipline3');
-		$this->db->where('id', $idClan);
-		$query = $this->db->get('clans');
-		$arrStartDisc = $query->row();
+	public function getPersonnages($id_user){
+		$this->db->where('id_user', $id_user);
+		$query = $this->db->get('personnages');
 
-		$this->db->where('id', $arrStartDisc->start_discipline1);
-		$this->db->or_where('id', $arrStartDisc->start_discipline2);
-		$this->db->or_where('id', $arrStartDisc->start_discipline3);
-		$query = $this->db->get('disciplines');
-		$discParents = $query->result_array();
+		return $query->result();
+	}
 
-		foreach ($discParents as $key => $discParent) {
+	public function newPerso($id_user){
+		$data = array(
+			'id_user'	=> $id_user,
+			'nom'		=> $this->input->post('nom'),
+			'concept'	=> $this->input->post('concept'),
+			'clan'		=> $this->input->post('clan'),
+			'prim_attr'	=> $this->input->post('prim_attr'),
+			'sec_attr'	=> $this->input->post('sec_attr'),
+			'tert_attr'	=> $this->input->post('tert_attr'),
+		);
 
-			$this->db->where('id_parent', $discParent['id']);
-			$query = $this->db->get('sub_disciplines');
-			
-			$results[$key]['id'] = $discParent['id'];
-			$results[$key]['name'] = $discParent['name'];
-			$results[$key]['description'] = $discParent['description'];
-			$results[$key]['subDiscipline'] = $query->result(); 
-		}
-		return $results;
+		$this->db->insert('personnages', $data);
 	}
 
 
