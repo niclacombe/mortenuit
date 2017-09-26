@@ -41,67 +41,67 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<h3>Attributs</h3>
-				<h4>En sélectionnant votre attribut primaire, vous lui attribuerez 7 points. Le secondaire, 5 points et le tertiaire, 3 points.</h4>
+				<h4>En sélectionnant votre attribut primaire, vous lui attribuerez 7 traits. Le secondaire, 5 traits et le tertiaire, 3 traits.</h4>
 				<div class="col-md-4 col-xs-12">
-					<h4>Attributs primaires</h4>
+					<h4>Attributs physiques</h4>
 					<div class="radio">
-						<label for="prim_attr">
-							<input type="radio" value="PHYS" name="prim_attr" checked>
-							Physique
+						<label for="phys">
+							<input type="radio" value="7" name="physique" checked>
+							7 traits
 						</label>
 					</div>
 					<div class="radio">
-						<label for="prim_attr">
-							<input type="radio" value="SOC" name="prim_attr">
-							Social
+						<label for="phys">
+							<input type="radio" value="5" name="physique">
+							5 traits
 						</label>
 					</div>
 					<div class="radio">
-						<label for="prim_attr">
-							<input type="radio" value="MENT" name="prim_attr">
-							Mental
+						<label for="phys">
+							<input type="radio" value="3" name="physique">
+							3 traits
 						</label>
 					</div>						
 				</div>
 				<div class="col-md-4 col-xs-12">
-					<h4>Attributs secondaires</h4>
+					<h4>Attributs sociaux</h4>
 					<div class="radio">
-						<label for="sec_attr">
-							<input type="radio" value="PHYS" name="sec_attr" checked>
-							Physique
+						<label for="social">
+							<input type="radio" value="7" name="social" checked>
+							7 traits
 						</label>
 					</div>
 					<div class="radio">
-						<label for="sec_attr">
-							<input type="radio" value="SOC" name="sec_attr">
-							Social
+						<label for="social">
+							<input type="radio" value="5" name="social">
+							5 traits
 						</label>
 					</div>
 					<div class="radio">
-						<label for="sec_attr">
-							<input type="radio" value="MENT" name="sec_attr">
-							Mental
+						<label for="social">
+							<input type="radio" value="3" name="social">
+							3 traits
 						</label>
 					</div>						
 				</div>
 				<div class="col-md-4 col-xs-12">
-					<h4>Attributs tertiaires</h4>
+					<h4>Attributs mentaux</h4>
 					<div class="radio">
-						<label for="tert_attr">
-							<input type="radio" value="PHYS" name="tert_attr" checked>
-							Physique
+						<label for="mental">
+							<input type="radio" value="7" name="mental" checked>
+							7 traits
 						</label>
 					</div>
 					<div class="radio">
-						<label for="tert_attr">
-							<input type="radio" value="SOC" name="tert_attr">
-							Social
+						<label for="mental">
+							<input type="radio" value="5" name="mental">
+							5 traits
 						</label>
 					</div>
 					<div class="radio">
-						<label for="tert_attr">
-							<input type="radio" value="MENT" name="tert_attr">
-							Mental
+						<label for="mental">
+							<input type="radio" value="3" name="mental">
+							3 traits
 						</label>
 					</div>						
 				</div>
@@ -152,7 +152,7 @@
 
 
 	//Others
-	$(document).ready(function(){
+	$(docu3).ready(function(){
 		$('.toPopup').hide();
 
 		$(".owl-carousel").owlCarousel({
@@ -160,7 +160,7 @@
 			margin: 0,
 			nav: true,
 			dots: true,
-			navElement: 'span',
+			navEle3: 'span',
 			navText: ['<span class="fa fa-chevron-left"></span>&nbsp;&nbsp;Précédent','Suivant&nbsp;&nbsp;<span class="fa fa-chevron-right"></span>'],
 			responsive:{
 				0:{

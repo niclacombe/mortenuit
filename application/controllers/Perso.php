@@ -38,9 +38,9 @@
 			$this->form_validation->set_rules('nom', 'Nom', 'trim|required|alpha_numeric_spaces');
 			$this->form_validation->set_rules('concept', 'Concept', 'trim|required');
 			$this->form_validation->set_rules('clan', 'Clan', 'trim|required');
-			$this->form_validation->set_rules('prim_attr', 'Attribut primaire', 'trim|required|differs["sec_attr"]|differs["tert_attr"]');
-			$this->form_validation->set_rules('sec_attr', 'Attribut secondaire', 'trim|required|differs["prim_attr"]|differs["tert_attr"]');
-			$this->form_validation->set_rules('tert_attr', 'Attribut tertiaire', 'trim|required|differs["prim_attr"]|differs["sec_attr"]');
+			$this->form_validation->set_rules('physique', 'Attribut physique', 'trim|required|differs[social]|differs[mental]');
+			$this->form_validation->set_rules('social', 'Attribut social', 'trim|required|differs[physique]|differs[mental]');
+			$this->form_validation->set_rules('mental', 'Attribut mental', 'trim|required|differs[physique]|differs[social]');
 
 			if ($this->form_validation->run() == FALSE) {
 
@@ -53,7 +53,9 @@
             }
             else {  
 
-            	$this->perso_model->newPerso($id_user);   	
+            	$this->perso_model->newPerso($id_user);
+
+            	$data['disciplines'] = 	$this->perso_model->getClanDisciplines($this->input->post('clan'));
 
 		        $this->load->view('template/header');
 				$this->load->view('template/nav');
