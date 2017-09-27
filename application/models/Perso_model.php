@@ -54,12 +54,46 @@ class Perso_model extends CI_Model {
 			$query = $this->db->get('discipline_prob');
 			$prob_total = $query->result_array();
 
-			/* GET ROLL */
-			$roll = rand(1,$prob_total[0]['total']);
+			$disciplines_id = [];
 
-			while($roll >= 0){
-				$roll = $roll - 
+			while(count($disciplines_id) != 3 ){
+				/* GET ROLL */
+				$maxRoll = 0;
+				for($i = 0 ; $i <= count($prob_total)-1; $i++){
+					$maxRoll .= $prob_total[$i]['prob'];
+				}				
+				$roll = rand(1,$maxRoll);
+
+				while($roll >= 0){
+					$roll = $roll - $prob_total[0]['prob'];
+					array_shift($prob_total);
+					if($roll > 0){
+						$disciplines_id[] = $prob_total[0]['id'];
+					} else {
+						array_shift($prob_total);
+					}
+				}
 			}
+
+			$this->db->where('id', $disciplines_id[0]);
+			$this->db->or_where('id', $disciplines_id[1]);
+			$this->db->or_where('id', $disciplines_id[2]);
+			$query = $this->db->get('disciplines');
+			$vDisciplines = $query->result();
+
+			$disciplines = [];
+
+			foreach ($vDisciplines as $vDisc) {
+				$this->db->where('id_parent', $vDisc->id);
+				$query = $this->db->get('sub_disciplines');
+
+				$disciplines['id'] = $vDisc->id;
+				$disciplines['name'] = $vDisc->name;
+				$disciplines['description'] = $vDisc->description;
+				$disciplines['subDisciplines'] = $query->result();
+			}
+
+			return $disciplines;
 
 
 		} else {
