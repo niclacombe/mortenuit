@@ -38,32 +38,33 @@ class Perso_model extends CI_Model {
 		$this->db->insert('personnages', $data);
 	}
 
-	public function getClanDisciplines($idClan){
-		$this->db->db_select('mn_systeme');
-		$this->db->select('start_discipline1,start_discipline2,start_discipline3');
-		$this->db->where('id', $idClan);
-		$query = $this->db->get('clans');
-		$idDisciplines = $query->result();
+	public function getStartDisciplines($idUser){
+		$this->db->where('id_user', $idUser);
+		$this->db->order_by('id', 'desc');
+		$query = $this->db->get('personnages');
 
-		$this->db->where('id', $idDisciplines[0]->start_discipline1);
-		$this->db->or_where('id', $idDisciplines[0]->start_discipline2);
-		$this->db->or_where('id', $idDisciplines[0]->start_discipline3);
-		$query = $this->db->get('disciplines');
-		$disciplines = $query->result();
+		$perso = $query->row();
 
-		$vDisciplines = [];
+		if($perso->reroll > 0){
+			$this->db->db_select('mn_systeme');
 
-		foreach ($disciplines as $discipline) {
-			$this->db->where('id_parent', $discipline->id);
-			$query = $this->db->get('sub_disciplines');
-			$sub_discipline = $query->result_array();
+			/* GET TOTAL */
+			$this->db->select('SUM(prob) as total');
+			$this->db->order_by('prob', 'desc');
+			$query = $this->db->get('discipline_prob');
+			$prob_total = $query->result_array();
 
-			$vDisciplines[]['name'] = $discipline->name;
-			$vDisciplines[]['description'] = $discipline->description;
-			$vDisciplines[]['$sub_discipline'] = $sub_discipline;
+			/* GET ROLL */
+			$roll = rand(1,$prob_total[0]['total']);
+
+			while($roll >= 0){
+				$roll = $roll - 
+			}
+
+
+		} else {
+			return false;
 		}
-
-		return $vDisciplines;
 	}
 
 

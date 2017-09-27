@@ -29,15 +29,16 @@ CREATE TABLE `personnages` (
   `concept` varchar(45) DEFAULT NULL,
   `clan` int(11) NOT NULL,
   `generation` int(11) NOT NULL DEFAULT '13',
-  `prim_attr` varchar(4) NOT NULL,
-  `sec_attr` varchar(4) NOT NULL,
-  `tert_attr` varchar(4) NOT NULL,
+  `physique` int(11) NOT NULL,
+  `social` int(11) NOT NULL,
+  `mental` int(11) NOT NULL,
   `etat` varchar(10) NOT NULL DEFAULT 'EN ATTENTE',
+  `reroll` int(11) DEFAULT '3',
   `is_deleted` int(11) NOT NULL DEFAULT '0',
   `is_verified` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +47,7 @@ CREATE TABLE `personnages` (
 
 LOCK TABLES `personnages` WRITE;
 /*!40000 ALTER TABLE `personnages` DISABLE KEYS */;
-INSERT INTO `personnages` VALUES (3,5,'Christophe Bilodeau','Dieu',5,13,'MENT','SOC','PHYS','EN ATTENTE',0,0);
+INSERT INTO `personnages` VALUES (3,5,'Christophe Bilodeau','Dieu',5,13,3,5,7,'EN ATTENTE',3,0,0);
 /*!40000 ALTER TABLE `personnages` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -59,4 +60,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-25 21:02:00
+-- Dump completed on 2017-09-26 23:09:49

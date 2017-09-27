@@ -16,28 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `disciplines`
+-- Table structure for table `discipline_prob`
 --
 
-DROP TABLE IF EXISTS `disciplines`;
+DROP TABLE IF EXISTS `discipline_prob`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `disciplines` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
-  `description` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+CREATE TABLE `discipline_prob` (
+  `id_discipline` int(11) NOT NULL,
+  `prob` int(11) NOT NULL,
+  PRIMARY KEY (`id_discipline`,`prob`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `disciplines`
+-- Dumping data for table `discipline_prob`
 --
 
-LOCK TABLES `disciplines` WRITE;
-/*!40000 ALTER TABLE `disciplines` DISABLE KEYS */;
-INSERT INTO `disciplines` VALUES (1,'Domination','Description Dominate'),(2,'Présence','Description Présence'),(3,'Potence','Description Potence'),(4,'Auspex','Description Auspex'),(5,'Célérité','Description Célérité'),(6,'Animalisme','Description Animalisme'),(7,'Fortitude','Description Fortitude'),(8,'Obfuscate','Description Obfuscate'),(9,'Protean','Description Protean'),(10,'Obtenebration','Description Obtenebration'),(11,'Thaumaturgie','Description Thaumaturgie');
-/*!40000 ALTER TABLE `disciplines` ENABLE KEYS */;
+LOCK TABLES `discipline_prob` WRITE;
+/*!40000 ALTER TABLE `discipline_prob` DISABLE KEYS */;
+INSERT INTO `discipline_prob` VALUES (1,2),(2,3),(3,2),(5,4),(6,2),(11,2),(12,1),(13,3),(14,3),(15,1),(29,1);
+/*!40000 ALTER TABLE `discipline_prob` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-25 21:02:02
+-- Dump completed on 2017-09-26 23:09:52

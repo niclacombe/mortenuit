@@ -30,7 +30,7 @@
 			$this->load->view('template/footer');
 		}
 
-		public function newPerso2($id_user) {
+		public function newPerso2($idUser) {
 
 			$data = array();
 			$this->load->library('form_validation');
@@ -53,9 +53,9 @@
             }
             else {  
 
-            	$this->perso_model->newPerso($id_user);
+            	$this->perso_model->newPerso($idUser);
 
-            	$data['disciplines'] = 	$this->perso_model->getClanDisciplines($this->input->post('clan'));
+            	$data['disciplines'] = 	$this->perso_model->getStartDisciplines($idUser);
 
 		        $this->load->view('template/header');
 				$this->load->view('template/nav');
