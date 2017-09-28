@@ -51,13 +51,6 @@ class Perso_model extends CI_Model {
 			/* GET TOTAL */
 			$disc_id = [];
 			while(count($disc_id) != 3){
-				if(isset($disc_id[0])){
-					$this->db->where('id_discipline !=', $disc_id[0]);
-				}
-				if(isset($disc_id[1])){
-					$this->db->where('id_discipline !=', $disc_id[0]);
-					$this->db->where('id_discipline !=', $disc_id[1]);
-				}
 				$this->db->order_by('prob', 'desc');
 				$query = $this->db->get('discipline_prob');
 				$tab_prob = $query->result();
