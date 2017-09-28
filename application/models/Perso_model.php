@@ -49,51 +49,37 @@ class Perso_model extends CI_Model {
 			$this->db->db_select('mn_systeme');
 
 			/* GET TOTAL */
-			$this->db->select('SUM(prob) as total');
-			$this->db->order_by('prob', 'desc');
-			$query = $this->db->get('discipline_prob');
-			$prob_total = $query->result_array();
+			$disc_id = [];
+			while(count($disc_id) != 3){
+				if(isset($disc_id[0])){
+					$this->db->where('id_discipline !=', $disc_id[0]);
+				}
+				if(isset($disc_id[1])){
+					$this->db->where('id_discipline !=', $disc_id[0]);
+					$this->db->where('id_discipline !=', $disc_id[1]);
+				}
+				$this->db->order_by('prob', 'desc');
+				$query = $this->db->get('discipline_prob');
+				$tab_prob = $query->result();
 
-			$disciplines_id = [];
-
-			while(count($disciplines_id) != 3 ){
-				/* GET ROLL */
 				$maxRoll = 0;
-				for($i = 0 ; $i <= count($prob_total)-1; $i++){
-					$maxRoll .= $prob_total[$i]['prob'];
-				}				
+				foreach ($tab_prob as $tab) {
+					$maxRoll = $maxRoll + $tab->prob;
+				}
 				$roll = rand(1,$maxRoll);
 
 				while($roll >= 0){
-					$roll = $roll - $prob_total[0]['prob'];
-					array_shift($prob_total);
+					$roll = $roll-$tab_prob[0]->prob;
 					if($roll > 0){
-						$disciplines_id[] = $prob_total[0]['id'];
+						array_shift($tab_prob);
 					} else {
-						array_shift($prob_total);
+						$disc_id[] = $tab_prob[0]->id_discipline;
+						array_shift($tab_prob);
 					}
 				}
 			}
 
-			$this->db->where('id', $disciplines_id[0]);
-			$this->db->or_where('id', $disciplines_id[1]);
-			$this->db->or_where('id', $disciplines_id[2]);
-			$query = $this->db->get('disciplines');
-			$vDisciplines = $query->result();
-
-			$disciplines = [];
-
-			foreach ($vDisciplines as $vDisc) {
-				$this->db->where('id_parent', $vDisc->id);
-				$query = $this->db->get('sub_disciplines');
-
-				$disciplines['id'] = $vDisc->id;
-				$disciplines['name'] = $vDisc->name;
-				$disciplines['description'] = $vDisc->description;
-				$disciplines['subDisciplines'] = $query->result();
-			}
-
-			return $disciplines;
+			return $disc_id;
 
 
 		} else {
