@@ -45,35 +45,61 @@ class Perso_model extends CI_Model {
 
 		$perso = $query->row();
 
+		$this->db->db_select('mn_systeme');
+		$this->db->order_by('prob', 'desc');
+		$query = $this->db->get('discipline_prob');
+		$tab_prob = $query->result();
+
+		//$tab_prob => RÉSULTAT DE RECHECHE
+
+		function sum($addt, $item) { // Section pour faire la somme avec array_reduce
+			return ($addt += $item->prob);
+		}
+
 		if($perso->reroll > 0){
-			$this->db->db_select('mn_systeme');
 
-			/* GET TOTAL */
-			$disc_id = [];
-			while(count($disc_id) != 3){
-				$this->db->order_by('prob', 'desc');
-				$query = $this->db->get('discipline_prob');
-				$tab_prob = $query->result();
+			$tab_rand_disc = [];
 
-				$maxRoll = 0;
-				foreach ($tab_prob as $tab) {
-					$maxRoll = $maxRoll + $tab->prob;
-				}
-				$roll = rand(1,$maxRoll);
+			for($i = 0; $i < 3; $i++) {
+				$max_prob = array_reduce($tab_prob, "sum"); // Permet d'obtenir la somme des probabilités
+				$prob = rand(0, $max_prob - 1); // Nombre aléatoire de 0 à probabilités totales moins 1
+				$tab_disc_temp = []; // Réinitialisation du tableau temporaire pour la décompte des disciplines
+				/* var_dump($prob); // Voir les résultats aléatoires*/
 
-				while($roll >= 0){
-					$roll = $roll-$tab_prob[0]->prob;
-					if($roll > 0){
-						array_shift($tab_prob);
+				while (true) { // Boucle infini qui sera terminé par break si le total des probabilité à ce point est supérieur au résultat
+					$prob -= $tab_prob[0]->prob; // Decrémentation de la probabilité de l'élément courant
+					if ($prob >= 0) {
+						array_push($tab_disc_temp, array_shift($tab_prob)); // Push apres le dernier élément du tableau temp et retirer l'élément courant du tableau des disciplines
 					} else {
-						$disc_id[] = $tab_prob[0]->id_discipline;
-						array_shift($tab_prob);
+						break;
 					}
 				}
+				array_push($tab_rand_disc, array_shift($tab_prob)); // Ajout du résultat et retire l'élément courant
+				$tab_prob = array_merge($tab_disc_temp, $tab_prob); // Merge des tableau de décompte et des éléments restant dans le tableau des disciplines
+			                                                      //ex [0, 1, 2, 4, 5, 6] si l'élément aléatoire était le 3.
+
 			}
 
-			return $disc_id;
+			$this->db->where('id', $tab_rand_disc[0]->id_discipline);
+			$this->db->or_where('id', $tab_rand_disc[1]->id_discipline);
+			$this->db->or_where('id', $tab_rand_disc[2]->id_discipline);
+			$query = $this->db->get('disciplines');
+			$vDisciplines = $query->result();
 
+			foreach ($vDisciplines as $vDisc) {
+				$this->db->where('id_parent', $vDisc->id);
+				$query = $this->db->get('sub_disciplines');
+
+				
+				$disciplines[] = array(
+					'name' => $vDisc->name,
+					'id' => $vDisc->id,
+					'description' => $vDisc->description,
+					'sub_disciplines' => $query->row(),
+				);
+			}
+
+			return $disciplines;
 
 		} else {
 			return false;
