@@ -56,7 +56,7 @@ class Perso_model extends CI_Model {
 			return ($addt += $item->prob);
 		}
 
-		if($perso->reroll > 0){
+		if($perso->reroll >= 0){
 
 			$tab_rand_disc = [];
 
@@ -92,10 +92,12 @@ class Perso_model extends CI_Model {
 
 				
 				$disciplines[] = array(
+					'reroll' => $perso->reroll,
+					'idPerso' => $perso->id,
 					'name' => $vDisc->name,
 					'id' => $vDisc->id,
 					'description' => $vDisc->description,
-					'sub_disciplines' => $query->row(),
+					'sub_disciplines' => $query->result(),
 				);
 			}
 
@@ -103,6 +105,40 @@ class Perso_model extends CI_Model {
 
 		} else {
 			return false;
+		}
+	}
+
+	public function reroll($idPerso){
+		$query = "UPDATE mn_personnages.personnages SET reroll = reroll-1 WHERE id = " .$idPerso .";";
+		$this->db->query($query);
+
+	}
+
+	public function addStartDisciplines($idPerso){
+
+		$startDisc = array_slice($_POST,0,3);
+
+		foreach ($startDisc as $disc) {
+			$explode = explode('-', $disc);
+			$data = array(
+				'id_personnage' => $idPerso,
+				'id_discipline' => $explode[0],
+				'niveau'		=> $explode[1],
+				'start_discipline' => 1
+			);
+
+			$this->db->insert('disciplines_acquises', $data);
+
+			$disciplines = explode('-',$this->input->post('disciplines'));
+
+			$data = array(
+				'startDisc_1' => $disciplines[0],
+				'startDisc_2' => $disciplines[1],
+				'startDisc_3' => $disciplines[2]
+			);
+
+			$this->db->where('id', $idPerso);
+			$this->db->update('personnages', $data);
 		}
 	}
 

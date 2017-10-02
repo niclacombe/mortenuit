@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
--- Host: localhost    Database: mn_mortenuit
+-- Host: localhost    Database: mn_systeme
 -- ------------------------------------------------------
 -- Server version	5.5.5-10.1.19-MariaDB
 
@@ -16,36 +16,27 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `users`
+-- Table structure for table `discipline_prob`
 --
 
-DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `discipline_prob`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `users` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `prenom` varchar(255) NOT NULL DEFAULT '',
-  `nom` varchar(255) NOT NULL,
-  `courriel` varchar(255) NOT NULL DEFAULT '',
-  `password` varchar(255) NOT NULL DEFAULT '',
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  `is_admin` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `is_confirmed` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `is_deleted` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+CREATE TABLE `discipline_prob` (
+  `id_discipline` int(11) NOT NULL,
+  `prob` int(11) NOT NULL,
+  PRIMARY KEY (`id_discipline`,`prob`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `discipline_prob`
 --
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (5,'Nicolas','Lacombe','niclacombe@gmail.com','a44103e47f24e6cd33827c1516bd30deb09cba52e42855fb70c9386877f34e6fab7c3a04c04ea784b17c8f57eb1cd09ca05a88260873bce9b5335c4f03333da2lYuqRx1ebulCufDftULS+qUi7Gy2RYPznzfhwWufr1E=','0000-00-00 00:00:00',NULL,1,1,0);
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+LOCK TABLES `discipline_prob` WRITE;
+/*!40000 ALTER TABLE `discipline_prob` DISABLE KEYS */;
+INSERT INTO `discipline_prob` VALUES (1,2),(2,3),(3,2),(5,4),(6,2),(11,2),(12,1),(13,3),(14,3),(15,1),(29,1);
+/*!40000 ALTER TABLE `discipline_prob` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -57,4 +48,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-26 23:09:50
+-- Dump completed on 2017-10-01 23:19:40

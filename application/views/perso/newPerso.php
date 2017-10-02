@@ -45,19 +45,19 @@
 				<div class="col-md-4 col-xs-12">
 					<h4>Attributs physiques</h4>
 					<div class="radio">
-						<label for="phys">
+						<label for="physique">
 							<input type="radio" value="7" name="physique" checked>
 							7 traits
 						</label>
 					</div>
 					<div class="radio">
-						<label for="phys">
+						<label for="physique">
 							<input type="radio" value="5" name="physique">
 							5 traits
 						</label>
 					</div>
 					<div class="radio">
-						<label for="phys">
+						<label for="physique">
 							<input type="radio" value="3" name="physique">
 							3 traits
 						</label>
@@ -152,7 +152,7 @@
 
 
 	//Others
-	$(docu3).ready(function(){
+	$(document).ready(function(){
 		$('.toPopup').hide();
 
 		$(".owl-carousel").owlCarousel({

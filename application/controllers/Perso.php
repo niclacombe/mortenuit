@@ -64,6 +64,28 @@
             } 
 		}
 
+		public function reroll($idPerso, $idUser){
+			$this->perso_model->reroll($idPerso);
+
+			$data['disciplines'] = 	$this->perso_model->getStartDisciplines($idUser);
+
+	        $this->load->view('template/header');
+			$this->load->view('template/nav');
+			$this->load->view('perso/newPerso2',$data);
+			$this->load->view('template/footer');
+		}
+
+		public function newPerso3($idPerso, $idUser){
+
+			$this->perso_model->addStartDisciplines($idPerso);
+
+			$data = array();
+			$this->load->view('template/header');
+			$this->load->view('template/nav');
+			$this->load->view('perso/newPerso3',$data);
+			$this->load->view('template/footer');
+		}
+
 		
 
 	}
