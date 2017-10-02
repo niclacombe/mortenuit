@@ -4,6 +4,7 @@
 		<div class="row">
 			<h2>Créer un Personnage</h2>
 			<h3>La Malédiction du Sang touche tous les Kindred. Nul ne sait quelles disciplines sont infant aura...</h3>
+			<h3>Vous avez trois "points" à distribuer</h3>
 			<br>
 			<h4>N.B. Vous n'avez que trois (3) relances...</h4>
 		</div>
@@ -59,26 +60,16 @@
 
 		<br><br>
 
-		<?php if($disciplines[0]['reroll'] > 0): ?>
-
-
-
-			<div class="row">
-				<?php if($disciplines[0]['reroll'] == 1): ?>
-					<div class="col-xs-6 col-md-4 col-xs-offset-6 col-md-offset-8 text-right text-danger">
-						<h4><span class="fa fa-exclamation-triangle"></span> Attention, ceci est votre DERNIÈRE tentative!</h4>
-					</div>
-				<?php endif; ?>
-				<div class="col-xs-6 col-md-3 col-xs-offset-6 col-md-offset-9">
-					<a href="<?php echo site_url('perso/reroll/') . $disciplines[0]['idPerso'] . '/' . $userInfo->id; ?>"><button type="button" class="btn btn-success btn-block btn-lg"><span class="fa fa-save"></span> Relancer les Disciplines (<?php echo $disciplines[0]['reroll']; ?>)</button></a>
-				</div>
-			</div>
-
-			<br><br>
-		<?php endif; ?>
-
 		<div class="row">
-			<div class="col-xs-6 col-md-3 col-xs-offset-6 col-md-offset-9">
+			<?php if($disciplines[0]['reroll'] == 1): ?>
+				<div class="col-xs-6 col-md-4 text-right text-danger">
+					<h4><span class="fa fa-exclamation-triangle"></span> Attention, ceci est votre DERNIÈRE tentative!</h4>
+				</div>
+			<?php endif; ?>
+			<div class="col-xs-6 col-md-4">
+				<a href="<?php echo site_url('perso/reroll/') . $disciplines[0]['idPerso'] . '/' . $userInfo->id; ?>"><button type="button" class="btn btn-success btn-block btn-lg"><span class="fa fa-save"></span> Relancer les Disciplines (<?php echo $disciplines[0]['reroll']; ?>)</button></a>
+			</div>
+			<div class="col-xs-6 col-md-4 col-xs-offset-3 col-md-offset-4">
 				<button id="submit" class="btn btn-primary btn-block btn-lg" disabled="disabled"><span class="fa fa-save"></span> Sauvegarder et continuer</button>
 			</div>
 		</div>

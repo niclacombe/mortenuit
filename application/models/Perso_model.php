@@ -142,6 +142,29 @@ class Perso_model extends CI_Model {
 		}
 	}
 
+	public function getStartSkills(){
+		$this->db->db_select('mn_systeme');
+
+		$query = $this->db->get('habiletes');
+
+		return $query->result();
+	}
+
+	public function addHabiletes($idPerso){
+		$skills = $_POST;
+
+		foreach ($skills as $skill) {
+			$explode = explode('-', $skill);
+			$data = array(
+				'id_personnage' => $idPerso,
+				'id_habilete'	=> $explode[0],
+				'niveau'		=> $explode[1]
+			);
+
+			$this->db->insert('habiletes_acquises', $data);
+		}
+	}
+
 
 }
 
