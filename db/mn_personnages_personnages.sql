@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
--- Host: localhost    Database: mn_mortenuit
+-- Host: localhost    Database: mn_personnages
 -- ------------------------------------------------------
 -- Server version	5.5.5-10.1.19-MariaDB
 
@@ -16,36 +16,44 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `users`
+-- Table structure for table `personnages`
 --
 
-DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `personnages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `users` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `prenom` varchar(255) NOT NULL DEFAULT '',
-  `nom` varchar(255) NOT NULL,
-  `courriel` varchar(255) NOT NULL DEFAULT '',
-  `password` varchar(255) NOT NULL DEFAULT '',
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  `is_admin` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `is_confirmed` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `is_deleted` tinyint(1) unsigned NOT NULL DEFAULT '0',
+CREATE TABLE `personnages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` int(11) NOT NULL,
+  `nom` varchar(45) NOT NULL,
+  `concept` varchar(45) DEFAULT NULL,
+  `clan` int(11) NOT NULL,
+  `generation` int(11) NOT NULL DEFAULT '13',
+  `physique` int(11) NOT NULL,
+  `social` int(11) NOT NULL,
+  `mental` int(11) NOT NULL,
+  `nature` varchar(45) DEFAULT NULL,
+  `attitude` varchar(45) DEFAULT NULL,
+  `etat` varchar(10) NOT NULL DEFAULT 'EN ATTENTE',
+  `reroll` int(11) DEFAULT '3',
+  `is_deleted` int(11) NOT NULL DEFAULT '0',
+  `is_verified` int(11) NOT NULL DEFAULT '0',
+  `startDisc_1` int(2) DEFAULT NULL,
+  `startDisc_2` int(2) DEFAULT NULL,
+  `startDisc_3` int(2) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `personnages`
 --
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (5,'Nicolas','Lacombe','niclacombe@gmail.com','a44103e47f24e6cd33827c1516bd30deb09cba52e42855fb70c9386877f34e6fab7c3a04c04ea784b17c8f57eb1cd09ca05a88260873bce9b5335c4f03333da2lYuqRx1ebulCufDftULS+qUi7Gy2RYPznzfhwWufr1E=','0000-00-00 00:00:00',NULL,1,1,0);
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+LOCK TABLES `personnages` WRITE;
+/*!40000 ALTER TABLE `personnages` DISABLE KEYS */;
+INSERT INTO `personnages` VALUES (3,5,'Christophe Bilodeau','Dieu',5,13,3,5,7,NULL,NULL,'EN ATTENTE',28,0,1,1,2,14);
+/*!40000 ALTER TABLE `personnages` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -57,4 +65,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-10-01 23:19:38
+-- Dump completed on 2017-10-02 23:26:21

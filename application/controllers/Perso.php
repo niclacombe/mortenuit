@@ -23,6 +23,7 @@
 			$data = array();
 
 			$data['clans'] = $this->perso_model->getClans();
+			$data['natures'] = $this->perso_model->getNatures();
 
 			$this->load->view('template/header');
 			$this->load->view('template/nav');
@@ -41,6 +42,8 @@
 			$this->form_validation->set_rules('physique', 'Attribut physique', 'trim|required|differs[social]|differs[mental]');
 			$this->form_validation->set_rules('social', 'Attribut social', 'trim|required|differs[physique]|differs[mental]');
 			$this->form_validation->set_rules('mental', 'Attribut mental', 'trim|required|differs[physique]|differs[social]');
+			$this->form_validation->set_rules('nature', 'Nature', 'trim|required|differs[social]|differs[mental]');
+			$this->form_validation->set_rules('attitude', 'Attitude', 'trim|required');
 
 			if ($this->form_validation->run() == FALSE) {
 

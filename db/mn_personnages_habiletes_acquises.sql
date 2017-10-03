@@ -16,29 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `disciplines_acquises`
+-- Table structure for table `habiletes_acquises`
 --
 
-DROP TABLE IF EXISTS `disciplines_acquises`;
+DROP TABLE IF EXISTS `habiletes_acquises`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `disciplines_acquises` (
+CREATE TABLE `habiletes_acquises` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_personnage` int(11) NOT NULL,
-  `id_discipline` int(11) NOT NULL,
-  `niveau` int(11) NOT NULL DEFAULT '1',
-  `start_discipline` int(11) NOT NULL DEFAULT '0',
+  `id_personnage` varchar(45) DEFAULT NULL,
+  `id_habilete` int(11) DEFAULT NULL,
+  `niveau` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `disciplines_acquises`
+-- Dumping data for table `habiletes_acquises`
 --
 
-LOCK TABLES `disciplines_acquises` WRITE;
-/*!40000 ALTER TABLE `disciplines_acquises` DISABLE KEYS */;
-/*!40000 ALTER TABLE `disciplines_acquises` ENABLE KEYS */;
+LOCK TABLES `habiletes_acquises` WRITE;
+/*!40000 ALTER TABLE `habiletes_acquises` DISABLE KEYS */;
+INSERT INTO `habiletes_acquises` VALUES (1,'3',1,1),(2,'3',2,1),(3,'3',3,5),(4,'3',4,3);
+/*!40000 ALTER TABLE `habiletes_acquises` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-10-01 23:19:38
+-- Dump completed on 2017-10-02 23:26:20

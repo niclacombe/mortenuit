@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
--- Host: localhost    Database: mn_mortenuit
+-- Host: localhost    Database: mn_personnages
 -- ------------------------------------------------------
 -- Server version	5.5.5-10.1.19-MariaDB
 
@@ -16,31 +16,30 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `news`
+-- Table structure for table `disciplines_acquises`
 --
 
-DROP TABLE IF EXISTS `news`;
+DROP TABLE IF EXISTS `disciplines_acquises`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `news` (
+CREATE TABLE `disciplines_acquises` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(100) NOT NULL,
-  `content` varchar(750) NOT NULL,
-  `id_author` int(11) NOT NULL,
-  `date` int(11) NOT NULL,
-  `modified` int(11) NOT NULL,
+  `id_personnage` int(11) NOT NULL,
+  `id_discipline` int(11) NOT NULL,
+  `niveau` int(11) NOT NULL DEFAULT '1',
+  `start_discipline` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `news`
+-- Dumping data for table `disciplines_acquises`
 --
 
-LOCK TABLES `news` WRITE;
-/*!40000 ALTER TABLE `news` DISABLE KEYS */;
-INSERT INTO `news` VALUES (4,'Nouvelle','Nouvelle Content',5,1486783861,1486784267);
-/*!40000 ALTER TABLE `news` ENABLE KEYS */;
+LOCK TABLES `disciplines_acquises` WRITE;
+/*!40000 ALTER TABLE `disciplines_acquises` DISABLE KEYS */;
+INSERT INTO `disciplines_acquises` VALUES (1,3,1,1,1),(2,3,2,1,1),(3,3,14,1,1),(4,3,1,1,1),(5,3,2,1,1),(6,3,14,1,1),(7,3,1,1,1),(8,3,2,1,1),(9,3,14,1,1),(10,3,1,1,1),(11,3,2,1,1),(12,3,14,1,1);
+/*!40000 ALTER TABLE `disciplines_acquises` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -52,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-10-01 23:19:38
+-- Dump completed on 2017-10-02 23:26:21

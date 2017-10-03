@@ -40,6 +40,27 @@
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
+				<div class="form-group col-xs-6 col-md-4">
+					<label for="nature">Nature :</label>
+					<select name="nature" class="form-control">
+						<?php foreach ($natures as $nature) : ?>
+							<option value="<?php echo $nature->id; ?>"><?php echo $nature->nom; ?></option>
+						<?php endforeach; ?>
+					</select>
+				</div>
+				<div class="form-group col-xs-6 col-md-4">
+					<label for="attitude">Attitude :</label>
+					<select name="attitude" class="form-control">
+						<?php foreach ($natures as $nature) : ?>
+							<option value="<?php echo $nature->id; ?>"><?php echo $nature->nom; ?></option>
+						<?php endforeach; ?>
+					</select>
+				</div>
+				<div class="col-xs-6 col-md-4"></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
 				<h3>Attributs</h3>
 				<h4>En sélectionnant votre attribut primaire, vous lui attribuerez 7 traits. Le secondaire, 5 traits et le tertiaire, 3 traits.</h4>
 				<div class="col-md-4 col-xs-12">

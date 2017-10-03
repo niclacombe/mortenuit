@@ -104,7 +104,7 @@
 			</div>
 			<div class="col-xs-12 col-md-4">
 				<div id="card" class="card">
-					<h4 class="card-header"><?php echo $habiletes[0]->name; ?></h4>
+					<h4 class="card-header"><?php echo $habiletes[0]->habilete; ?></h4>
 					<div class="card-body">
 						<p class="card-text"><?php echo $habiletes[0]->description; ?></p>
 					</div>
@@ -162,7 +162,7 @@
 				});
 			}
 
-			if($('.habilete:checked').length >= 10){
+			if($('.habilete:checked').length >= 5){
 				$('.habilete:not(":checked")').attr('disabled','disabled');
 				$('#submit').removeAttr('disabled');
 			} else {

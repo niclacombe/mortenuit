@@ -17,6 +17,15 @@ class Perso_model extends CI_Model {
 		return $query->result();
 	}
 
+	public function getNatures(){
+		$this->db->db_select('mn_systeme');
+
+		$this->db->order_by('nom', 'asc');
+		$query = $this->db->get('natures');
+
+		return $query->result();
+	}
+
 	public function getPersonnages($id_user){
 		$this->db->where('id_user', $id_user);
 		$query = $this->db->get('personnages');
