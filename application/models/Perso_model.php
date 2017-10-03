@@ -42,6 +42,8 @@ class Perso_model extends CI_Model {
 			'physique'	=> $this->input->post('physique'),
 			'social'	=> $this->input->post('social'),
 			'mental'	=> $this->input->post('mental'),
+			'nature'	=> $this->input->post('nature'),
+			'attitude'	=> $this->input->post('attitude'),
 		);
 
 		$this->db->insert('personnages', $data);
