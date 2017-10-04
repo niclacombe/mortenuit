@@ -29,6 +29,30 @@ class Influence_model extends CI_Model {
 
 		return $return;
 	}
+
+	public function getStartContactsBySecteur(){
+		$this->db->select('id,secteur');
+		$this->db->order_by('secteur', 'asc');
+		$query = $this->db->get('secteurs');
+		$secteurs = $query->result();
+
+		$return = array();
+
+		foreach ($secteurs as $key => $secteur) {
+			$this->db->select('nom, niveau');
+			$this->db->where('secteur', $secteur->id);
+			//$this->db->where('niveau <=', 3);
+			$this->db->order_by('niveau', 'desc');
+			$query = $this->db->get('contacts');
+
+
+			$return[$key]['idSecteur'] = $secteur->id;
+			$return[$key]['nameSecteur'] = $secteur->secteur;
+			$return[$key]['contacts'] = $query->result();
+		}
+
+		return $return;
+	}
 	
 
 }

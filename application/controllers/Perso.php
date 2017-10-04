@@ -97,7 +97,7 @@
 
 			$this->load->model('influence_model');
 
-			$data['contacts'] = $this->influence_model->getContactsBySecteur();
+			$data['contacts'] = $this->influence_model->getStartContactsBySecteur();
 
 			$this->load->view('template/header');
 			$this->load->view('template/nav');
