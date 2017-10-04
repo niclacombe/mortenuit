@@ -52,7 +52,7 @@ CREATE TABLE `personnages` (
 
 LOCK TABLES `personnages` WRITE;
 /*!40000 ALTER TABLE `personnages` DISABLE KEYS */;
-INSERT INTO `personnages` VALUES (3,5,'Christophe Bilodeau','Dieu',5,13,3,5,7,NULL,NULL,'EN ATTENTE',28,0,1,1,2,14);
+INSERT INTO `personnages` VALUES (3,5,'Christophe Bilodeau','Dieu',5,13,3,5,7,NULL,NULL,'EN ATTENTE',27,0,1,1,2,14);
 /*!40000 ALTER TABLE `personnages` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -65,4 +65,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-10-02 23:26:21
+-- Dump completed on 2017-10-03 23:00:23

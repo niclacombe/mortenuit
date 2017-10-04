@@ -7,7 +7,7 @@
 			<h3>Vous avez 10 "points" à distribuer</h3>
 		</div>
 
-		-<?php echo form_open('perso/newPerso4/' .$idPerso . '/' .$userInfo->id); ?>
+		<?php echo form_open('perso/newPerso4/' .$idPerso . '/' .$userInfo->id); ?>
 
 		<div class="row">
 			<div class="col-xs-12 col-md-4">

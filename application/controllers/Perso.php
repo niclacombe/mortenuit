@@ -95,7 +95,9 @@
 
 			$this->perso_model->addHabiletes($idPerso);
 
-			$data = array();
+			$this->load->model('influence_model');
+
+			$data['contacts'] = $this->influence_model->getContactsBySecteur();
 
 			$this->load->view('template/header');
 			$this->load->view('template/nav');
