@@ -41,7 +41,8 @@ class Influence_model extends CI_Model {
 		foreach ($secteurs as $key => $secteur) {
 			$this->db->select('nom, niveau');
 			$this->db->where('secteur', $secteur->id);
-			//$this->db->where('niveau <=', 3);
+			$this->db->where('niveau <=', 3);
+			$this->db->where('niveau !=', 0);
 			$this->db->order_by('niveau', 'desc');
 			$query = $this->db->get('contacts');
 
