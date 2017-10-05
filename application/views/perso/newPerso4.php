@@ -13,11 +13,11 @@
 						<td>Génération</td>
 						<td class="form-check-inline form-check">
 							<label for="" class="form-check-label">
-								12e <input data-cost="1" type="checkbox">
+								12e <input class="checkBG" data-cost="1" type="checkbox">
 								&nbsp&nbsp							
-								&nbsp11e <input data-cost="3" type="checkbox">
+								&nbsp11e <input class="checkBG" data-cost="3" type="checkbox">
 								&nbsp&nbsp
-								&nbsp10e <input data-cost="5" type="checkbox">
+								&nbsp10e <input class="checkBG" data-cost="5" type="checkbox">
 							</label>
 						</td>
 					</tr>
@@ -29,11 +29,11 @@
 						<td>Ressources</td>
 						<td class="form-check-inline form-check">
 							<label for="" class="form-check-label">
-								1 <input data-cost="1" type="checkbox">
-								2 <input data-cost="1" type="checkbox">
-								3 <input data-cost="1" type="checkbox">
-								4 <input data-cost="1" type="checkbox">
-								5 <input data-cost="1" type="checkbox">
+								1 <input class="checkBG" data-cost="1" type="checkbox">
+								2 <input class="checkBG" data-cost="1" type="checkbox">
+								3 <input class="checkBG" data-cost="1" type="checkbox">
+								4 <input class="checkBG" data-cost="1" type="checkbox">
+								5 <input class="checkBG" data-cost="1" type="checkbox">
 							</label>
 						</td>
 					</tr>
@@ -45,11 +45,11 @@
 						<td>Herd</td>
 						<td class="form-check-inline form-check">
 							<label for="" class="form-check-label">
-								1 <input data-cost="1" type="checkbox">
-								2 <input data-cost="1" type="checkbox">
-								3 <input data-cost="1" type="checkbox">
-								4 <input data-cost="1" type="checkbox">
-								5 <input data-cost="1" type="checkbox">
+								1 <input class="checkBG" data-cost="1" type="checkbox">
+								2 <input class="checkBG" data-cost="1" type="checkbox">
+								3 <input class="checkBG" data-cost="1" type="checkbox">
+								4 <input class="checkBG" data-cost="1" type="checkbox">
+								5 <input  class="checkBG"data-cost="1" type="checkbox">
 							</label>
 						</td>
 					</tr>
@@ -62,16 +62,18 @@
 
 			<div class="col-xs-12 col-md-3">
 				<h4>Secteur</h4>
-				<select name="" id="" class="form-control">
+				<select name="secteur" id="secteurSelector" class="form-control">
 					<?php foreach ($contacts as $contact) : ?>
 						<option value="<?php echo $contact['idSecteur']; ?>"><?php echo $contact['nameSecteur'] ?></option>
 					<?php endforeach; ?>					
 				</select>
 			</div>
 			<div class="col-xs-12 col-md-4">
-				<?php foreach ($contacts as $contact) : ?>
-					<div class="row sectorContainer">
-						<h4><?php echo $contact['nameSecteur']; ?></h4>
+				<?php foreach ($contacts as $secteur) : ?>
+					<div class="row sectorContainer" 
+					data-idSecteur="<?php echo $secteur['idSecteur']; ?>"
+					<?php if($secteur['idSecteur'] != 1 ) : echo 'style="display:none"'; endif; ?>>
+						<h4><?php echo $secteur['nameSecteur']; ?></h4>
 
 						<table class="table table-responsive table-striped">
 							<tr>
@@ -79,21 +81,56 @@
 								<th class="text-center">Niveau</th>
 								<th class="text-center">Sélectionner</th>
 							</tr>
-							<?php foreach ($contact['contacts'] as $contact) : ?>
+							<?php foreach ($secteur['contacts'] as $contact) : ?>
 								<tr>
 									<td><?php echo $contact->nom; ?></td>
 									<td class="text-center"><?php echo $contact->niveau ?></td>
-									<td class="text-center"><input type="checkbox"></td>
+									<td class="text-center">
+										<input class="checkBG checkContact" 
+										type="checkbox" 
+										data-id="<?php echo $contact->id; ?>"
+										data-cost="<?php echo $contact->niveau ?>" 
+										data-secteur="<?php echo $secteur['nameSecteur']; ?>"
+										data-nom="<?php echo $contact->nom; ?>">
+									</td>
 								</tr>
 							<?php endforeach; ?>
 						</table>
 					</div>
 				<?php endforeach; ?>
 			</div>
-			<div class="col-xs-12 col-md-4">
+			<div id="selection" class="col-xs-12 col-md-4">
 				<h4>Sélection</h4>
 			</div>
 		</div>
 
 	</div>
 </div>
+
+<script>
+	$(function(){
+
+		$('#secteurSelector').on('change',function(){
+			var idSecteur = $('#secteurSelector :selected').val();
+			$('.sectorContainer').hide();
+			$('.sectorContainer[data-idSecteur = ' +idSecteur +']').show();
+		});
+
+	});
+
+	$(function(){
+
+		$('.checkBG').on('change',function(){
+			if( $(this).hasClass('checkContact') ){
+				if( $(this).prop('checked') ){
+					var append = '<p id="' +$(this).attr('data-id') +'">' +$(this).attr('data-nom') +' - ' +'<i>' +$(this).attr('data-secteur') +'(' +$(this).attr('data-cost') +')' +'</i></p>';
+					$('#selection').append(append);
+				} else {
+					$('#' +$(this).attr('data-id')).remove();
+				}
+			}
+		});		
+
+	});
+
+</script>
