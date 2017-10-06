@@ -172,13 +172,15 @@
 
 			} else {
 
-				var freebies = parseInt($('#freebiesCount').html());
-				$('#freebiesCount').html(freebies + parseInt($(this).attr('data-cost')) );
-
 				var siblings = $(this).nextAll('input');
 
 				$.each(siblings, function(){
 					$(this).prop('checked',false).attr('disabled','disabled');
+				});
+
+				var checkedBG = $('.checkBG:checked');
+				$.each(checkedBG, function(){
+					$('#freebiesCount').html(15 - parseInt($(this).attr('data-cost')) );
 				});
 			}
 
