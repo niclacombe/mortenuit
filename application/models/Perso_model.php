@@ -176,6 +176,10 @@ class Perso_model extends CI_Model {
 		}
 	}
 
+	public function addBackgrounds($idPerso){
+
+	}
+
 
 }
 

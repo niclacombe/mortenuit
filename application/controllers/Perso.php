@@ -98,12 +98,17 @@
 			$this->load->model('influence_model');
 
 			$data['contacts'] = $this->influence_model->getStartContactsBySecteur();
+			$data['idPerso'] = $idPerso;
 
 			$this->load->view('template/header');
 			$this->load->view('template/nav');
 			$this->load->view('perso/newPerso4',$data);
 			$this->load->view('template/footer');
 
+		}
+
+		public function newPerso5($idPerso,$idUser){
+			echo '<pre>' .var_dump($_POST) .'</pre>';
 		}
 
 		

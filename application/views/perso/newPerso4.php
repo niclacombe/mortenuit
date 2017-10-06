@@ -6,6 +6,10 @@
 			<h3>Background</h3>
 		</div>
 
+		<?php echo form_open('perso/newPerso5/' .$idPerso . '/' .$userInfo->id); ?>
+
+		<input name="freebiesCount" type="hidden" value="15">
+
 		<div class="row">
 			<div class="col-xs-12">
 				<h3>Il vous reste <span id="freebiesCount">15</span> freebies à distribuer</h3>
@@ -19,11 +23,11 @@
 						<td>Génération</td>
 						<td class="form-check-inline form-check">
 							<label for="" class="form-check-label">
-								12e <input class="checkBG" data-cost="1" type="checkbox">
+								12e <input name="generation" value="12" class="checkBG" data-cost="1" type="checkbox">
 								&nbsp&nbsp							
-								&nbsp11e <input class="checkBG" data-cost="3" type="checkbox" disabled="disabled">
+								&nbsp11e <input name="generation" value="11" class="checkBG" data-cost="3" type="checkbox" disabled="disabled">
 								&nbsp&nbsp
-								&nbsp10e <input class="checkBG" data-cost="5" type="checkbox" disabled="disabled">
+								&nbsp10e <input name="generation" value="10" class="checkBG" data-cost="5" type="checkbox" disabled="disabled">
 							</label>
 						</td>
 					</tr>
@@ -35,11 +39,11 @@
 						<td>Ressources</td>
 						<td class="form-check-inline form-check">
 							<label for="" class="form-check-label">
-								1 <input class="checkBG" data-cost="1" type="checkbox">
-								2 <input class="checkBG" data-cost="1" type="checkbox" disabled="disabled">
-								3 <input class="checkBG" data-cost="1" type="checkbox" disabled="disabled">
-								4 <input class="checkBG" data-cost="1" type="checkbox" disabled="disabled">
-								5 <input class="checkBG" data-cost="1" type="checkbox" disabled="disabled">
+								1 <input name="ressource" value="1" class="checkBG" data-cost="1" type="checkbox">
+								2 <input name="ressource" value="2" class="checkBG" data-cost="1" type="checkbox" disabled="disabled">
+								3 <input name="ressource" value="3" class="checkBG" data-cost="1" type="checkbox" disabled="disabled">
+								4 <input name="ressource" value="4" class="checkBG" data-cost="1" type="checkbox" disabled="disabled">
+								5 <input name="ressource" value="5" class="checkBG" data-cost="1" type="checkbox" disabled="disabled">
 							</label>
 						</td>
 					</tr>
@@ -51,11 +55,11 @@
 						<td>Herd</td>
 						<td class="form-check-inline form-check">
 							<label for="" class="form-check-label">
-								1 <input class="checkBG" data-cost="1" type="checkbox">
-								2 <input class="checkBG" data-cost="1" type="checkbox" disabled="disabled">
-								3 <input class="checkBG" data-cost="1" type="checkbox" disabled="disabled">
-								4 <input class="checkBG" data-cost="1" type="checkbox" disabled="disabled">
-								5 <input class="checkBG" data-cost="1" type="checkbox" disabled="disabled">
+								1 <input name="herd" value="1" class="checkBG" data-cost="1" type="checkbox">
+								2 <input name="herd" value="2" class="checkBG" data-cost="1" type="checkbox" disabled="disabled">
+								3 <input name="herd" value="3" class="checkBG" data-cost="1" type="checkbox" disabled="disabled">
+								4 <input name="herd" value="4" class="checkBG" data-cost="1" type="checkbox" disabled="disabled">
+								5 <input name="herd" value="5" class="checkBG" data-cost="1" type="checkbox" disabled="disabled">
 							</label>
 						</td>
 					</tr>
@@ -114,6 +118,8 @@
 									<td class="text-center"><?php echo $contact->niveau ?></td>
 									<td class="text-center">
 										<input class="checkBG checkContact" 
+										name="<?php echo 'contact-' .$contact->id; ?>"
+										value="<?php echo $contact->id; ?>"
 										type="checkbox" 
 										data-id="<?php echo $contact->id; ?>"
 										data-cost="<?php echo $contact->niveau ?>" 
@@ -126,10 +132,23 @@
 					</div>
 				<?php endforeach; ?>
 			</div>
-			<div id="selection" class="col-xs-12 col-md-4">
+			<div class="col-xs-12 col-md-4">
 				<h4>Sélection</h4>
+				<div id="selection" >
+				</div>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+				<div class="col-xs-8  col-xs-offset-4">
+					<button id="submit" class="btn btn-primary btn-block btn-lg"><span class="fa fa-save"></span> Sauvegarder et continuer</button>
+				</div>
 			</div>
+			
 		</div>
+
+		<?php echo form_close(); ?>
 
 	</div>
 </div>
@@ -168,7 +187,7 @@
 
 				var freebies = parseInt($('#freebiesCount').html());
 				$('#freebiesCount').html(freebies - parseInt($(this).attr('data-cost')) );
-
+				$('input[name="freebiesCount"]').val($('#freebiesCount').html());
 
 			} else {
 
@@ -181,6 +200,7 @@
 				var checkedBG = $('.checkBG:checked');
 				$.each(checkedBG, function(){
 					$('#freebiesCount').html(15 - parseInt($(this).attr('data-cost')) );
+					$('input[name="freebiesCount"]').val($('#freebiesCount').html());
 				});
 			}
 
