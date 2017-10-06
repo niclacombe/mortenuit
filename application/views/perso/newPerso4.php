@@ -7,6 +7,12 @@
 		</div>
 
 		<div class="row">
+			<div class="col-xs-12">
+				<h3>Il vous reste <span id="freebiesCount">15</span> freebies à distribuer</h3>
+			</div>
+		</div>
+
+		<div class="row">
 			<div class="col-xs-12 col-md-4 form-group">
 				<table class="table table-responsive">
 					<tr>
@@ -15,9 +21,9 @@
 							<label for="" class="form-check-label">
 								12e <input class="checkBG" data-cost="1" type="checkbox">
 								&nbsp&nbsp							
-								&nbsp11e <input class="checkBG" data-cost="3" type="checkbox">
+								&nbsp11e <input class="checkBG" data-cost="3" type="checkbox" disabled="disabled">
 								&nbsp&nbsp
-								&nbsp10e <input class="checkBG" data-cost="5" type="checkbox">
+								&nbsp10e <input class="checkBG" data-cost="5" type="checkbox" disabled="disabled">
 							</label>
 						</td>
 					</tr>
@@ -30,10 +36,10 @@
 						<td class="form-check-inline form-check">
 							<label for="" class="form-check-label">
 								1 <input class="checkBG" data-cost="1" type="checkbox">
-								2 <input class="checkBG" data-cost="1" type="checkbox">
-								3 <input class="checkBG" data-cost="1" type="checkbox">
-								4 <input class="checkBG" data-cost="1" type="checkbox">
-								5 <input class="checkBG" data-cost="1" type="checkbox">
+								2 <input class="checkBG" data-cost="1" type="checkbox" disabled="disabled">
+								3 <input class="checkBG" data-cost="1" type="checkbox" disabled="disabled">
+								4 <input class="checkBG" data-cost="1" type="checkbox" disabled="disabled">
+								5 <input class="checkBG" data-cost="1" type="checkbox" disabled="disabled">
 							</label>
 						</td>
 					</tr>
@@ -46,10 +52,10 @@
 						<td class="form-check-inline form-check">
 							<label for="" class="form-check-label">
 								1 <input class="checkBG" data-cost="1" type="checkbox">
-								2 <input class="checkBG" data-cost="1" type="checkbox">
-								3 <input class="checkBG" data-cost="1" type="checkbox">
-								4 <input class="checkBG" data-cost="1" type="checkbox">
-								5 <input  class="checkBG"data-cost="1" type="checkbox">
+								2 <input class="checkBG" data-cost="1" type="checkbox" disabled="disabled">
+								3 <input class="checkBG" data-cost="1" type="checkbox" disabled="disabled">
+								4 <input class="checkBG" data-cost="1" type="checkbox" disabled="disabled">
+								5 <input class="checkBG" data-cost="1" type="checkbox" disabled="disabled">
 							</label>
 						</td>
 					</tr>
@@ -67,13 +73,34 @@
 						<option value="<?php echo $contact['idSecteur']; ?>"><?php echo $contact['nameSecteur'] ?></option>
 					<?php endforeach; ?>					
 				</select>
+				<?php foreach ($contacts as $secteur) : ?>
+					<div class="row sectorContainer" 
+					data-idSecteur="<?php echo $secteur['idSecteur']; ?>"
+					<?php if($secteur['idSecteur'] != 1 ) : echo 'style="display:none"'; endif; ?>>
+						<div class="col-xs-12">
+							<ul class="list-unstyled">
+								<?php foreach ($secteur['niveaux'] as $niveau) :?>
+									<li><?php echo $niveau->niveau .' - ' . $niveau->description; ?></li>
+								<?php endforeach; ?>
+							</ul>
+						</div>
+					</div>
+				<?php endforeach; ?>
 			</div>
 			<div class="col-xs-12 col-md-4">
 				<?php foreach ($contacts as $secteur) : ?>
 					<div class="row sectorContainer" 
 					data-idSecteur="<?php echo $secteur['idSecteur']; ?>"
 					<?php if($secteur['idSecteur'] != 1 ) : echo 'style="display:none"'; endif; ?>>
-						<h4><?php echo $secteur['nameSecteur']; ?></h4>
+						<h4><?php echo $secteur['nameSecteur']; ?> 
+							<a href="#" data-toggle="popover" 
+								title="<?php echo $secteur['nameSecteur']; ?>" 
+								data-content="<?php echo $secteur['description']; ?>" 
+								data-trigger="focus" 
+								data-placement="right">
+									<span class="fa fa-question-circle"></span>
+							</a>
+						</h4>
 
 						<table class="table table-responsive table-striped">
 							<tr>
@@ -108,6 +135,12 @@
 </div>
 
 <script>
+
+	$(function(){
+		$('.fa-question-circle').parent('a').popover();
+
+	});
+
 	$(function(){
 
 		$('#secteurSelector').on('change',function(){
@@ -122,13 +155,35 @@
 
 		$('.checkBG').on('change',function(){
 			if( $(this).hasClass('checkContact') ){
-				if( $(this).prop('checked') ){
+				if( $(this).is(':checked') ){
 					var append = '<p id="' +$(this).attr('data-id') +'">' +$(this).attr('data-nom') +' - ' +'<i>' +$(this).attr('data-secteur') +'(' +$(this).attr('data-cost') +')' +'</i></p>';
 					$('#selection').append(append);
 				} else {
 					$('#' +$(this).attr('data-id')).remove();
 				}
 			}
+
+			if( $(this).is(':checked') ){
+				$(this).next('.checkBG').removeAttr('disabled');
+
+				var freebies = parseInt($('#freebiesCount').html());
+				$('#freebiesCount').html(freebies - parseInt($(this).attr('data-cost')) );
+
+
+			} else {
+
+				var freebies = parseInt($('#freebiesCount').html());
+				$('#freebiesCount').html(freebies + parseInt($(this).attr('data-cost')) );
+
+				var siblings = $(this).nextAll('input');
+
+				$.each(siblings, function(){
+					$(this).prop('checked',false).attr('disabled','disabled');
+				});
+			}
+
+
+
 		});		
 
 	});

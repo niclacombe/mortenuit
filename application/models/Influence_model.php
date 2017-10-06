@@ -8,7 +8,6 @@ class Influence_model extends CI_Model {
 	}
 
 	public function getContactsBySecteur(){
-		$this->db->select('id,secteur');
 		$this->db->order_by('secteur', 'asc');
 		$query = $this->db->get('secteurs');
 		$secteurs = $query->result();
@@ -16,7 +15,7 @@ class Influence_model extends CI_Model {
 		$return = array();
 
 		foreach ($secteurs as $key => $secteur) {
-			$this->db->select('nom, niveau');
+			$this->db->select('id, nom, niveau');
 			$this->db->where('secteur', $secteur->id);
 			$this->db->order_by('niveau', 'desc');
 			$query = $this->db->get('contacts');
@@ -24,6 +23,7 @@ class Influence_model extends CI_Model {
 
 			$return[$key]['idSecteur'] = $secteur->id;
 			$return[$key]['nameSecteur'] = $secteur->secteur;
+			$return[$key]['description'] = $secteur->description;
 			$return[$key]['contacts'] = $query->result();
 		}
 
@@ -31,7 +31,6 @@ class Influence_model extends CI_Model {
 	}
 
 	public function getStartContactsBySecteur(){
-		$this->db->select('id,secteur');
 		$this->db->order_by('secteur', 'asc');
 		$query = $this->db->get('secteurs');
 		$secteurs = $query->result();
@@ -46,10 +45,18 @@ class Influence_model extends CI_Model {
 			$this->db->order_by('niveau', 'desc');
 			$query = $this->db->get('contacts');
 
+			$this->db->select('id,description, niveau');
+			$this->db->where('secteur_parent', $secteur->id);
+			$this->db->where('niveau <=', 5);
+			$this->db->where('niveau !=', 0);
+			$this->db->order_by('niveau', 'asc');
+			$query2 = $this->db->get('sub_secteurs');
 
 			$return[$key]['idSecteur'] = $secteur->id;
 			$return[$key]['nameSecteur'] = $secteur->secteur;
+			$return[$key]['description'] = $secteur->description;
 			$return[$key]['contacts'] = $query->result();
+			$return[$key]['niveaux'] = $query2->result();
 		}
 
 		return $return;
