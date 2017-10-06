@@ -187,7 +187,7 @@
 
 				var freebies = parseInt($('#freebiesCount').html());
 				$('#freebiesCount').html(freebies - parseInt($(this).attr('data-cost')) );
-				$('input[name="freebiesCount"]').val($('#freebiesCount').html());
+				$('input[name="freebiesCount"]').val(15 - parseInt($('#freebiesCount').html()));
 
 			} else {
 
@@ -200,7 +200,7 @@
 				var checkedBG = $('.checkBG:checked');
 				$.each(checkedBG, function(){
 					$('#freebiesCount').html(15 - parseInt($(this).attr('data-cost')) );
-					$('input[name="freebiesCount"]').val($('#freebiesCount').html());
+					$('input[name="freebiesCount"]').val(15 - parseInt($('#freebiesCount').html()));
 				});
 			}
 

@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: mn_personnages
+-- Host: 127.0.0.1    Database: mn_influence
 -- ------------------------------------------------------
 -- Server version	5.5.5-10.1.21-MariaDB
 
@@ -16,29 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `habiletes_acquises`
+-- Table structure for table `contacts_acquis`
 --
 
-DROP TABLE IF EXISTS `habiletes_acquises`;
+DROP TABLE IF EXISTS `contacts_acquis`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `habiletes_acquises` (
+CREATE TABLE `contacts_acquis` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_personnage` varchar(45) DEFAULT NULL,
-  `id_habilete` int(11) DEFAULT NULL,
-  `niveau` int(11) DEFAULT NULL,
+  `id_contact` int(11) DEFAULT NULL,
+  `id_perso` int(11) DEFAULT NULL,
+  `date_acquisition` date DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `habiletes_acquises`
+-- Dumping data for table `contacts_acquis`
 --
 
-LOCK TABLES `habiletes_acquises` WRITE;
-/*!40000 ALTER TABLE `habiletes_acquises` DISABLE KEYS */;
-INSERT INTO `habiletes_acquises` VALUES (1,'3',1,1),(2,'3',2,1),(3,'3',3,5),(4,'3',4,3);
-/*!40000 ALTER TABLE `habiletes_acquises` ENABLE KEYS */;
+LOCK TABLES `contacts_acquis` WRITE;
+/*!40000 ALTER TABLE `contacts_acquis` DISABLE KEYS */;
+/*!40000 ALTER TABLE `contacts_acquis` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-10-06 17:46:46
+-- Dump completed on 2017-10-06 17:46:47

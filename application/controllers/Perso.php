@@ -109,6 +109,9 @@
 
 		public function newPerso5($idPerso,$idUser){
 			echo '<pre>' .var_dump($_POST) .'</pre>';
+
+			$this->perso_model->addBackground($idPerso);
+			$this->perso_model->updateFreebies($idPerso, intval( $_POST['freebiesCount'] ) );
 		}
 
 		

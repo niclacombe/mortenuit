@@ -176,8 +176,32 @@ class Perso_model extends CI_Model {
 		}
 	}
 
-	public function addBackgrounds($idPerso){
+	public function addBackground($idPerso){
+		$data = array();
+		$update = false;
 
+		if($this->input->post('generation')){
+			$data['generation'] = $this->input->post('generation');
+			$update = true;
+		}
+		if($this->input->post('ressource')){
+			$data['ressources'] = $this->input->post('ressource');
+			$update = true;
+		}
+		if($this->input->post('herd')){
+			$data['herd'] = $this->input->post('herd');
+			$update = true;
+		}
+
+		if($update){
+			$data['herd'] = $this->input->post('herd');
+			$this->db->where('id', $idPerso);
+			$this->db->update('personnages', $data);
+		}
+	}
+
+	public function updateFreebies($idPerso){
+		$data = array();
 	}
 
 
