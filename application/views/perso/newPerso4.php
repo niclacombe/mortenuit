@@ -189,6 +189,13 @@
 				$('#freebiesCount').html(freebies - parseInt($(this).attr('data-cost')) );
 				$('input[name="freebiesCount"]').val(15 - parseInt($('#freebiesCount').html()));
 
+				var nonCheckedBG = $('.checkBG:not(:checked)');
+				$.each(nonCheckedBG, function(){
+					if( parseInt( $(this).attr('data-cost') ) > parseInt($('#freebiesCount').html()) ){
+						$(this).attr('disabled','disabled');
+					}
+				})
+
 			} else {
 
 				var siblings = $(this).nextAll('input');
@@ -198,10 +205,22 @@
 				});
 
 				var checkedBG = $('.checkBG:checked');
-				$.each(checkedBG, function(){
-					$('#freebiesCount').html(15 - parseInt($(this).attr('data-cost')) );
-					$('input[name="freebiesCount"]').val(15 - parseInt($('#freebiesCount').html()));
-				});
+				if(checkedBG.length > 0){
+					$.each(checkedBG, function(){
+						$('#freebiesCount').html(15 - parseInt($(this).attr('data-cost')) );
+						$('input[name="freebiesCount"]').val(15 - parseInt($('#freebiesCount').html()));
+					});
+				} else {
+					$('#freebiesCount').html(15 - 0);
+					$('input[name="freebiesCount"]').val(15 - 0);
+				}
+
+				var nonCheckedBG = $('.checkBG:not(:checked)');
+				$.each(nonCheckedBG, function(){
+					if( parseInt( $(this).attr('data-cost') ) < parseInt($('#freebiesCount').html()) && $(this).previous('input').prop('checked') == true ){
+						$(this).removeAttr('disabled','disabled');
+					}
+				})
 			}
 
 
