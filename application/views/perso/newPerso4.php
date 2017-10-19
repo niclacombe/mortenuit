@@ -23,7 +23,7 @@
 						<td>Génération</td>
 						<td class="form-check-inline form-check">
 							<label for="" class="form-check-label">
-								12e <input name="generation" value="12" class="checkBG" data-cost="1" type="checkbox">
+								12e <input name="generation" value="12" class="checkBG first" data-cost="1" type="checkbox">
 								&nbsp&nbsp							
 								&nbsp11e <input name="generation" value="11" class="checkBG" data-cost="3" type="checkbox" disabled="disabled">
 								&nbsp&nbsp
@@ -39,7 +39,7 @@
 						<td>Ressources</td>
 						<td class="form-check-inline form-check">
 							<label for="" class="form-check-label">
-								1 <input name="ressource" value="1" class="checkBG" data-cost="1" type="checkbox">
+								1 <input name="ressource" value="1" class="checkBG first" data-cost="1" type="checkbox">
 								2 <input name="ressource" value="2" class="checkBG" data-cost="1" type="checkbox" disabled="disabled">
 								3 <input name="ressource" value="3" class="checkBG" data-cost="1" type="checkbox" disabled="disabled">
 								4 <input name="ressource" value="4" class="checkBG" data-cost="1" type="checkbox" disabled="disabled">
@@ -55,7 +55,7 @@
 						<td>Herd</td>
 						<td class="form-check-inline form-check">
 							<label for="" class="form-check-label">
-								1 <input name="herd" value="1" class="checkBG" data-cost="1" type="checkbox">
+								1 <input name="herd" value="1" class="checkBG first" data-cost="1" type="checkbox">
 								2 <input name="herd" value="2" class="checkBG" data-cost="1" type="checkbox" disabled="disabled">
 								3 <input name="herd" value="3" class="checkBG" data-cost="1" type="checkbox" disabled="disabled">
 								4 <input name="herd" value="4" class="checkBG" data-cost="1" type="checkbox" disabled="disabled">
@@ -204,12 +204,15 @@
 					$(this).prop('checked',false).attr('disabled','disabled');
 				});
 
-				var checkedBG = $('.checkBG:checked');
+				var checkedBG = $('.checkBG:checkbox:checked');
+				//alert(checkedBG.length);
 				if(checkedBG.length > 0){
+						var currentFreebie = 0;
 					$.each(checkedBG, function(){
-						$('#freebiesCount').html(15 - parseInt($(this).attr('data-cost')) );
-						$('input[name="freebiesCount"]').val(15 - parseInt($('#freebiesCount').html()));
+						currentFreebie += parseInt($(this).attr('data-cost'));						
 					});
+					$('#freebiesCount').html( 15 - currentFreebie );
+					$('input[name="freebiesCount"]').val( 15 - currentFreebie );
 				} else {
 					$('#freebiesCount').html(15 - 0);
 					$('input[name="freebiesCount"]').val(15 - 0);
@@ -217,8 +220,15 @@
 
 				var nonCheckedBG = $('.checkBG:not(:checked)');
 				$.each(nonCheckedBG, function(){
-					if( parseInt( $(this).attr('data-cost') ) < parseInt($('#freebiesCount').html()) && $(this).previous('input').prop('checked') == true ){
-						$(this).removeAttr('disabled','disabled');
+					if( parseInt( $(this).attr('data-cost') ) <= parseInt($('#freebiesCount').html()) ){
+						if( $(this).hasClass('checkContact') ){
+							$(this).removeAttr('disabled');
+						} else {
+							if( $(this).hasClass('first') || $(this).prev('input').is(':checked') ){
+								$(this).removeAttr('disabled');
+							}
+							
+						}
 					}
 				})
 			}
