@@ -142,6 +142,7 @@
 				<br>
 				<br>
 				<div class="col-xs-8  col-xs-offset-4">
+					<button type="reset" class="btn btn-success btn-block btn-lg" onclick=""><span class="fa fa-refresh"></span> Réinitialiser</button>
 					<button id="submit" class="btn btn-primary btn-block btn-lg"><span class="fa fa-save"></span> Sauvegarder et continuer</button>
 				</div>
 			</div>
@@ -154,12 +155,20 @@
 </div>
 
 <script>
-
+	/* POPOVER SECTOR DESC */
 	$(function(){
 		$('.fa-question-circle').parent('a').popover();
 
 	});
 
+	/* CLEAR #selection on form reset */
+	$(function(){
+		$('form').on('reset',function(){
+			$('#selection p').remove();
+		})
+	})
+
+	/* Switch sector contacts list */
 	$(function(){
 
 		$('#secteurSelector').on('change',function(){
@@ -169,6 +178,8 @@
 		});
 
 	});
+
+	/*Manage checkboxes and freebies amount*/
 
 	$(function(){
 
