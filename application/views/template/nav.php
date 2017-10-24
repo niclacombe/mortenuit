@@ -73,6 +73,12 @@
                         <li>
                             <a href="<?php echo site_url('perso/index') . '/' .$this->session->user_info->id; ?>"><span class="fa fa-child"></span> Mes Personnages (à venir)<span class="fa arrow"></span></a>
                         </li>
+                        <li>
+                            <a href="#"><span class="fa fa-users"></span> Influence<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li><a href="<?php echo site_url('influence/index'); ?>"><span class="fa fa-users"></span> Voir mes Contacts</a></li>
+                            </ul>
+                        </li>
                     </ul>
                     <?php endif; ?>
                 </div>

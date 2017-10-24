@@ -26,16 +26,24 @@ class Perso_model extends CI_Model {
 		return $query->result();
 	}
 
-	public function getPersonnages($id_user){
-		$this->db->where('id_user', $id_user);
+	public function getPersonnages($idUser){
+		$this->db->where('id_user', $idUser);
 		$query = $this->db->get('personnages');
 
 		return $query->result();
 	}
 
-	public function newPerso($id_user){
+	public function getActivePerso($idUser){
+		$this->db->where('etat', 'ACTIF');
+		$this->db->where('id_user', $idUser);
+		$query = $this->db->get('personnages',1);
+
+		return $query->row();
+	}
+
+	public function newPerso($idUser){
 		$data = array(
-			'id_user'	=> $id_user,
+			'id_user'	=> $idUser,
 			'nom'		=> $this->input->post('nom'),
 			'concept'	=> $this->input->post('concept'),
 			'clan'		=> $this->input->post('clan'),
@@ -202,6 +210,16 @@ class Perso_model extends CI_Model {
 
 	public function updateFreebies($idPerso){
 		$data = array();
+	}
+
+	public function getFreebies($idPerso){
+		$this->db->db_select('mn_personnages');
+
+		$this->db->select('SUM(freebies) AS freebies');
+		$this->db->where('id_personnage', $idPerso);
+
+		$query = $this->db->get('freebies');
+		return $query->row();
 	}
 
 
