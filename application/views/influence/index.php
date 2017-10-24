@@ -4,8 +4,6 @@
 		<div class="row">
 			<h1>Liste des contacts pour <i><?php echo $activePerso->nom; ?></i></h1>
 		</div>
-		
-		<?php echo var_dump($persoContacts); ?>
 
 		<div class="row">
 			<div class="col-md-6">
@@ -24,14 +22,21 @@
 							<th>Secteur - Niveau</th>
 							<th>Actions</th>
 						</tr>
+						<?php foreach ($persoContacts as $contact) : ?>
+							<tr>
+								<td><?php echo $contact->nom; ?></td>
+								<td><?php echo $contact->nomSecteur .' - ' .$contact->niveau; ?></td>
+								<td>
+									<button class="btn btn-primary"><span class="fa fa-edit"></span></button>
+									<button class="btn btn-danger"><span class="fa fa-trash"></span></button>
+								</td>
+							</tr>
+						<?php endforeach; ?>
 					</table>
 				<?php endif; ?>
 
 			</div>
 		</div>
-
-
-		
 
 	</div>
 </div>

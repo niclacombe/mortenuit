@@ -16,7 +16,7 @@
 		</div>
 
 		<div class="row">
-			<div class="secteur col-md-6">
+			<div class="secteur col-md-6 col-md-offset-3">
 				<h5>NB. Un contact ne peut être acheté durant les 3 semaines suivant son achat par un autre personnage.</h5>
 				<table class="table table-responsive table-striped">
 					<tr>
@@ -32,11 +32,13 @@
 							<td><?php echo $contact->nom; ?></td>
 							<td><?php echo $secteur['nameSecteur'] .' - ' .$contact->niveau; ?></td>
 							<td>
-								<button class="btn btn-success btn_addContact" 
+								<a href="<?php echo site_url('influence/addContact/') .$activePerso->id .'/' .$contact->id; ?>">
+									<button class="btn btn-success btn_addContact" 
 										<?php if($contact->date_protection > date('Y-m-d') || $freebies->freebies < $contact->niveau): echo 'disabled="disabled"'; endif; ?>
 										data-idContact="<?php echo $contact->id; ?>" >
-									<span class="fa fa-user-plus"></span>
-								</button>
+										<span class="fa fa-user-plus"></span>
+									</button>
+								</a>
 							</td>
 						</tr>
 					<?php endforeach; ?>								
@@ -59,5 +61,7 @@
 		});
 
 	});
+
+
 
 </script>

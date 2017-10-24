@@ -18,10 +18,6 @@ class Influence extends CI_Controller {
 
 		$data['persoContacts'] = $this->influence_model->getPersoContacts($data['activePerso']->id);
 
-		//** BUY CONTACT MODAL **//
-		
-
-
 		$this->load->view('template/header');
 		$this->load->view('template/nav');
 		$this->load->view('influence/index',$data);
@@ -33,7 +29,7 @@ class Influence extends CI_Controller {
 		$data = array();
 
 		$this->load->model('perso_model');
-		$data['activePerso'] = $this->perso_model->getActivePerso($idPerso);
+		$data['activePerso'] = $this->perso_model->getActivePerso($this->session->user_info->id);
 		$data['freebies'] = $this->perso_model->getFreebies($idPerso);
 
 		$this->load->model('influence_model');
@@ -44,6 +40,13 @@ class Influence extends CI_Controller {
 		$this->load->view('template/nav');
 		$this->load->view('influence/buyContact',$data);
 		$this->load->view('template/footer');
+	}
+
+	public function addContact($idPerso,$idContact){
+		
+		$this->influence_model->addContact($idPerso,$idContact);
+
+		redirect('/influence/buyContact/' .$idPerso ,'refresh');
 	}
 
 }

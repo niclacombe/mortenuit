@@ -50,7 +50,11 @@ class Influence_model extends CI_Model {
 
 		foreach ($secteurs as $key => $secteur) {
 
-			$ownedId = $this->db->query('SELECT id FROM mn_influence.contacts WHERE proprietaire = ' .$idPerso .';')->result_array();
+			$owned = $this->db->query('SELECT id FROM mn_influence.contacts WHERE proprietaire = ' .$idPerso .';')->result_array();
+			$ownedId = array();
+			foreach ($owned as $own) {
+				$ownedId[] = $own['id'];
+			}
 
 			if(!empty($ownedId)) : $this->db->where_not_in('id', $ownedId); endif;
 			$this->db->where('secteur', $secteur->id);
@@ -108,10 +112,51 @@ class Influence_model extends CI_Model {
 	public function getPersoContacts($idPerso){
 		$this->db->db_select('mn_influence');
 
+		$this->db->select('con.*, sec.secteur as nomSecteur');
+		$this->db->from('contacts con');
 		$this->db->where('proprietaire', $idPerso);
-		$query = $this->db->get('contacts');
+		$this->db->join('secteurs sec', 'sec.id = con.secteur', 'left');
+		$query = $this->db->get();
 
 		return $query->result();
+
+	}
+
+	public function addContact($idPerso,$idContact){
+		$this->db->db_select('mn_influence');
+
+		$data = array(
+			'id_contact' 	=> $idContact,
+			'id_perso'		=> $idPerso,
+			'date_acquisition' => date('Y-m-d H:i:s', time()),
+		);
+
+		$this->db->insert('contacts_acquis', $data);
+
+		$data = array(
+			'proprietaire'	=> $idPerso,
+			'date_achat'	=> date('Y-m-d H:i:s', time()),
+			'date_protection' => date('Y-m-d H:i:s', strtotime('+3 week'))
+		);
+
+		$this->db->where('id', $idContact);
+		$this->db->update('contacts', $data);
+
+		$this->db->select('niveau, nom');
+		$this->db->where('id', $idContact);
+		$contact = $this->db->get('contacts')->row();
+
+		$this->db->db_select('mn_personnages');
+
+		$data = array(
+			'id_personnage' => $idPerso,
+			'freebies' => '-' .$contact->niveau,
+			'raison' => 'Achat ' .$contact->nom,
+			'date' => date('Y-m-d H:i:s', time()),
+		);
+
+		$this->db->insert('freebies', $data);
+
 
 	}
 	
