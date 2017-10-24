@@ -16,28 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `contacts_acquis`
+-- Table structure for table `actions`
 --
 
-DROP TABLE IF EXISTS `contacts_acquis`;
+DROP TABLE IF EXISTS `actions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `contacts_acquis` (
+CREATE TABLE `actions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `id_contact` int(11) DEFAULT NULL,
-  `id_perso` int(11) DEFAULT NULL,
-  `date_acquisition` date DEFAULT NULL,
+  `id_contact` int(11) NOT NULL,
+  `description` varchar(500) NOT NULL,
+  `note` varchar(150) DEFAULT NULL,
+  `etat` varchar(45) DEFAULT 'ATTENT',
+  `niveau` int(11) DEFAULT NULL,
+  `secret` int(11) DEFAULT NULL,
+  `date_parution` date DEFAULT NULL,
+  `date_modif` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `contacts_acquis`
+-- Dumping data for table `actions`
 --
 
-LOCK TABLES `contacts_acquis` WRITE;
-/*!40000 ALTER TABLE `contacts_acquis` DISABLE KEYS */;
-/*!40000 ALTER TABLE `contacts_acquis` ENABLE KEYS */;
+LOCK TABLES `actions` WRITE;
+/*!40000 ALTER TABLE `actions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `actions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-10-06 17:46:47
+-- Dump completed on 2017-10-24 14:21:26

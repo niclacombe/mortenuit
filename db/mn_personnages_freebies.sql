@@ -23,12 +23,13 @@ DROP TABLE IF EXISTS `freebies`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `freebies` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_personnage` int(11) NOT NULL,
   `freebies` int(11) DEFAULT NULL,
   `raison` varchar(45) DEFAULT NULL,
-  `date` date DEFAULT NULL,
-  PRIMARY KEY (`id_personnage`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,6 +38,7 @@ CREATE TABLE `freebies` (
 
 LOCK TABLES `freebies` WRITE;
 /*!40000 ALTER TABLE `freebies` DISABLE KEYS */;
+INSERT INTO `freebies` VALUES (2,3,999,'ddd','2017-10-23 00:00:00'),(6,3,-6,'Achat Hélène Gagné','2017-10-24 19:06:45'),(7,3,-5,'Achat Yvonne Saint-Onge','2017-10-24 19:06:46'),(8,3,-5,'Achat Benjamin Robert','2017-10-24 19:06:48');
 /*!40000 ALTER TABLE `freebies` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-10-06 17:46:47
+-- Dump completed on 2017-10-24 14:21:26
