@@ -126,14 +126,6 @@ class Influence_model extends CI_Model {
 		$this->db->db_select('mn_influence');
 
 		$data = array(
-			'id_contact' 	=> $idContact,
-			'id_perso'		=> $idPerso,
-			'date_acquisition' => date('Y-m-d H:i:s', time()),
-		);
-
-		$this->db->insert('contacts_acquis', $data);
-
-		$data = array(
 			'proprietaire'	=> $idPerso,
 			'date_achat'	=> date('Y-m-d H:i:s', time()),
 			'date_protection' => date('Y-m-d H:i:s', strtotime('+3 week'))
@@ -156,8 +148,29 @@ class Influence_model extends CI_Model {
 		);
 
 		$this->db->insert('freebies', $data);
+	}
 
+	public function getContact($idContact){
+		$this->db->db_select('mn_influence');
 
+		$this->db->select('con.*, sec.secteur as nomSecteur');
+		$this->db->from('contacts con');
+		$this->db->join('secteurs sec', 'sec.id = con.secteur', 'left');
+		$this->db->where('con.id', $idContact);
+		$query = $this->db->get('contacts', 1);
+
+		return $query->row();
+	}
+
+	public function getLast3Actions($idContact){
+		$this->db->db_select('mn_influence');
+
+		$this->db->where('id_contact', $idContact);
+		$this->db->where('etat', 'ACCEPT');
+		$this->db->order_by('date_parution', 'desc');
+		$query = $this->db->get('actions', 3);
+
+		return $query->result();
 	}
 	
 

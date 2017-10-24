@@ -27,14 +27,16 @@
 								<td><?php echo $contact->nom; ?></td>
 								<td><?php echo $contact->nomSecteur .' - ' .$contact->niveau; ?></td>
 								<td>
-									<button class="btn btn-primary"><span class="fa fa-edit"></span></button>
+									<button class="btn btn-primary editAction" data-contact="<?php echo $contact->id; ?>"><span class="fa fa-edit"></span></button>
 									<button class="btn btn-danger"><span class="fa fa-trash"></span></button>
 								</td>
 							</tr>
 						<?php endforeach; ?>
 					</table>
 				<?php endif; ?>
-
+			</div>
+			<div id="actionEditor" class="col-md-6">
+				
 			</div>
 		</div>
 
@@ -51,6 +53,24 @@
 			$('.sectorContainer[data-idSecteur = ' +idSecteur +']').show();
 		});
 
-	});
+	
+		$('.editAction').on('click',function(){
+			showEditor($(this).attr('data-contact'));
+		});
 
+		function showEditor(idContact){
+
+			$.ajax({
+				'url' : "<?php echo site_url('influence/editAction/'); ?>" + idContact,
+				'type' : 'POST',
+				'success' : function(data){
+					$('#actionEditor').html(data);
+					console.log('AAAA');
+				},
+				'error' : function(err){
+					console.log(err);
+				}
+			});
+		}
+	});
 </script>

@@ -49,6 +49,14 @@ class Influence extends CI_Controller {
 		redirect('/influence/buyContact/' .$idPerso ,'refresh');
 	}
 
+	public function editAction($idContact){
+		$data = array();
+		$data['contact'] = $this->influence_model->getContact($idContact);
+		$data['last3Actions'] = $this->influence_model->getLast3Actions($idContact);
+
+		$this->load->view('influence/editAction',$data);
+	}
+
 }
 
 /* End of file Influence.php */
