@@ -83,3 +83,9 @@ h1,h2,h3,h4,h5{
 									   color-stop(0.72, rgb(73,125,189)),
 									   color-stop(0.86, rgb(28,58,148)));
 }
+
+textarea[name="actionDescription"],
+textarea[name="note"]{
+	height: 150px; 
+	resize: vertical;
+}

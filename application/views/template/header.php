@@ -17,6 +17,8 @@
     <!-- Custom CSS -->
     <link href="/mortenuit/assets/dist/css/sb-admin-2.css" rel="stylesheet">
 
+    <link href="/mortenuit/assets/css/bootstrap-datepicker.min.css" rel="stylesheet">
+
     <!-- Custom CSS -->
     <link href="/mortenuit/assets/css/style.css" rel="stylesheet">
 
@@ -50,6 +52,8 @@
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src="/mortenuit/assets/vendor/metisMenu/metisMenu.min.js"></script>
+
+    <script src="/mortenuit/assets/js/bootstrap-datepicker.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="/mortenuit/assets/dist/js/sb-admin-2.js"></script>

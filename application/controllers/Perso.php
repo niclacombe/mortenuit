@@ -95,6 +95,9 @@
 
 			$this->perso_model->addHabiletes($idPerso);
 
+
+			$data['freebies'] = $this->perso_model->getFreebies($idPerso);
+
 			$this->load->model('influence_model');
 
 			$data['contacts'] = $this->influence_model->getStartContactsBySecteur();
@@ -108,10 +111,20 @@
 		}
 
 		public function newPerso5($idPerso,$idUser){
-			echo '<pre>' .var_dump($_POST) .'</pre>';
 
 			$this->perso_model->addBackground($idPerso);
-			$this->perso_model->updateFreebies($idPerso, intval( $_POST['freebiesCount'] ) );
+			$this->perso_model->addContact($idPerso);
+			$this->perso_model->updateFreebies($idPerso, intval( $_POST['freebiesCount'] ), 'Freebies départ' );
+
+
+			$data['freebies'] = $this->perso_model->getFreebies($idPerso);
+			$data['idPerso'] = $idPerso;
+
+
+			$this->load->view('template/header');
+			$this->load->view('template/nav');
+			$this->load->view('perso/newPerso5',$data);
+			$this->load->view('template/footer');
 		}
 
 		

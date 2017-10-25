@@ -8,7 +8,7 @@
 
 		<?php echo form_open('perso/newPerso5/' .$idPerso . '/' .$userInfo->id); ?>
 
-		<input name="freebiesCount" type="hidden" value="15">
+		<input name="freebiesCount" type="hidden">
 
 		<div class="row">
 			<div class="col-xs-12">
@@ -155,6 +155,9 @@
 </div>
 
 <script>
+	
+	$('input[name="freebiesCount"]').val( parseInt( $('#freebiesCount').html() ) );
+	
 	/* POPOVER SECTOR DESC */
 	$(function(){
 		$('.fa-question-circle').parent('a').popover();
@@ -198,7 +201,6 @@
 
 				var freebies = parseInt($('#freebiesCount').html());
 				$('#freebiesCount').html(freebies - parseInt($(this).attr('data-cost')) );
-				$('input[name="freebiesCount"]').val(15 - parseInt($('#freebiesCount').html()));
 
 				var nonCheckedBG = $('.checkBG:not(:checked)');
 				$.each(nonCheckedBG, function(){
@@ -244,7 +246,7 @@
 				})
 			}
 
-
+			$('input[name="freebiesCount"]').val( parseInt( $('#freebiesCount').html() ) );
 
 		});		
 
