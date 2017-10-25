@@ -172,6 +172,25 @@ class Influence_model extends CI_Model {
 
 		return $query->result();
 	}
+
+	public function addAction(){
+		$this->db->db_select('mn_influence');
+
+		if($this->input->post('note') == '') : $note = NULL; else : $note = $this->input->post('note'); endif;
+
+		$data = array(
+			'id_contact' => $this->input->post('idContact'),
+			'description' => $this->input->post('actionDescription'),
+			'note' => $note,
+			'etat' => 'ATTENT',
+			'niveau' => 0,
+			'secret' => $this->input->post('niveauSecret'),
+			'date_parution' => $this->input->post('dateParution'),
+			'date_modif' => date('Y-m-d H:i:s', time())
+		);
+
+		$this->db->insert('actions', $data);
+	}
 	
 
 }

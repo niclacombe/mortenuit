@@ -11,48 +11,56 @@
 
 <input type="hidden" name="idContact" value="<?php echo $contact->id; ?>">
 
-<?php if($contact->niveau > 1): ?>
+<?php if(isset($action_success)): ?>
+	<h4><span class="fa fa-check"></span> Action envoyée avec succès!</h4> 
+<?php
+	else :
+?>
+
+	<?php if($contact->niveau > 1): ?>
+		<div class="row">
+			<div class="form-group col-xs-6 col-md-3 ">
+				<label for="niveauSecret">Niveau de discrétion</label>
+				<select name="niveauSecret" id="niveauSecret" class="form-control">
+					<?php for($i = 0; $i <= $contact->power; $i++) :?>
+					<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+				<?php endfor; ?>
+				</select>
+			</div>
+			<div class="form-group col-xs-6 col-md-3 col-md-offset-2">
+				<label for="dateParution">Date de la parution*</label>
+				<div class='input-group date' id='datetimepicker'>
+	                <input type='text' name="dateParution" class="form-control" />
+	                <span class="input-group-addon">
+	                    <span class="glyphicon glyphicon-calendar"></span>
+	                </span>
+	            </div>
+			</div>
+		</div>
+	<?php endif; ?>
+
 	<div class="row">
-		<div class="form-group col-xs-6 col-md-3 ">
-			<label for="niveauSecret">Niveau de discrétion</label>
-			<select name="niveauSecret" id="niveauSecret" class="form-control">
-				<?php for($i = 1; $i <= $contact->power; $i++) :?>
-				<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-			<?php endfor; ?>
-			</select>
-		</div>
-		<div class="form-group col-xs-6 col-md-3 col-md-offset-2">
-			<label for="dateParution">Date de la parution*</label>
-			<div class='input-group date' id='datetimepicker'>
-                <input type='text' name="dateParution" class="form-control" />
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-            </div>
+		<div class="form-group col-xs-12 col-md-8">
+			<label for="description">Description de l'action*</label>
+			<textarea name="actionDescription" id="actionDescription" class="form-control"></textarea>
 		</div>
 	</div>
+
+	<div class="row">
+		<div class="form-group col-xs-12 col-md-8">
+			<label for="note">Note pour le validateur</label>
+			<textarea name="note" id="note" class="form-control"></textarea>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="form-group col-xs-6 col-xs-offset-6 col-md-3 col-md-offset-5">
+			<button class="btn btn-block btn-success" type="submit"><span class="fa fa-check"></span> Soumettre</button>
+		</div>
+	</div>
+	<?php echo form_close(); ?>
+
 <?php endif; ?>
-
-<div class="row">
-	<div class="form-group col-xs-12 col-md-8">
-		<label for="description">Description de l'action*</label>
-		<textarea name="actionDescription" id="actionDescription" class="form-control"></textarea>
-	</div>
-</div>
-
-<div class="row">
-	<div class="form-group col-xs-12 col-md-8">
-		<label for="note">Note pour le validateur</label>
-		<textarea name="note" id="note" class="form-control"></textarea>
-	</div>
-</div>
-
-<div class="row">
-	<div class="form-group col-xs-6 col-xs-offset-6 col-md-3 col-md-offset-5">
-		<button class="btn btn-block btn-success" type="submit"><span class="fa fa-check"></span> Soumettre</button>
-	</div>
-</div>
-<?php echo form_close(); ?>
 
 <script>
 	$('#datetimepicker input').datepicker({

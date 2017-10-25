@@ -84,8 +84,30 @@ class Influence extends CI_Controller {
 			$this->load->view('influence/index',$data);
 			$this->load->view('template/footer');
         }
-        else {  
-        	echo 'win';
+        else {
+
+
+ 
+        	$this->load->model('perso_model');
+
+			$data['activePerso'] = $this->perso_model->getActivePerso($this->session->user_info->id);
+
+			$this->load->model('influence_model');
+
+			$this->influence_model->addAction($idContact);
+
+			$data['contact'] = $this->influence_model->getContact($idContact);
+			$data['last3Actions'] = $this->influence_model->getLast3Actions($idContact);
+			$data['persoContacts'] = $this->influence_model->getPersoContacts($data['activePerso']->id);
+
+			$data['action_success'] = true;
+
+			$data['validation_error'] = $this->load->view('influence/editAction',$data, TRUE);
+
+			$this->load->view('template/header');
+			$this->load->view('template/nav');
+			$this->load->view('influence/index',$data);
+			$this->load->view('template/footer');
 		}
 	}
 
