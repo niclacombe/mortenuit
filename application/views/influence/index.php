@@ -36,7 +36,7 @@
 				<?php endif; ?>
 			</div>
 			<div id="actionEditor" class="col-md-6">
-				
+				<?php if(isset($validation_error)) : echo $validation_error; endif; ?>
 			</div>
 		</div>
 

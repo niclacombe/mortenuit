@@ -5,7 +5,11 @@
 <h5>* : Champ obligatoire</h5>
 <hr>
 
-<?php echo form_open('influence/addAction/' .$contact->id); ?>
+<div class="row"><?php echo validation_errors(); ?></div>
+
+<?php echo form_open('influence/validateAction/' .$contact->id); ?>
+
+<input type="hidden" name="idContact" value="<?php echo $contact->id; ?>">
 
 <?php if($contact->niveau > 1): ?>
 	<div class="row">
