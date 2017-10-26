@@ -26,7 +26,7 @@ class Admin_model extends CI_Model {
 	public function getAction($idAction){
 		$this->db->db_select('mn_influence');
 
-		$this->db->select('act.*, con.nom as nomContact, con.niveau as niveauContact, sec.secteur as nomSecteur');
+		$this->db->select('act.*, con.nom as nomContact, con.power as powerContact, con.niveau as niveauContact, sec.secteur as nomSecteur');
 		$this->db->from('mn_influence.actions act');
 		$this->db->join('mn_influence.contacts con', 'con.id = act.id_contact', 'left');
 		$this->db->join('mn_influence.secteurs sec', 'sec.id = con.secteur', 'left');

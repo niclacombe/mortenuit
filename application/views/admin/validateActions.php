@@ -52,6 +52,7 @@
 	$(function(){
 
 		$('.action').on('click',function(){
+			$('html').css('cursor','wait');
 			var idAction = $(this).attr('data-idAction'),
 				siteUrl = "<?php echo site_url(); ?>",
 				controller = 'admin';
@@ -66,6 +67,7 @@
 				'type' : 'POST',
 				'success' : function(data){
 					$('#actionDetails').html(data);
+					$('html').css('cursor','default');
 				},
 				'error' : function(err){
 					console.log(err);

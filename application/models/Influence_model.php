@@ -193,6 +193,15 @@ class Influence_model extends CI_Model {
 	}
 	
 
+	public function getSecteurs(){
+		$this->db->db_select('mn_influence');
+
+		$this->db->order_by('secteur', 'asc');
+		$query = $this->db->get('secteurs');
+
+		return $query->result();
+	}
+
 }
 
 /* End of file Influence_model */

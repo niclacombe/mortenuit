@@ -28,6 +28,10 @@ class Admin extends CI_Controller {
 
 		$data['action'] = $this->admin_model->getAction($idAction);
 
+		$this->load->model('influence_model');
+
+		$data['secteurs'] = $this->influence_model->getSecteurs();
+
 		$this->load->view('admin/showAction', $data);
 
 	}
