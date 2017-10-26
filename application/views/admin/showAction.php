@@ -80,7 +80,7 @@
 		<a href="#"><button type="submit" class="btn btn-success btn-block"><span class="fa fa-check"></span> Accepter</button></a>
 	</div>
 	<div class="col-xs-5 col-xs-offset-2">
-		<a href="#"><button type="button" class="btn btn-danger btn-block"><span class="fa fa-close"></span> Refuser</button></a>
+		<a href="#"><button type="button" id="refusAction" class="btn btn-danger btn-block"><span class="fa fa-close"></span> Refuser</button></a>
 	</div>
 </div>
 
@@ -93,6 +93,10 @@
 				niveauAction = parseInt($('#actionNiveau :selected').val());
 			$('input[name="niveauActionFinal"]').val(secret + niveauAction);
 		});
+
+		$('#refusAction').on('click',function(){
+			
+		})
 	});
 </script>
 
