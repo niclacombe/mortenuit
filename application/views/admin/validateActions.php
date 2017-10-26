@@ -12,7 +12,7 @@
 		<?php else: ?>
 
 			<div class="row">
-				<div class="col-md-8">
+				<div class="col-md-7">
 					<table class="table table-responsive table-striped">
 						<tr>
 							<th>Contact</th>
@@ -25,12 +25,19 @@
 						<tr>
 							<td><?php echo $action->nomContact; ?></td>
 							<td><?php echo $action->nomSecteur .' - ' .$action->niveauContact; ?></td>
-							<td><?php echo substr($action->description,0,50); ?></td>
+							<td>
+								<?php echo substr($action->description,0,30); ?>
+								<?php if(strlen($action->description) >= 30 ) : echo '...'; endif; ?>
+							</td>
 							<td><?php echo $action->date_parution; ?></td>
-							<td><button class="btn btn-primary"><span class="fa fa-eye"></span></button></td>
+							<td><button class="btn btn-primary action" data-idAction="<?php echo $action->id; ?>"><span class="fa fa-eye"></span></button></td>
 						</tr>
 					<?php endforeach; ?>
 					</table>
+				</div>
+
+				<div class="col-md-5" id="actionDetails">
+					
 				</div>
 			</div>
 
@@ -40,3 +47,31 @@
 
 	</div>
 </div>
+
+<script>
+	$(function(){
+
+		$('.action').on('click',function(){
+			var idAction = $(this).attr('data-idAction'),
+				siteUrl = "<?php echo site_url(); ?>",
+				controller = 'admin';
+
+			showAction(idAction);
+
+		});
+
+		function showAction(idAction){
+			$.ajax({
+				'url' : "<?php echo site_url(); ?>" + "admin/" + 'showAction/' + idAction,
+				'type' : 'POST',
+				'success' : function(data){
+					$('#actionDetails').html(data);
+				},
+				'error' : function(err){
+					console.log(err);
+				}
+			});
+		}
+
+	});
+</script>

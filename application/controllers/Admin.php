@@ -22,6 +22,16 @@ class Admin extends CI_Controller {
 		$this->load->view('template/footer');
 	}
 
+	public function showAction($idAction){
+
+		$data = array();
+
+		$data['action'] = $this->admin_model->getAction($idAction);
+
+		$this->load->view('admin/showAction', $data);
+
+	}
+
 }
 
 /* End of file Admin.php */
