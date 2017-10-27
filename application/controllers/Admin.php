@@ -36,6 +36,10 @@ class Admin extends CI_Controller {
 
 	}
 
+	public function approveAction($idAction){
+		$this->load->library('form_validation');
+	}
+
 }
 
 /* End of file Admin.php */
