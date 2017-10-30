@@ -5,6 +5,8 @@
 <h5>* : Champ obligatoire</h5>
 <hr>
 
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#lastActions"><span class="fa fa-calendar"></span> 3 Dernières actions </button>
+
 <div class="row"><?php echo validation_errors(); ?></div>
 
 <?php echo form_open('influence/validateAction/' .$contact->id); ?>
@@ -56,6 +58,37 @@
 	<div class="row">
 		<div class="form-group col-xs-6 col-xs-offset-6 col-md-3 col-md-offset-5">
 			<button class="btn btn-block btn-success" type="submit"><span class="fa fa-check"></span> Soumettre</button>
+		</div>
+	</div>
+
+	<div class="modal fade" role="dialog" tabindex="-1" id="lastActions">
+		<div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		    	<div class="modal-header">
+		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        	<h4 class="modal-title" id="myModalLabel">Dernières actions de <?php echo $contact->nom; ?></h4>
+		      	</div>
+		      	<div class="modal-body">
+		      		
+		      			<table class="table table-striped">
+		      				<tr>
+		      					<th>Date de Parution</th>
+		      					<th>Description</th>
+		      					<th>Niveau de l'Action</th>
+		      					<th>Niveau de Discrétion</th>
+		      				</tr>
+		      				<?php foreach ($last3Actions as $action) : ?>
+		      				<tr>
+		      					<td><?php echo $action->date_parution; ?></td>
+		      					<td><?php echo $action->description; ?></td>
+		      					<td><?php echo $action->niveau; ?></td>
+		      					<td><?php echo $action->secret; ?></td>
+		      				</tr>
+		      				<?php endforeach; ?>
+		      			</table>
+		      		
+		    	</div>
+		    </div>
 		</div>
 	</div>
 	<?php echo form_close(); ?>

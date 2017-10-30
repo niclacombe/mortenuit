@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
--- Host: localhost    Database: mn_systeme
+-- Host: localhost    Database: mn_influence
 -- ------------------------------------------------------
 -- Server version	5.5.5-10.1.19-MariaDB
 
@@ -16,27 +16,25 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `discipline_prob`
+-- Table structure for table `action_secteur`
 --
 
-DROP TABLE IF EXISTS `discipline_prob`;
+DROP TABLE IF EXISTS `action_secteur`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `discipline_prob` (
-  `id_discipline` int(11) NOT NULL,
-  `prob` int(11) NOT NULL,
-  PRIMARY KEY (`id_discipline`,`prob`)
+CREATE TABLE `action_secteur` (
+  `id_action` int(11) NOT NULL,
+  `id_secteur` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `discipline_prob`
+-- Dumping data for table `action_secteur`
 --
 
-LOCK TABLES `discipline_prob` WRITE;
-/*!40000 ALTER TABLE `discipline_prob` DISABLE KEYS */;
-INSERT INTO `discipline_prob` VALUES (1,2),(2,3),(3,2),(5,4),(6,2),(11,2),(12,1),(13,3),(14,3),(15,1),(29,1);
-/*!40000 ALTER TABLE `discipline_prob` ENABLE KEYS */;
+LOCK TABLES `action_secteur` WRITE;
+/*!40000 ALTER TABLE `action_secteur` DISABLE KEYS */;
+/*!40000 ALTER TABLE `action_secteur` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -48,4 +46,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-10-29 23:05:12
+-- Dump completed on 2017-10-29 23:05:14

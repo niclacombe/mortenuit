@@ -1,4 +1,8 @@
-<?php echo form_open(site_url('admin/approveAction/') .$action->id ); ?>
+<div class="row"><?php echo validation_errors(); ?></div>
+
+<?php echo form_open('admin/approveAction/' .$action->id ); ?>
+
+<input type="hidden" value="<?php echo $action->id_contact; ?>" name="idContact">
 
 <div class="row">
 	<div class="form-group col-xs-4">
@@ -51,26 +55,22 @@
 <div class="row">
 	<div class="col-xs-12">
 		<h4>Secteurs affectés</h4>
-		<div class="form-group col-xs-4">
-			<label for="" class="form-checkbox-inline"><input name="secteurs" type="checkbox"> Tous les secteurs</label>
+		<div class="row">
+			<div class="form-group col-xs-4">
+				<label for="" class="form-checkbox-inline"><input name="secteurs" id="allSecteurs" type="checkbox"> Tous les secteurs</label>
+			</div>
 		</div>
-		<?php foreach (array_slice($secteurs, 0, 5)  as $secteur) : ?>
+		<div class="row">
+		<?php foreach ($secteurs as $secteur) : ?>
+
 			<div class="form-group col-xs-4">
-				<label for="" class="form-checkbox-inline"><input name="secteurs" type="checkbox"> <?php echo $secteur->secteur; ?> </label>
+				<label for="" class="form-checkbox-inline">
+					<input name="secteurs[] ?>" value="<?php echo $secteur->id; ?>" type="checkbox" <?php if($action->nomSecteur == $secteur->secteur) : echo 'onclick="return false;" checked'; endif; ?> >
+						<?php echo $secteur->secteur; ?> 
+					</label>
 			</div>
 		<?php endforeach; ?>
-		<br>
-		<?php foreach (array_slice($secteurs, 5, 5) as $secteur) : ?>
-			<div class="form-group col-xs-4">
-				<label for="" class="form-checkbox-inline"><input name="secteurs" type="checkbox"> <?php echo $secteur->secteur; ?> </label>
-			</div>
-		<?php endforeach; ?>
-		<br>
-		<?php foreach (array_slice($secteurs, 10, 5)  as $secteur) : ?>
-			<div class="form-group col-xs-4">
-				<label for="" class="form-checkbox-inline"><input name="secteurs" type="checkbox"> <?php echo $secteur->secteur; ?> </label>
-			</div>
-		<?php endforeach; ?>
+		</div>
 
 	</div>
 </div>
@@ -80,13 +80,44 @@
 		<a href="#"><button type="submit" class="btn btn-success btn-block"><span class="fa fa-check"></span> Accepter</button></a>
 	</div>
 	<div class="col-xs-5 col-xs-offset-2">
-		<a href="#"><button type="button" id="refusAction" class="btn btn-danger btn-block"><span class="fa fa-close"></span> Refuser</button></a>
+		<a href="#"><button type="button" id="refusAction" data-toggle="modal" data-target="#refusActions" class="btn btn-danger btn-block"><span class="fa fa-close"></span> Refuser</button></a>
 	</div>
 </div>
 
 <?php echo form_close(); ?>
 
+<div class="modal fade" role="dialog" tabindex="-1" id="refusActions">
+		<?php echo form_open('admin/refusAction/' .$action->id); ?>
+
+		<input type="hidden" value="<?php echo $action->id_contact; ?>" name="idContact">
+		<div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		    	<div class="modal-header">
+		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        	<h4 class="modal-title" id="myModalLabel">Refuser une action</h4>	        	
+		      	</div>
+		      	<div class="modal-body">
+		      		<div class="form-group">
+		        		<label for="commentaires">Expliquer pourquoi cette action est refusée.</label>
+
+		        		<textarea name="commentaires" class="form-control"></textarea>
+		        	</div>	
+		    	</div>
+		     	<div class="modal-footer">
+		        	<button type="submit" class="btn btn-danger"><span class="fa fa-close"></span> Refuser</button>
+		      	</div>
+		    </div>
+		</div>
+		<?php echo form_close(); ?>
+	</div>
+
 <script>
+	$(function(){
+		$('#allSecteurs').on('click',function(){
+			$('input[type="checkbox"][name="secteurs"]').prop('checked', $(this).is(':checked') );
+		});
+	});
+
 	$(function(){
 		$('#actionNiveau').on('change',function(){
 			var secret = parseInt($('input[name=niveauDiscretion]').val()),

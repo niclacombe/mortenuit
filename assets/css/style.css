@@ -47,7 +47,7 @@ h1,h2,h3,h4,h5{
 	height: 100%;
 }
 
-.modal{
+.modalNic{
 	border-radius: 4px;
 	background-color: #ffffff;
 	max-height: 40%;
@@ -85,7 +85,8 @@ h1,h2,h3,h4,h5{
 }
 
 textarea[name="actionDescription"],
-textarea[name="note"]{
+textarea[name="note"],
+textarea[name="commentaires"]{
 	height: 150px; 
 	resize: vertical;
 }

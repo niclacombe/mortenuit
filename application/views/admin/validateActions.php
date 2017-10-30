@@ -37,7 +37,9 @@
 				</div>
 
 				<div class="col-md-5" id="actionDetails">
-					
+					<?php if(isset($view)) : ?>
+						<?php echo $view; ?>
+					<?php endif; ?>
 				</div>
 			</div>
 

@@ -36,6 +36,55 @@ class Admin_model extends CI_Model {
 		return $query->row();
 	}
 
+	public function saveAction($idAction){
+		$this->db->db_select('mn_influence');
+		$data = array(
+			'etat' => 'ACCEPT',
+			'date_modif' => date('Y-m-d H:i:s', time()),
+			'niveau' => $this->input->post('niveauAction')
+		);
+
+		$this->db->where('id', $idAction);
+		$this->db->update('actions', $data);
+
+		$actionPower = intval($this->input->post('niveauActionFinal'));
+		$idContact = intval($this->input->post('idContact'));
+
+		$query = "UPDATE mn_influence.contacts SET power = power-{$actionPower} WHERE id = {$idContact};";
+		$this->db->query($query);
+
+		foreach ($this->input->post('secteurs') as $secteur) {
+			$this->db->insert('action_secteur', array('id_action' => $idAction, 'id_secteur' => $secteur );
+		}
+
+	}
+
+	public function refusAction($idAction){
+		$this->db->db_select('mn_influence');
+		$data = array(
+			'etat' => 'REFUS',
+			'date_modif' => date('Y-m-d H:i:s', time()),
+			'commentaires' => $this->input->post('commentaires')
+		);
+
+		$this->db->where('id', $idAction);
+		$this->db->update('actions', $data);
+
+	}
+
+	public function getJoueurFromContact($idContact){
+
+		$this->db->select('jou.*');
+		$this->db->from('mn_personnages.personnages perso');
+		$this->db->join('mn_influence.contacts con', 'con.proprietaire = perso.id', 'left');
+		$this->db->join('mn_mortenuit.users jou', 'jou.id = perso.id_user', 'left');
+		$this->db->where('con.id', $idContact);
+
+		$query = $this->db->get();
+
+		return $query->result();
+	}
+
 	
 
 }

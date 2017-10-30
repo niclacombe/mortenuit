@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
 --
--- Host: localhost    Database: mn_systeme
+-- Host: localhost    Database: mn_influence
 -- ------------------------------------------------------
 -- Server version	5.5.5-10.1.19-MariaDB
 
@@ -16,27 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `discipline_prob`
+-- Table structure for table `contacts_acquis`
 --
 
-DROP TABLE IF EXISTS `discipline_prob`;
+DROP TABLE IF EXISTS `contacts_acquis`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `discipline_prob` (
-  `id_discipline` int(11) NOT NULL,
-  `prob` int(11) NOT NULL,
-  PRIMARY KEY (`id_discipline`,`prob`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `contacts_acquis` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_contact` int(11) DEFAULT NULL,
+  `id_perso` int(11) DEFAULT NULL,
+  `date_acquisition` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `discipline_prob`
+-- Dumping data for table `contacts_acquis`
 --
 
-LOCK TABLES `discipline_prob` WRITE;
-/*!40000 ALTER TABLE `discipline_prob` DISABLE KEYS */;
-INSERT INTO `discipline_prob` VALUES (1,2),(2,3),(3,2),(5,4),(6,2),(11,2),(12,1),(13,3),(14,3),(15,1),(29,1);
-/*!40000 ALTER TABLE `discipline_prob` ENABLE KEYS */;
+LOCK TABLES `contacts_acquis` WRITE;
+/*!40000 ALTER TABLE `contacts_acquis` DISABLE KEYS */;
+INSERT INTO `contacts_acquis` VALUES (28,5,3,'2017-10-21'),(29,7,3,'2017-10-21'),(30,10,3,'2017-10-21');
+/*!40000 ALTER TABLE `contacts_acquis` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -48,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-10-29 23:05:12
+-- Dump completed on 2017-10-29 23:05:14

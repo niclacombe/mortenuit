@@ -95,7 +95,7 @@
             <!-- /.navbar-static-side -->
         </nav>
 
-        <div id="confirmCancel" class="col-md-6 col-xs-12 modal">
+        <div id="confirmCancel" class="col-md-6 col-xs-12 modalNic">
             <div class="row">
                 <h3>Êtes-vous sûr de vouloir supprimer cette nouvelle ?</h3>
             </div>
