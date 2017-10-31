@@ -6,6 +6,14 @@
 		</div>
 
 		<div class="row">
+			<h3>
+				<a href="<?php echo site_url('influence/buyContact/') .$activePerso->id; ?> ">
+					<h4>Se procurer de nouveaux contacts</h4>
+				</a>
+			</h3>
+		</div>
+		<br>
+		<div class="row">
 			<div class="col-md-6">
 				<?php if ( empty($persoContacts) ): ?>
 					<h3>Vous n'avez aucun contact actif.</h3>

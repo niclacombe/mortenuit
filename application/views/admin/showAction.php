@@ -43,6 +43,14 @@
 	</div>
 </div>
 
+
+<div class="row">
+	<div class="form-group col-xs-12">
+		<label for="">Commentaires</label>
+		<textarea name="commentaires" class="form-control" type="text" ></textarea>
+	</div>
+</div>
+
 <?php if($action->note ) : ?>
 	<div class="row">
 		<div class="form-group col-xs-12">

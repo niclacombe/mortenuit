@@ -55,8 +55,6 @@ class Admin extends CI_Controller {
 
 		if ($this->form_validation->run() == FALSE) {
 
-			//echo '<pre>'.var_dump($_POST) .'</pre>';
-
 			$data['actions'] = $this->admin_model->getWaitingActions();
 			
 			$data['action'] = $this->admin_model->getAction($idAction);
@@ -78,9 +76,12 @@ class Admin extends CI_Controller {
 			$this->load->model('influence_model');
 			$this->admin_model->saveAction($idAction);
 
-			echo '<pre>'.var_dump($_POST['secteurs']) .'</pre>';
+			/* EMAIL JOUEUR */
+			if( $this->input->post('commentaires') != NULL ){
+				$joueur = $this->admin_model->getJoueurFromContact($this->input->post('idContact'));
+			}
 
-		//redirect('admin/validateActions','refresh');
+			redirect('admin/validateActions','refresh');
 		}
 
 	}
@@ -92,6 +93,11 @@ class Admin extends CI_Controller {
 		$joueur = $this->admin_model->getJoueurFromContact($this->input->post('idContact'));
 
 		echo '<pre>' .var_dump($joueur) .'</pre>';
+
+		/* EMAIL JOUEUR */
+		if( $this->input->post('commentaires') != NULL ){
+
+		}
 
 		//redirect('admin/validateActions','refresh');
 	}

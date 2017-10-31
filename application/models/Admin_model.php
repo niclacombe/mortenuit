@@ -41,7 +41,8 @@ class Admin_model extends CI_Model {
 		$data = array(
 			'etat' => 'ACCEPT',
 			'date_modif' => date('Y-m-d H:i:s', time()),
-			'niveau' => $this->input->post('niveauAction')
+			'niveau' => $this->input->post('niveauAction'),
+			'commentaires' => $this->input->post('commentaires')
 		);
 
 		$this->db->where('id', $idAction);
@@ -54,7 +55,7 @@ class Admin_model extends CI_Model {
 		$this->db->query($query);
 
 		foreach ($this->input->post('secteurs') as $secteur) {
-			$this->db->insert('action_secteur', array('id_action' => $idAction, 'id_secteur' => $secteur );
+			$this->db->insert('action_secteur', array('id_action' => $idAction, 'id_secteur' => $secteur ));
 		}
 
 	}
