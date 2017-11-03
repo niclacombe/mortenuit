@@ -111,6 +111,16 @@ class Influence extends CI_Controller {
 		}
 	}
 
+	public function readActions($idPerso){
+
+		$data = array();
+
+		$this->load->view('template/header');
+		$this->load->view('template/nav');
+		$this->load->view('influence/readActions',$data);
+		$this->load->view('template/footer');
+	}
+
 }
 
 /* End of file Influence.php */

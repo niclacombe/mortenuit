@@ -43,9 +43,7 @@ class User_model extends CI_Model{
         $this->db->where('courriel',$this->input->post('logIn_courriel'));
         $row = $this->db->get('users');
 
-        $returned = $row->row();
-
-        return $returned;        
+        return $row->row();       
     }
 
     public function readProfile($idUser) {

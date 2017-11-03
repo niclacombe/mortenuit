@@ -96,10 +96,15 @@ class User extends CI_Controller {
 			if ( $this->encryption->decrypt( $returned->password ) == $this->input->post('logIn_password') ) {
 				$array = array(
 					'is_logged_in'	=> true,
-					'user_info'		=> $returned
-				);
-				
+					'user_info'		=> $returned,
+				);				
+
+				$this->load->model('perso_model');
+
+				$array['activePerso'] = $this->perso_model->getActivePerso($returned->id)->id;
+
 				$this->session->set_userdata( $array );
+
 				$data['returned'] = true;
 			} 
 		} 
@@ -110,7 +115,7 @@ class User extends CI_Controller {
 		$data['news'] = $this->news_model->getNews();
 
 		$this->load->view('template/header');
-		$this->load->view('template/nav');
+		$this->load->view('template/nav', $data);
 		$this->load->view('home/home',$data);
 		$this->load->view('template/footer');
 

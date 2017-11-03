@@ -84,7 +84,15 @@
                             <li>
                                 <a href="#"><span class="fa fa-users"></span> Influence<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
-                                    <li><a href="<?php echo site_url('influence/index'); ?>"><span class="fa fa-users"></span> Voir mes Contacts</a></li>
+                                    <li>
+                                        <a href="<?php echo site_url('influence/buyContact/') .$this->session->userdata['activePerso']; ?>"><span class="fa fa-user-plus"></span> Acheter des Contacts</a>
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo site_url('influence/index'); ?>"><span class="fa fa-users"></span> Voir mes Contacts</a>
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo site_url('influence/readActions/') .$this->session->userdata['activePerso']; ?>"><span class="fa fa-user-plus"></span> Lire les actions</a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
