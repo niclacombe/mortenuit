@@ -115,10 +115,57 @@ class Influence extends CI_Controller {
 
 		$data = array();
 
+		//get Dates
+		$startDate = date('Y-m-d', strtotime('-1 week'));
+		$endDate = date('Y-m-d', time());
+
+		if($this->input->post('startDate')  ){
+			$startDate = $this->input->post('startDate');
+		}
+		if($this->input->post('endDate')  ){
+			$endDate = $this->input->post('endDate');
+		}
+
+		$data['startDate'] = $startDate;
+		$data['endDate'] = $endDate;
+
+		$data['actions'] = $this->influence_model->readActions($idPerso, $startDate, $endDate);
+
+		$data['secteurs'] = $this->influence_model->getSecteurs();
+
+		$this->load->model('perso_model');
+		$data['activePerso'] = $this->perso_model->getActivePerso($this->session->user_info->id);
+
 		$this->load->view('template/header');
 		$this->load->view('template/nav');
 		$this->load->view('influence/readActions',$data);
 		$this->load->view('template/footer');
+	}
+
+	public function sortActionsBySector($idPerso){
+		$data = array();
+
+		//get Dates
+		$startDate = $_POST['startDate'];
+		$endDate = $_POST['endDate'];
+		$secteurs = $_POST['secteurs'];
+
+		$data['startDate'] = $startDate;
+		$data['endDate'] = $endDate;
+
+		$data['actions'] = $this->influence_model->readActions($idPerso, $startDate, $endDate, $secteurs);
+
+		$this->load->view('influence/ajax/sortActionsBySector', $data);
+
+	}
+
+	public function unlockAction($idPerso, $idAction){
+		//substract Freebie
+
+		//add to unlocked table
+
+		//redirect
+
 	}
 
 }

@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: mn_personnages
+-- Host: 127.0.0.1    Database: mn_personnages
 -- ------------------------------------------------------
--- Server version	5.5.5-10.1.19-MariaDB
+-- Server version	5.5.5-10.1.21-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -45,7 +45,7 @@ CREATE TABLE `personnages` (
   `herd` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -54,7 +54,7 @@ CREATE TABLE `personnages` (
 
 LOCK TABLES `personnages` WRITE;
 /*!40000 ALTER TABLE `personnages` DISABLE KEYS */;
-INSERT INTO `personnages` VALUES (3,5,'Christophe Bilodeau','Dieu',5,12,3,5,7,NULL,NULL,'ACTIF',27,0,1,1,2,14,2,2);
+INSERT INTO `personnages` VALUES (3,5,'Christophe Bilodeau','Dieu',5,12,3,5,7,NULL,NULL,'ACTIF',27,0,1,1,2,14,2,2),(4,6,'Christophe 2','Dieu',5,12,3,5,7,NULL,NULL,'ACTIF',27,0,1,1,2,14,2,2);
 /*!40000 ALTER TABLE `personnages` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -67,4 +67,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-10-29 23:05:13
+-- Dump completed on 2017-11-08 16:51:21

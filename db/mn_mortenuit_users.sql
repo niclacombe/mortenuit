@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.7.12, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
--- Host: localhost    Database: mn_mortenuit
+-- Host: 127.0.0.1    Database: mn_mortenuit
 -- ------------------------------------------------------
--- Server version	5.5.5-10.1.19-MariaDB
+-- Server version	5.5.5-10.1.21-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -35,7 +35,7 @@ CREATE TABLE `users` (
   `is_deleted` tinyint(1) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (5,'Nicolas','Lacombe','niclacombe@gmail.com','a44103e47f24e6cd33827c1516bd30deb09cba52e42855fb70c9386877f34e6fab7c3a04c04ea784b17c8f57eb1cd09ca05a88260873bce9b5335c4f03333da2lYuqRx1ebulCufDftULS+qUi7Gy2RYPznzfhwWufr1E=','0000-00-00 00:00:00',NULL,1,1,0);
+INSERT INTO `users` VALUES (5,'Nicolas','Lacombe','niclacombe@gmail.com','a44103e47f24e6cd33827c1516bd30deb09cba52e42855fb70c9386877f34e6fab7c3a04c04ea784b17c8f57eb1cd09ca05a88260873bce9b5335c4f03333da2lYuqRx1ebulCufDftULS+qUi7Gy2RYPznzfhwWufr1E=','0000-00-00 00:00:00',NULL,1,1,0),(6,'Nicolas','Lacombe','nicolaslacombe@hotmail.com','a44103e47f24e6cd33827c1516bd30deb09cba52e42855fb70c9386877f34e6fab7c3a04c04ea784b17c8f57eb1cd09ca05a88260873bce9b5335c4f03333da2lYuqRx1ebulCufDftULS+qUi7Gy2RYPznzfhwWufr1E=','0000-00-00 00:00:00',NULL,1,1,0);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -57,4 +57,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-10-29 23:05:15
+-- Dump completed on 2017-11-08 16:51:23

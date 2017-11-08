@@ -73,7 +73,7 @@
 
 			<div class="form-group col-xs-4">
 				<label for="" class="form-checkbox-inline">
-					<input name="secteurs[] ?>" value="<?php echo $secteur->id; ?>" type="checkbox" <?php if($action->nomSecteur == $secteur->secteur) : echo 'onclick="return false;" checked'; endif; ?> >
+					<input name="secteurs[] ?>" class="secteurs" value="<?php echo $secteur->id; ?>" type="checkbox" <?php if($action->nomSecteur == $secteur->secteur) : echo 'onclick="return false;" checked'; endif; ?> >
 						<?php echo $secteur->secteur; ?> 
 					</label>
 			</div>
@@ -122,7 +122,7 @@
 <script>
 	$(function(){
 		$('#allSecteurs').on('click',function(){
-			$('input[type="checkbox"][name="secteurs"]').prop('checked', $(this).is(':checked') );
+			$('input[type="checkbox"].secteurs').prop('checked', $(this).is(':checked') );
 		});
 	});
 

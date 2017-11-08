@@ -202,6 +202,98 @@ class Influence_model extends CI_Model {
 		return $query->result();
 	}
 
+	public function readActions($idPerso, $startDate, $endDate, $secteurs = null){
+		//get Secteurs
+		$this->db->db_select('mn_influence');
+
+		if($secteurs == null || empty($secteurs)){
+			$this->db->select('DISTINCT(secteur)');
+			$this->db->where('proprietaire', $idPerso);
+
+			$query = $this->db->get('contacts');
+			$results = $query->result();
+
+			$secteurs = array();
+
+			foreach ($results as $result) {
+				array_push($secteurs, $result->secteur);
+			}
+		}
+
+		//get approved Actions ID selon Secteurs
+		$this->db->select('id_action');
+		$this->db->where_in('id_secteur', $secteurs);
+		$query = $this->db->get('action_secteur');
+		$results = $query->result();
+
+		$idActions = array();
+
+		foreach ($results as $result) {
+			array_push($idActions, $result->id_action);
+		}
+
+		//get Actions
+		$this->db->select("act.*, sect.secteur as 'nomSecteur', con.nom as 'nomContact', con.titre as 'titre'");
+		$this->db->from('mn_influence.actions act');
+		$this->db->join('mn_influence.action_secteur actsect', 'actsect.id_action = act.id', 'left');
+		$this->db->join('mn_influence.contacts con', 'con.id = act.id_contact', 'left');
+		$this->db->join('mn_influence.secteurs sect', 'sect.id = con.secteur', 'left');
+		$this->db->where_in('act.id', $idActions);
+		$this->db->where('etat', 'ACCEPT');
+		$this->db->where('date_parution >=', $startDate);
+		$this->db->where('date_parution <=', $endDate);
+		$this->db->group_by('act.id');
+		$this->db->order_by('act.date_parution', 'desc');
+
+		$query = $this->db->get();
+		$results = $query->result_array();
+
+		$actions = array();
+
+		foreach ($results as $result) {
+			$contact_owned = false;
+			$locked = false;
+			$is_faitDivers = false;
+
+			$this->db->where('id', $result['id_contact']);
+			$this->db->where('proprietaire', $idPerso);
+			$query = $this->db->get('contacts');
+			$autor_result = $query->row();
+
+			if($autor_result) : $contact_owned = true; endif;
+
+			//Discretion Manager
+			if( $result['secret'] ){
+				$locked = true;
+
+				$this->db->where('id_action', $result['id']);
+				$this->db->where('id_perso', $idPerso);
+				$query = $this->db->get('actionsecrete_perso');
+				$autor_result = $query->row();
+
+				if($autor_result) : $locked = false; endif;
+			}
+
+			$actions[] = array(
+				'id' => $result['id'],
+				'id_contact' => $result['id_contact'],
+				'description' => $result['description'],
+				'niveau' => $result['niveau'],
+				'secret' => $result['secret'],
+				'date_parution' => $result['date_parution'],
+				'nomSecteur' => $result['nomSecteur'],
+				'nomContact' => $result['nomContact'],
+				'titre' => $result['titre'],
+				'contact_owned' => $contact_owned,
+				'locked' => $locked
+			);
+		}
+
+
+		return $actions;
+
+	}
+
 }
 
 /* End of file Influence_model */

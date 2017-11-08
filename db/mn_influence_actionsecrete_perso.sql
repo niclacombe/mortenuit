@@ -16,26 +16,25 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `action_secteur`
+-- Table structure for table `actionsecrete_perso`
 --
 
-DROP TABLE IF EXISTS `action_secteur`;
+DROP TABLE IF EXISTS `actionsecrete_perso`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `action_secteur` (
-  `id_action` int(11) NOT NULL,
-  `id_secteur` varchar(45) NOT NULL
+CREATE TABLE `actionsecrete_perso` (
+  `id_action` int(11) DEFAULT NULL,
+  `id_perso` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `action_secteur`
+-- Dumping data for table `actionsecrete_perso`
 --
 
-LOCK TABLES `action_secteur` WRITE;
-/*!40000 ALTER TABLE `action_secteur` DISABLE KEYS */;
-INSERT INTO `action_secteur` VALUES (1,'1'),(3,'1'),(4,'1'),(4,'3'),(2,'1'),(5,'1'),(5,'2'),(5,'3'),(5,'4'),(5,'5'),(5,'6'),(5,'7'),(5,'8'),(5,'9'),(5,'10'),(5,'11'),(5,'12'),(5,'13'),(5,'14'),(5,'15'),(6,'8'),(6,'15'),(7,'5'),(7,'7'),(7,'10'),(7,'1');
-/*!40000 ALTER TABLE `action_secteur` ENABLE KEYS */;
+LOCK TABLES `actionsecrete_perso` WRITE;
+/*!40000 ALTER TABLE `actionsecrete_perso` DISABLE KEYS */;
+/*!40000 ALTER TABLE `actionsecrete_perso` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -47,4 +46,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-08 16:51:21
+-- Dump completed on 2017-11-08 16:51:22
