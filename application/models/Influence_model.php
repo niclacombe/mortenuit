@@ -294,6 +294,33 @@ class Influence_model extends CI_Model {
 
 	}
 
+	public function unlockAction($idPerso, $idAction){
+		$this->db->db_select('mn_influence');
+
+		$this->db->select('secret, date_parution');
+		$this->db->where('id', $idAction);
+		$query = $this->db->get('actions');
+		$action = $query->row();
+
+		$data = array(
+			'id_personnage' => $idPerso,
+			'freebies' => -$action->secret,
+			'raison' => 'Déverouiller une action du ' .$action->date_parution,
+			'date' => date('Y-m-d H:i:s', time())	
+		);
+
+		$this->db->db_select('mn_personnages');
+		$this->db->insert('freebies', $data);
+
+		$data = array(
+			'id_action' => $idAction,
+			'id_perso' => $idPerso
+		);
+
+		$this->db->db_select('mn_influence');
+		$this->db->insert('actionsecrete_perso', $data);
+	}
+
 }
 
 /* End of file Influence_model */

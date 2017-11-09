@@ -29,7 +29,7 @@ CREATE TABLE `disciplines_acquises` (
   `niveau` int(11) NOT NULL DEFAULT '1',
   `start_discipline` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -38,7 +38,7 @@ CREATE TABLE `disciplines_acquises` (
 
 LOCK TABLES `disciplines_acquises` WRITE;
 /*!40000 ALTER TABLE `disciplines_acquises` DISABLE KEYS */;
-INSERT INTO `disciplines_acquises` VALUES (1,3,1,1,1),(2,3,2,1,1),(3,3,14,1,1),(4,3,1,1,1),(5,3,2,1,1),(6,3,14,1,1),(7,3,1,1,1),(8,3,2,1,1),(9,3,14,1,1),(10,3,1,1,1),(11,3,2,1,1),(12,3,14,1,1);
+INSERT INTO `disciplines_acquises` VALUES (1,3,1,1,1),(2,3,2,1,1),(3,3,14,1,1),(4,3,1,1,1),(5,3,2,1,1),(6,3,14,1,1),(7,3,1,1,1),(8,3,2,1,1),(9,3,14,1,1),(10,3,1,1,1),(11,3,2,1,1),(12,3,14,1,1),(13,5,5,1,1),(14,5,13,1,1),(15,5,14,1,1);
 /*!40000 ALTER TABLE `disciplines_acquises` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -51,4 +51,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-08 16:51:21
+-- Dump completed on 2017-11-09 16:54:00

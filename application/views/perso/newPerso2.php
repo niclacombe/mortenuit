@@ -2,6 +2,7 @@
 	<div class="page-wrapper container-fluid">
 		<?php $userInfo = $this->session->user_info; ?>
 		<div class="row">
+			<h3>Étape 2/6</h3>
 			<h2>Créer un Personnage</h2>
 			<h3>La Malédiction du Sang touche tous les Kindred. Nul ne sait quelles disciplines sont infant aura...</h3>
 			<h3>Vous avez trois "points" à distribuer</h3>

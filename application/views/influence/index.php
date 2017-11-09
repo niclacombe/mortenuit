@@ -1,6 +1,7 @@
 <div id="page-wrapper">
 	<div class="page-wrapper container-fluid">
 		<?php $userInfo = $this->session->user_info; ?>
+		<?php if($activePerso) : ?>
 		<div class="row">
 			<h1>Liste des contacts pour <i><?php echo $activePerso->nom; ?></i></h1>
 		</div>
@@ -47,6 +48,10 @@
 				<?php if(isset($validation_error)) : echo $validation_error; endif; ?>
 			</div>
 		</div>
+	<?php else : ?>
+		<h3>Vous n'avez aucun personnage Actif</h3>
+		<h4>Veuillez communiquez avec un oranisateur si la situation est anormale.</h4>
+	<?php endif; ?>
 
 	</div>
 </div>

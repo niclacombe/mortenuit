@@ -28,7 +28,7 @@ CREATE TABLE `habiletes_acquises` (
   `id_habilete` int(11) DEFAULT NULL,
   `niveau` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -37,7 +37,7 @@ CREATE TABLE `habiletes_acquises` (
 
 LOCK TABLES `habiletes_acquises` WRITE;
 /*!40000 ALTER TABLE `habiletes_acquises` DISABLE KEYS */;
-INSERT INTO `habiletes_acquises` VALUES (1,'3',1,1),(2,'3',2,1),(3,'3',3,5),(4,'3',4,3);
+INSERT INTO `habiletes_acquises` VALUES (1,'3',1,1),(2,'3',2,1),(3,'3',3,5),(4,'3',4,3),(5,'5',1,1),(6,'5',2,4);
 /*!40000 ALTER TABLE `habiletes_acquises` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -50,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-08 16:51:21
+-- Dump completed on 2017-11-09 16:53:59

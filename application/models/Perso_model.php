@@ -222,6 +222,31 @@ class Perso_model extends CI_Model {
 		return $query->row();
 	}
 
+	public function updateBG($idPerso){
+		$data = array(
+			'background' => $this->input->post('bg')
+		);
+		$this->db->where('id', $idPerso);
+		$this->db->update('personnages', $data);
+	}
+
+	public function waitEtat($idPerso, $idUser){
+		$data = array(
+			'etat' => 'INACT'
+		);
+		$this->db->where('etat !=', 'MORT');
+		$this->db->where('etat !=', 'TORP');
+		$this->db->where('id_user', $idUser);
+		$this->db->update('personnages', $data);
+
+		$data = array(
+			'etat' => 'ATTENT',
+			'date_soumission' => date('Y-m-d H:i:s',time())
+		);
+		$this->db->where('id', $idPerso);
+		$this->db->update('personnages', $data);
+	}
+
 
 }
 

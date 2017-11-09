@@ -15,7 +15,7 @@
 		?>
 		<div class="row">
 			<div class="col-xs-12">
-				<h3>Étape 1/?</h3>
+				<h3>Étape 1/6</h3>
 				<h3>Informations de base</h3>
 				<div class="form-group col-md-4 col-xs-12">
 					<label for="nom">Nom :</label>

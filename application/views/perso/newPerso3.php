@@ -2,9 +2,10 @@
 	<div class="page-wrapper container-fluid">
 		<?php $userInfo = $this->session->user_info; ?>
 		<div class="row">
+			<h3>Étape 3/6</h3>
 			<h2>Créer un Personnage</h2>
 			<h3>Habiletés</h3>
-			<h3>Vous avez 10 "points" à distribuer</h3>
+			<h3>Vous avez 5 "points" à distribuer</h3>
 		</div>
 
 		<?php echo form_open('perso/newPerso4/' .$idPerso . '/' .$userInfo->id); ?>

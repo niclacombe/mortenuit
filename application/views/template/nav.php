@@ -9,7 +9,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?php echo base_url(); ?>">Les Catacombes</a>
+                <a class="navbar-brand" href="<?php echo base_url(); ?>">La Malédiction</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -66,6 +66,7 @@
                                     <a href="#"><span class="fa fa-gavel"></span> Administration<span class="fa arrow"></span></a>
                                     <ul class="nav nav-second-level">
                                         <li><a href="<?php echo site_url('admin/validateActions/'); ?>">Valider les actions</a></li>
+                                        <li><a href="<?php echo site_url('admin/validatePersos'); ?>">Valider les personnages</a></li>
                                     </ul>
                                 </li>
                             <?php endif; ?>                      
@@ -80,6 +81,15 @@
                             </li>
                             <li>
                                 <a href="<?php echo site_url('perso/index') . '/' .$this->session->user_info->id; ?>"><span class="fa fa-child"></span> Mes Personnages (à venir)<span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    <li>
+                                        <a href="<?php echo site_url('perso/index') . '/' .$this->session->user_info->id; ?>">Mes Personnages</a>
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo site_url('perso/newPerso') . '/' .$this->session->user_info->id; ?>">Nouveau Personnage</a>
+                                    </li>
+                                </ul>
+                                
                             </li>
                             <li>
                                 <a href="#"><span class="fa fa-users"></span> Influence<span class="fa arrow"></span></a>

@@ -2,6 +2,7 @@
 	<div class="page-wrapper container-fluid">
 		<?php $userInfo = $this->session->user_info; ?>
 		<div class="row">
+			<h3>Étape 4/6</h3>
 			<h2>Créer un Personnage</h2>
 			<h3>Background</h3>
 		</div>

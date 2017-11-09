@@ -102,6 +102,28 @@ class Admin extends CI_Controller {
 		//redirect('admin/validateActions','refresh');
 	}
 
+	public function validatePersos(){
+		$data = array();
+
+		$data['persos'] = $this->admin_model->validatePerso();
+
+		$this->load->view('template/header');
+		$this->load->view('template/nav');
+		$this->load->view('admin/validatePersos', $data);
+		$this->load->view('template/footer');
+
+	}
+
+	public function inspectPerso($idPerso){
+		$data = array();	
+
+		$data['perso'] = $this->admin_model->inspectPerso($idPerso);
+		$this->load->model('perso_model');
+		$data['freebies'] = $this->perso_model->getFreebies($idPerso);
+
+		$this->load->view('admin/ajax/inspectPerso', $data);
+	}
+
 }
 
 /* End of file Admin.php */

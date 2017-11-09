@@ -34,6 +34,7 @@ CREATE TABLE `actionsecrete_perso` (
 
 LOCK TABLES `actionsecrete_perso` WRITE;
 /*!40000 ALTER TABLE `actionsecrete_perso` DISABLE KEYS */;
+INSERT INTO `actionsecrete_perso` VALUES (7,3);
 /*!40000 ALTER TABLE `actionsecrete_perso` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -46,4 +47,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-08 16:51:22
+-- Dump completed on 2017-11-09 16:54:01

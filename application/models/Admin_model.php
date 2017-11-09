@@ -86,6 +86,27 @@ class Admin_model extends CI_Model {
 		return $query->result();
 	}
 
+	public function validatePerso(){
+		$this->db->db_select('mn_personnages');
+
+		$this->db->select("perso.*, CONCAT(user.Prenom, ' ' , user.nom) as 'nomUser' ");
+		$this->db->from('mn_personnages.personnages perso');
+		$this->db->join('mn_mortenuit.users user', 'user.id = perso.id_user', 'left');
+		$this->db->where('perso.etat', 'ATTENT');
+		$query = $this->db->get();
+
+		return $query->result();
+	}
+
+	public function inspectPerso($idPerso){
+		$this->db->db_select('mn_personnages');
+
+		$this->db->where('id', $idPerso);
+		$query = $this->db->get('personnages');
+
+		return $query->row();
+	}
+
 	
 
 }

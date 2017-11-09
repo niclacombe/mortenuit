@@ -111,9 +111,17 @@
 		}
 
 		public function newPerso5($idPerso,$idUser){
+			
 
+			$this->load->model('influence_model');
+			foreach ($_POST as $key => $value) {
+				if (substr($key, 0 ,7) == 'contact' ) {
+					$this->influence_model->addContact($idPerso ,$value);
+				}
+			}
+			
+			$this->load->model('perso_model');
 			$this->perso_model->addBackground($idPerso);
-			$this->perso_model->addContact($idPerso);
 			$this->perso_model->updateFreebies($idPerso, intval( $_POST['freebiesCount'] ), 'Freebies départ' );
 
 
@@ -125,6 +133,37 @@
 			$this->load->view('template/nav');
 			$this->load->view('perso/newPerso5',$data);
 			$this->load->view('template/footer');
+		}
+
+		public function newPerso6($idPerso, $idUser){
+			$data = array();
+			$this->load->library('form_validation');
+
+			$this->form_validation->set_rules('bg', 'Historique de Personnage', 'trim|required|max_length[500]');
+
+			if ($this->form_validation->run() == FALSE) {
+				$data['freebies'] = $this->perso_model->getFreebies($idPerso);
+				$data['idPerso'] = $idPerso;
+
+				$this->load->view('template/header');
+				$this->load->view('template/nav');
+				$this->load->view('perso/newPerso5',$data);
+				$this->load->view('template/footer');
+			} else {
+				$this->load->model('perso_model');
+				$this->perso_model->updateBG($idPerso);
+
+				$this->perso_model->waitEtat($idPerso, $idUser);
+
+				$data['newPersoAttente'] = true;
+
+				$this->load->view('template/header');
+				$this->load->view('template/nav');
+				$this->load->view('perso/newPerso5',$data);
+				$this->load->view('template/footer');
+
+
+			}
 		}
 
 		

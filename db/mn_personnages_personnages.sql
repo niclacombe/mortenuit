@@ -43,9 +43,11 @@ CREATE TABLE `personnages` (
   `startDisc_3` int(2) DEFAULT NULL,
   `ressources` int(11) DEFAULT '0',
   `herd` int(11) DEFAULT '0',
+  `background` text,
+  `date_soumission` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -54,7 +56,7 @@ CREATE TABLE `personnages` (
 
 LOCK TABLES `personnages` WRITE;
 /*!40000 ALTER TABLE `personnages` DISABLE KEYS */;
-INSERT INTO `personnages` VALUES (3,5,'Christophe Bilodeau','Dieu',5,12,3,5,7,NULL,NULL,'ACTIF',27,0,1,1,2,14,2,2),(4,6,'Christophe 2','Dieu',5,12,3,5,7,NULL,NULL,'ACTIF',27,0,1,1,2,14,2,2);
+INSERT INTO `personnages` VALUES (3,5,'Christophe Bilodeau','Dieu',5,12,3,5,7,NULL,NULL,'INACT',27,0,1,1,2,14,2,2,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque id dictum magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse accumsan risus a volutpat luctus. Aenean ac mauris sed leo ultrices pretium. Sed id orci bibendum, faucibus libero et, pulvinar erat. Vivamus non nibh et ex malesuada fermentum sit amet ut sem. Nam elementum dapibus tortor, nec sagittis nibh maximus a. Pellentesque habitant morbi tristique senectus et netus id.',NULL),(4,6,'Christophe 2','Dieu',5,12,3,5,7,NULL,NULL,'ACTIF',27,0,1,1,2,14,2,2,NULL,NULL),(5,5,'Test McTest','Test',1,13,7,5,3,'1','1','ATTENT',3,0,0,5,13,14,0,0,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque id dictum magna. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse accumsan risus a volutpat luctus. Aenean ac mauris sed leo ultrices pretium. Sed id orci bibendum, faucibus libero et, pulvinar erat. Vivamus non nibh et ex malesuada fermentum sit amet ut sem. Nam elementum dapibus tortor, nec sagittis nibh maximus a. Pellentesque habitant morbi tristique senectus et netus id.','2017-01-01 00:00:00');
 /*!40000 ALTER TABLE `personnages` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -67,4 +69,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-11-08 16:51:21
+-- Dump completed on 2017-11-09 16:53:59

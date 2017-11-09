@@ -16,7 +16,11 @@ class Influence extends CI_Controller {
 
 		$this->load->model('influence_model');
 
-		$data['persoContacts'] = $this->influence_model->getPersoContacts($data['activePerso']->id);
+		if($data['activePerso'] != NULL) {
+			$data['persoContacts'] = $this->influence_model->getPersoContacts($data['activePerso']->id);
+		} else {
+			$data['persoContacts'] = NULL;
+		}
 
 		$this->load->view('template/header');
 		$this->load->view('template/nav');
@@ -135,6 +139,7 @@ class Influence extends CI_Controller {
 
 		$this->load->model('perso_model');
 		$data['activePerso'] = $this->perso_model->getActivePerso($this->session->user_info->id);
+		$data['freebies'] = $this->perso_model->getFreebies($idPerso);
 
 		$this->load->view('template/header');
 		$this->load->view('template/nav');
@@ -155,16 +160,20 @@ class Influence extends CI_Controller {
 
 		$data['actions'] = $this->influence_model->readActions($idPerso, $startDate, $endDate, $secteurs);
 
+		$this->load->model('perso_model');
+		$data['activePerso'] = $this->perso_model->getActivePerso($this->session->user_info->id);
+		$data['freebies'] = $this->perso_model->getFreebies($idPerso);
+
 		$this->load->view('influence/ajax/sortActionsBySector', $data);
 
 	}
 
 	public function unlockAction($idPerso, $idAction){
-		//substract Freebie
-
-		//add to unlocked table
+		
+		$this->influence_model->unlockAction($idPerso, $idAction);
 
 		//redirect
+		redirect('/influence/readActions/' .$idPerso ,'refresh');
 
 	}
 
