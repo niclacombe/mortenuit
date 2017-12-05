@@ -13,6 +13,145 @@
 			);
 			echo form_open('perso/newPerso2/' .$userInfo->id,$data );
 		?>
+
+		<div class="row">
+			<ul class="nav nav-tabs">
+				<li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+				<li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+				<li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+			</ul>
+
+			<div class="tab-content">
+				<div id="home" class="tab-pane fade in active">
+					<div class="row">
+						<div class="col-xs-12">
+							<h3>Étape 1/6</h3>
+							<h3>Informations de base</h3>
+							<div class="form-group col-md-4 col-xs-12">
+								<label for="nom">Nom :</label>
+								<input type="text" name="nom" class="form-control" placeholder="Nom">
+							</div>
+
+							<div class="form-group col-md-4 col-xs-12">
+								<label for="concept">Concept :</label>
+								<input type="text" name="concept" class="form-control" placeholder="Concept">
+							</div>
+
+							<div class="form-group col-md-4 col-xs-12">
+								<label for="clan">Clan :</label>
+								<select name="clan" class="form-control" id="select_clan">
+									<?php foreach ($clans as $clan) { ?>
+										<option value="<?php echo $clan->id; ?>"><?php echo $clan->name ?></option>
+									<?php } //end Foreach ?>
+								</select>
+
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="form-group col-xs-6 col-md-4">
+								<label for="nature">Nature :</label>
+								<select name="nature" class="form-control">
+									<?php foreach ($natures as $nature) : ?>
+										<option value="<?php echo $nature->id; ?>"><?php echo $nature->nom; ?></option>
+									<?php endforeach; ?>
+								</select>
+							</div>
+							<div class="form-group col-xs-6 col-md-4">
+								<label for="attitude">Attitude :</label>
+								<select name="attitude" class="form-control">
+									<?php foreach ($natures as $nature) : ?>
+										<option value="<?php echo $nature->id; ?>"><?php echo $nature->nom; ?></option>
+									<?php endforeach; ?>
+								</select>
+							</div>
+							<div class="col-xs-6 col-md-4"></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+							<h3>Attributs</h3>
+							<h4>En sélectionnant votre attribut primaire, vous lui attribuerez 7 traits. Le secondaire, 5 traits et le tertiaire, 3 traits.</h4>
+							<div class="col-md-4 col-xs-12">
+								<h4>Attributs physiques</h4>
+								<div class="radio">
+									<label for="physique">
+										<input type="radio" value="7" name="physique" checked>
+										7 traits
+									</label>
+								</div>
+								<div class="radio">
+									<label for="physique">
+										<input type="radio" value="5" name="physique">
+										5 traits
+									</label>
+								</div>
+								<div class="radio">
+									<label for="physique">
+										<input type="radio" value="3" name="physique">
+										3 traits
+									</label>
+								</div>						
+							</div>
+							<div class="col-md-4 col-xs-12">
+								<h4>Attributs sociaux</h4>
+								<div class="radio">
+									<label for="social">
+										<input type="radio" value="7" name="social" checked>
+										7 traits
+									</label>
+								</div>
+								<div class="radio">
+									<label for="social">
+										<input type="radio" value="5" name="social">
+										5 traits
+									</label>
+								</div>
+								<div class="radio">
+									<label for="social">
+										<input type="radio" value="3" name="social">
+										3 traits
+									</label>
+								</div>						
+							</div>
+							<div class="col-md-4 col-xs-12">
+								<h4>Attributs mentaux</h4>
+								<div class="radio">
+									<label for="mental">
+										<input type="radio" value="7" name="mental" checked>
+										7 traits
+									</label>
+								</div>
+								<div class="radio">
+									<label for="mental">
+										<input type="radio" value="5" name="mental">
+										5 traits
+									</label>
+								</div>
+								<div class="radio">
+									<label for="mental">
+										<input type="radio" value="3" name="mental">
+										3 traits
+									</label>
+								</div>						
+							</div>
+						</div>
+
+						
+					</div>
+				</div>
+				<div id="menu1" class="tab-pane fade">
+					<h3>Menu 1</h3>
+					<p>Some content in menu 1.</p>
+				</div>
+				<div id="menu2" class="tab-pane fade">
+					<h3>Menu 2</h3>
+					<p>Some content in menu 2.</p>
+				</div>
+			</div>
+		</div>
+		<!--
 		<div class="row">
 			<div class="col-xs-12">
 				<h3>Étape 1/6</h3>
@@ -127,8 +266,9 @@
 					</div>						
 				</div>
 			</div>
+
 			
-		</div>
+		</div>-->
 
 		<br><br>
 
