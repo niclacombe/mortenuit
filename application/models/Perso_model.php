@@ -58,6 +58,8 @@ class Perso_model extends CI_Model {
 	}
 
 	public function getStartDisciplines($idUser){
+		$this->db->db_select('mn_personnages');
+
 		$this->db->where('id_user', $idUser);
 		$this->db->order_by('id', 'desc');
 		$query = $this->db->get('personnages');

@@ -19,11 +19,13 @@
 			$this->load->view('template/footer');
 		}
 
-		public function newPerso() {
+		public function newPerso($idUser) {
 			$data = array();
 
 			$data['clans'] = $this->perso_model->getClans();
 			$data['natures'] = $this->perso_model->getNatures();
+
+			$data['startDisciplines'] = $this->perso_model->getStartDisciplines($idUser);
 
 			$this->load->view('template/header');
 			$this->load->view('template/nav');
