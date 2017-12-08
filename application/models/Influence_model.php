@@ -8,6 +8,7 @@ class Influence_model extends CI_Model {
 	}
 
 	public function getStartContactsBySecteur(){
+		$this->db->db_select('mn_influence');
 		$this->db->order_by('secteur', 'asc');
 		$query = $this->db->get('secteurs');
 		$secteurs = $query->result();

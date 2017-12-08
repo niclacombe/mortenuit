@@ -29,7 +29,11 @@
 			$data['startDisciplines'] = $this->perso_model->getStartDisciplines($idUser);
 
 			// step 3
+			$this->load->model('influence_model');
 			$data['habiletes'] = $this->perso_model->getStartSkills();
+
+			//step 4
+			$data['contacts'] = $this->influence_model->getStartContactsBySecteur();
 
 			$this->load->view('template/header');
 			$this->load->view('template/nav');
