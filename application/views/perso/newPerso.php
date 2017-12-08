@@ -18,7 +18,7 @@
 			<ul class="nav nav-tabs">
 				<li class="active"><a data-toggle="tab" href="#step1">Étape 1</a></li>
 				<?php if(isset($startDisciplines) ): ?><li><a data-toggle="tab" href="#startDisciplines">Étape 2</a></li><?php endif; ?>
-				<?php if(isset($step3) ): ?><li><a data-toggle="tab" href="#step3">Menu 2</a></li><?php endif; ?>
+				<?php if(isset($habiletes) ): ?><li><a data-toggle="tab" href="#step3">Étape 3</a></li><?php endif; ?>
 			</ul>
 
 			<div class="tab-content">
@@ -186,10 +186,126 @@
 						</div>
 					</div>
 				<?php endif; ?>
-				<?php if(isset($step3) ): ?>
+				<?php if(isset($habiletes) ): ?>
 					<div id="step3" class="tab-pane fade">
-						<h3>Step 3/h3>
-						<p>Some content in menu 1.</p>
+						<h3>Habiletés</h3>
+						<div class="row">
+							<div class="col-xs-12 col-md-4">
+								<table class="table table-responsive table-striped">
+									<?php foreach (array_slice($habiletes, 0, ceil(count($habiletes)/2)) as $habilete) : ?>
+										<tr>
+											<td>
+												<?php echo $habilete->habilete; ?>
+											</td>
+											<td class="form-check form-check-inline align-right">
+												<label for="" class="form-check-label">
+													1 <input class="habilete" 
+															name="<?php echo $habilete->habilete; ?>" 
+															value="<?php echo $habilete->id; ?>-1" 
+															type="checkbox">
+													2 <input class="habilete" 
+															name="<?php echo $habilete->habilete; ?>" 
+															value="<?php echo $habilete->id; ?>-2" 
+															type="checkbox" 
+															disabled="disabled">
+													3 <input class="habilete" 
+														name="<?php echo $habilete->habilete; ?>" 
+														value="<?php echo $habilete->id; ?>-3" 
+														type="checkbox" 
+														disabled="disabled">
+													4 <input class="habilete" 
+															name="<?php echo $habilete->habilete; ?>" 
+															value="<?php echo $habilete->id; ?>-4" 
+															type="checkbox" 
+															disabled="disabled">
+													5 <input class="habilete" 
+															name="<?php echo $habilete->habilete; ?>" 
+															value="<?php echo $habilete->id; ?>-5" 
+															type="checkbox" 
+															disabled="disabled">
+												</label>
+											</td>
+											<td>
+												<a href="#" class="info" 
+													data-title="<?php echo $habilete->habilete; ?>" 
+													data-content="<?php echo $habilete->description; ?>">
+														<span class="fa fa-question-circle"></span>
+												</a>
+											</td>
+										</tr>
+									<?php endforeach; ?>
+								</table>
+							</div>
+							<div class="col-xs-12 col-md-4">
+								<table class="table table-responsive table-striped">
+									<?php foreach (array_slice($habiletes, ceil(count($habiletes)/2), ceil(count($habiletes)+1)) as $key => $habilete) : ?>
+										<tr>
+											<td>
+												<?php echo $habilete->habilete; ?>
+											</td>
+											<td class="form-check form-check-inline align-right">
+												<label for="" class="form-check-label">
+													1 <input class="habilete" 
+															name="<?php echo $habilete->habilete; ?>" 
+															value="<?php echo $habilete->id; ?>-1" 
+															type="checkbox">
+													2 <input class="habilete" 
+															name="<?php echo $habilete->habilete; ?>" 
+															value="<?php echo $habilete->id; ?>-2" 
+															type="checkbox" 
+															disabled="disabled">
+													3 <input class="habilete" 
+														name="<?php echo $habilete->habilete; ?>" 
+														value="<?php echo $habilete->id; ?>-3" 
+														type="checkbox" 
+														disabled="disabled">
+													4 <input class="habilete" 
+															name="<?php echo $habilete->habilete; ?>" 
+															value="<?php echo $habilete->id; ?>-4" 
+															type="checkbox" 
+															disabled="disabled">
+													5 <input class="habilete" 
+															name="<?php echo $habilete->habilete; ?>" 
+															value="<?php echo $habilete->id; ?>-5" 
+															type="checkbox" 
+															disabled="disabled">
+												</label>
+											</td>
+											<td>
+												<a href="#" class="info" 
+													data-title="<?php echo $habilete->habilete; ?>" 
+													data-content="<?php echo $habilete->description; ?>">
+														<span class="fa fa-question-circle"></span>
+												</a>
+											</td>
+										</tr>
+									<?php endforeach; ?>
+								</table>
+							</div>
+							<div class="col-xs-12 col-md-4">
+								<div id="card" class="card">
+									<h4 class="card-header"><?php echo $habiletes[0]->habilete; ?></h4>
+									<div class="card-body">
+										<p class="card-text"><?php echo $habiletes[0]->description; ?></p>
+									</div>
+								</div>
+								<br>
+								<hr>
+								<br>
+								<div class="row">
+									<div class="col-xs-12 col-md-8 col-md-offset-2 text-center">
+										<h4>Il vous reste <span id="count">10</span> points à placer.</h4>
+										<button type="reset" class="btn btn-success btn-block btn-lg"><span class="fa fa-refresh"></span> Réinitialiser</button>
+									</div>
+								</div>
+								<br><br>
+								<div class="row">
+									<div class="col-xs-12 col-md-8 col-md-offset-2">
+										<button id="submit" class="btn btn-primary btn-block btn-lg" disabled="disabled"><span class="fa fa-save"></span> Sauvegarder et continuer</button>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				<?php endif; ?>
 			</div>
@@ -241,21 +357,11 @@
 	});
 
 	//Manage Sub-Discipline
-
 	$(function(){
 		var limit = 3;
 		$('input[name="subDisc"]').on('change', function(evt) {
-		   /*if($('input[name="subDisc"]:checked').length > limit) {
-		    	this.checked = false;
-		       
-		    	$('input[name="subDisc"]:not(:checked)').attr('disabled','disabled');
-		   } else {
-		   		$(this).closest('.form-check').next('.form-check').children('label').children('input').removeAttr('disabled');
-		   }*/
-
 		});
 	});
-
 
 	//Others
 	$(document).ready(function(){
@@ -275,7 +381,6 @@
 			} 
 		});
 	});
-
 	$(function () {
 	  $('.popUpToggler').on('click', function(){
 	  	var target = $(this).attr('data-toPopup');
@@ -284,6 +389,99 @@
 	  	});
 	  })
 	})
+</script>
 
+<!-- STEP 2 -->
 
+<script>
+	// Enable Question popup
+	$(function(){
+		$('.fa-question-circle').parent('a').popover();
+
+		$('.disciplinePop').on('click', function(){
+			$('#toPop').bPopup();
+		});
+	});
+
+	$(function(){
+		$('.pop').on('click',function(){
+			var target = '#' + $(this).attr('data-pop');
+
+			$(target).bPopup({
+				opacity : 0.8,
+			});
+		});
+	});
+
+	$(function(){
+		$('.sub').on('change',function(){
+			if ( $(this).is(':checked') ) {
+				$(this).closest('.form-check').next('.form-check').children('label').children('input').removeAttr('disabled');
+			} else {
+				var siblings = $(this).closest('.form-check').nextAll('.form-check');//.children('label').children('input').attr('checked',false).attr('disabled','disabled');
+
+				$.each(siblings, function(){
+					var input = ($(this).children('label').children('input'));
+					$.each(input, function(){
+						$(this).prop('checked',false).attr('disabled','disabled');
+					});
+				});
+			}
+			if($('.sub:checked').length >= 3){
+				$('.sub:not(":checked")').attr('disabled','disabled');
+				$('#submit').removeAttr('disabled');
+			} else {
+				var input = $('.sub:checked');
+				$.each(input, function(){
+					$(this).closest('.form-check').next('.form-check').children('label').children('input').removeAttr('disabled');
+					$('div .subContainer .form-check:first-child label input').removeAttr('disabled');
+				});
+				$('#submit').attr('disabled','disabled');
+			}
+		})
+	})
+</script>
+
+<!-- STEP 3 -->
+<script>
+	$(function(){
+
+		$('a.info').on('click',function(e){
+			e.preventDefault();
+			$('#card .card-header').html($(this).attr('data-title'));
+			$('#card .card-text').html($(this).attr('data-content'));
+		});
+
+		$("button[type='reset']").on('click', function(e){
+			$('#count').html(10);
+			$('.form-check-inline label input:first-child').nextAll('.habilete').attr('disabled','disabled');
+		});
+
+		$('.habilete').on('change',function(){
+
+			$('#count').html(10 - $('.habilete:checked').length);		
+
+			if ( $(this).is(':checked') ) {
+				$(this).next('input').removeAttr('disabled');
+			} else {
+				var siblings = $(this).nextAll('input');
+
+				$.each(siblings, function(){
+					$(this).prop('checked',false).attr('disabled','disabled');
+				});
+			}
+
+			if($('.habilete:checked').length >= 5){
+				$('.habilete:not(":checked")').attr('disabled','disabled');
+				$('#submit').removeAttr('disabled');
+			} else {
+				var input = $('.habilete:checked');
+				$.each(input, function(){
+					$(this).next('input').removeAttr('disabled');
+					$('.form-check-inline label input:first-child').removeAttr('disabled');
+				});
+				$('#submit').attr('disabled','disabled');
+			}
+		});
+	})
 </script>
