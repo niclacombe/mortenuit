@@ -25,7 +25,11 @@
 			$data['clans'] = $this->perso_model->getClans();
 			$data['natures'] = $this->perso_model->getNatures();
 
+			// step 2
 			$data['startDisciplines'] = $this->perso_model->getStartDisciplines($idUser);
+
+			// step 3
+			$data['habiletes'] = $this->perso_model->getStartSkills();
 
 			$this->load->view('template/header');
 			$this->load->view('template/nav');
