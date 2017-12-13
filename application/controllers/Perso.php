@@ -25,16 +25,6 @@
 			$data['clans'] = $this->perso_model->getClans();
 			$data['natures'] = $this->perso_model->getNatures();
 
-			// step 2
-			$data['startDisciplines'] = $this->perso_model->getStartDisciplines($idUser);
-
-			// step 3
-			$this->load->model('influence_model');
-			$data['habiletes'] = $this->perso_model->getStartSkills();
-
-			//step 4
-			$data['contacts'] = $this->influence_model->getStartContactsBySecteur();
-
 			$this->load->view('template/header');
 			$this->load->view('template/nav');
 			$this->load->view('perso/newPerso',$data);
@@ -58,6 +48,7 @@
 			if ($this->form_validation->run() == FALSE) {
 
 				$data['clans'] = $this->perso_model->getClans();
+				$data['natures'] = $this->perso_model->getNatures();
 				
                 $this->load->view('template/header');
 				$this->load->view('template/nav');
@@ -68,11 +59,16 @@
 
             	$this->perso_model->newPerso($idUser);
 
+            	//STEP 1
+            	$data['clans'] = $this->perso_model->getClans();
+				$data['natures'] = $this->perso_model->getNatures();
+
+				//STEP 2
             	$data['disciplines'] = 	$this->perso_model->getStartDisciplines($idUser);
 
 		        $this->load->view('template/header');
 				$this->load->view('template/nav');
-				$this->load->view('perso/newPerso2',$data);
+				$this->load->view('perso/newPerso',$data);
 				$this->load->view('template/footer');
             } 
 		}
@@ -80,11 +76,16 @@
 		public function reroll($idPerso, $idUser){
 			$this->perso_model->reroll($idPerso);
 
-			$data['disciplines'] = 	$this->perso_model->getStartDisciplines($idUser);
+			//STEP 1
+        	$data['clans'] = $this->perso_model->getClans();
+			$data['natures'] = $this->perso_model->getNatures();
+
+			//STEP 2
+        	$data['disciplines'] = 	$this->perso_model->getStartDisciplines($idUser);
 
 	        $this->load->view('template/header');
 			$this->load->view('template/nav');
-			$this->load->view('perso/newPerso2',$data);
+			$this->load->view('perso/newPerso',$data);
 			$this->load->view('template/footer');
 		}
 
@@ -92,6 +93,14 @@
 
 			$this->perso_model->addStartDisciplines($idPerso);
 
+			//STEP 1
+        	$data['clans'] = $this->perso_model->getClans();
+			$data['natures'] = $this->perso_model->getNatures();
+
+			//STEP 2
+        	$data['disciplines'] = 	$this->perso_model->getStartDisciplines($idUser);
+
+        	//STEP 3
 			$data['habiletes'] = $this->perso_model->getStartSkills();
 			$data['idPerso'] = $idPerso;
 

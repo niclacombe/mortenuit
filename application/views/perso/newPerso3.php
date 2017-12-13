@@ -1,6 +1,4 @@
-<div id="page-wrapper">
-	<div class="page-wrapper container-fluid">
-		<?php $userInfo = $this->session->user_info; ?>
+
 		<div class="row">
 			<h3>Étape 3/6</h3>
 			<h2>Créer un Personnage</h2>
@@ -131,9 +129,6 @@
 		
 
 		<?php echo form_close(); ?>
-
-	</div>
-</div>
 
 <script>
 	$(function(){

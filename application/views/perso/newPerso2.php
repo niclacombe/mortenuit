@@ -1,6 +1,3 @@
-<div id="page-wrapper">
-	<div class="page-wrapper container-fluid">
-		<?php $userInfo = $this->session->user_info; ?>
 		<div class="row">
 			<h3>Étape 2/6</h3>
 			<h2>Créer un Personnage</h2>
@@ -100,17 +97,13 @@
 		<?php endif; ?>
 			
 
-
-
-	</div>
-</div>
-
 <script>
 	// Enable Question popup
 	$(function(){
 		$('.fa-question-circle').parent('a').popover();
 
-		$('.disciplinePop').on('click', function(){
+		$('.disciplinePop').on('click', function(e){
+			e.preventDefault();
 			$('#toPop').bPopup();
 		});
 	});
