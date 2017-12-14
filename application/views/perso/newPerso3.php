@@ -1,9 +1,9 @@
-
+<?php $userInfo = $this->session->user_info; ?>
 		<div class="row">
 			<h3>Étape 3/6</h3>
 			<h2>Créer un Personnage</h2>
 			<h3>Habiletés</h3>
-			<h3>Vous avez 5 "points" à distribuer</h3>
+			<h3>Vous avez 10 "points" à distribuer</h3>
 		</div>
 
 		<?php echo form_open('perso/newPerso4/' .$idPerso . '/' .$userInfo->id); ?>
@@ -120,7 +120,7 @@
 				<br><br>
 				<div class="row">
 					<div class="col-xs-12 col-md-8 col-md-offset-2">
-						<button id="submit" class="btn btn-primary btn-block btn-lg" disabled="disabled"><span class="fa fa-save"></span> Sauvegarder et continuer</button>
+						<button id="submit3" class="btn btn-primary btn-block btn-lg" disabled="disabled"><span class="fa fa-save"></span> Sauvegarder et continuer</button>
 					</div>
 				</div>
 			</div>
@@ -158,16 +158,16 @@
 				});
 			}
 
-			if($('.habilete:checked').length >= 5){
+			if($('.habilete:checked').length >= 10){
 				$('.habilete:not(":checked")').attr('disabled','disabled');
-				$('#submit').removeAttr('disabled');
+				$('#submit3').removeAttr('disabled');
 			} else {
 				var input = $('.habilete:checked');
 				$.each(input, function(){
 					$(this).next('input').removeAttr('disabled');
 					$('.form-check-inline label input:first-child').removeAttr('disabled');
 				});
-				$('#submit').attr('disabled','disabled');
+				$('#submit3').attr('disabled','disabled');
 			}
 		});
 	})

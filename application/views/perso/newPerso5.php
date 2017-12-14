@@ -1,5 +1,4 @@
-<div id="page-wrapper">
-	<div class="page-wrapper container-fluid">
+
 		<?php $userInfo = $this->session->user_info; ?>
 		<?php if(isset($newPersoAttente) && isset($newPersoAttente) == true ) : ?>
 			<h2>Votre personnage a été créé; surveillez vos courriels pour son approbation.</h2>
@@ -50,8 +49,6 @@
 
 		<?php endif; ?>
 
-	</div>
-</div>
 
 <script>
 	$('#bg').on('keyup',function(){

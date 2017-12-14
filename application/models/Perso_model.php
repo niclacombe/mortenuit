@@ -174,6 +174,8 @@ class Perso_model extends CI_Model {
 	public function addHabiletes($idPerso){
 		$skills = $_POST;
 
+		$this->db->db_select('mn_personnages');
+
 		foreach ($skills as $skill) {
 			$explode = explode('-', $skill);
 			$data = array(

@@ -7,22 +7,24 @@
 
 		<div class="row"><?php echo validation_errors(); ?></div>
 
-		<?php 
-			$data = array(
-				'class'	=> 'col-xs-12',
-			);
-			echo form_open('perso/newPerso2/' .$userInfo->id,$data );
-		?>
-
 		<div class="row">
 			<ul class="nav nav-tabs">
-				<li <?php if(!isset($disciplines)) : echo 'class="active"'; else: echo 'class="disabled"'; endif; ?> ><a data-toggle="tab" href="#step1">Étape 1</a></li>
-				<?php if(isset($disciplines)) : ?><li <?php if(!isset($habiletes)) : echo 'class="active"'; else: echo 'class="disabled"'; endif; ?> ><a data-toggle="tab" href="#step2">Étape 2</a></li><?php endif; ?>
-				<?php if(isset($habiletes)) : ?><li class="active"><a data-toggle="tab" href="#step2">Étape 3</a></li><?php endif; ?>
+				<li <?php if( $step == 1 ) : ?> class="active" <?php else: ?> class="disabled" <?php endif; ?> ><a data-toggle="tab" href="#step1">Étape 1</a></li>
+				<?php if( $step >= 2 ) : ?><li <?php if( $step == 2 ) : ?> class="active" <?php else: ?> class="disabled" <?php endif; ?> ><a data-toggle="tab" href="#step2">Étape 2</a></li><?php endif; ?>
+				<?php if( $step >= 3 ) : ?><li <?php if( $step == 3 ) : ?> class="active" <?php else: ?> class="disabled" <?php endif; ?> ><a data-toggle="tab" href="#step3">Étape 3</a></li><?php endif; ?>
+				<?php if( $step >= 4 ) : ?><li <?php if( $step == 4 ) : ?> class="active" <?php else: ?> class="disabled" <?php endif; ?> ><a data-toggle="tab" href="#step4">Étape 4</a></li><?php endif; ?>
+				<?php if( $step >= 5 ) : ?><li <?php if( $step == 5 ) : ?> class="active" <?php else: ?> class="disabled" <?php endif; ?> ><a data-toggle="tab" href="#step5">Étape 5</a></li><?php endif; ?>
 			</ul>
 
 			<div class="tab-content">
-				<div id="step1" class="tab-pane fade in <?php if(!isset($disciplines)) : echo 'active'; endif; ?>">
+				
+				<div id="step1" class="tab-pane fade in <?php if($step == 1) : echo 'active'; endif; ?>">
+					<?php 
+						$data = array(
+							'class'	=> 'col-xs-12',
+						);
+						echo form_open('perso/newPerso2/' .$userInfo->id,$data );
+					?>
 					<div class="row">
 						<div class="col-xs-12">
 							<h3>Étape 1/6</h3>
@@ -144,17 +146,38 @@
 							</div>
 						</div>						
 					</div>
+					<div class="row">
+						<div class="col-xs-6 col-md-3 col-xs-offset-6 col-md-offset-9">
+							<button class="btn btn-primary btn-block btn-lg"><span class="fa fa-save"></span> Sauvegarder et continuer</button>
+						</div>
+					</div>
+
+						<?php
+							echo form_close(); 
+						?>
 				</div>
 
-				<?php if(isset($disciplines)) : ?>
-				<div id="step2" class="tab-pane fade in <?php if(!isset($habiletes)) : echo 'active'; endif; ?>">
+				<?php if($step >= 2 ) : ?>
+				<div id="step2" class="tab-pane fade in <?php if($step == 2) : echo 'active'; endif; ?>">
 					<?php include('newPerso2.php'); ?>
 				</div>
 				<?php endif; ?>
 
-				<?php if(isset($habiletes)) : ?>
-				<div id="step2" class="tab-pane fade in active">
+				<?php if( $step >= 3 ) : ?>
+				<div id="step3" class="tab-pane fade in <?php if($step == 3) : echo 'active'; endif; ?>">
 					<?php include('newPerso3.php'); ?>
+				</div>
+				<?php endif; ?>
+
+				<?php if( $step >= 4 ) : ?>
+				<div id="step4" class="tab-pane fade in <?php if($step == 4) : echo 'active'; endif; ?>">
+					<?php include('newPerso4.php'); ?>
+				</div>
+				<?php endif; ?>
+
+				<?php if( $step >= 5 ) : ?>
+				<div id="step4" class="tab-pane fade in <?php if($step == 5) : echo 'active'; endif; ?>">
+					<?php include('newPerso5.php'); ?>
 				</div>
 				<?php endif; ?>
 			</div>
@@ -163,17 +186,6 @@
 
 
 		<br><br>
-
-		<div class="row">
-			<div class="col-xs-6 col-md-3 col-xs-offset-6 col-md-offset-9">
-				<button class="btn btn-primary btn-block btn-lg"><span class="fa fa-save"></span> Sauvegarder et continuer</button>
-			</div>
-		</div>
-
-
-			<?php
-				echo form_close(); 
-			?>
 
 			<?php if(isset($startDisciplines)): ?>
 

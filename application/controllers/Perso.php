@@ -25,6 +25,8 @@
 			$data['clans'] = $this->perso_model->getClans();
 			$data['natures'] = $this->perso_model->getNatures();
 
+			$data['step'] = 1;
+
 			$this->load->view('template/header');
 			$this->load->view('template/nav');
 			$this->load->view('perso/newPerso',$data);
@@ -65,6 +67,7 @@
 
 				//STEP 2
             	$data['disciplines'] = 	$this->perso_model->getStartDisciplines($idUser);
+            	$data['step'] = 2;
 
 		        $this->load->view('template/header');
 				$this->load->view('template/nav');
@@ -102,15 +105,29 @@
 
         	//STEP 3
 			$data['habiletes'] = $this->perso_model->getStartSkills();
+			$data['step'] = 3;
 			$data['idPerso'] = $idPerso;
 
 			$this->load->view('template/header');
 			$this->load->view('template/nav');
-			$this->load->view('perso/newPerso3',$data);
+			$this->load->view('perso/newPerso',$data);
 			$this->load->view('template/footer');
 		}
 
 		public function newPerso4($idPerso,$idUser){
+
+			//STEP 1
+        	$data['clans'] = $this->perso_model->getClans();
+			$data['natures'] = $this->perso_model->getNatures();
+
+			//STEP 2
+        	$data['disciplines'] = 	$this->perso_model->getStartDisciplines($idUser);
+
+        	//STEP 3
+			$data['habiletes'] = $this->perso_model->getStartSkills();
+			$data['idPerso'] = $idPerso;
+
+			//STEP 4
 
 			$this->perso_model->addHabiletes($idPerso);
 
@@ -122,22 +139,44 @@
 			$data['contacts'] = $this->influence_model->getStartContactsBySecteur();
 			$data['idPerso'] = $idPerso;
 
+			$data['step'] = 4;
+
 			$this->load->view('template/header');
 			$this->load->view('template/nav');
-			$this->load->view('perso/newPerso4',$data);
+			$this->load->view('perso/newPerso',$data);
 			$this->load->view('template/footer');
 
 		}
 
 		public function newPerso5($idPerso,$idUser){
-			
+
+			//STEP 1
+        	$data['clans'] = $this->perso_model->getClans();
+			$data['natures'] = $this->perso_model->getNatures();
+
+			//STEP 2
+        	$data['disciplines'] = 	$this->perso_model->getStartDisciplines($idUser);
+
+        	//STEP 3
+			$data['habiletes'] = $this->perso_model->getStartSkills();
+			$data['idPerso'] = $idPerso;
+
+			//STEP 4
+
+			$data['freebies'] = $this->perso_model->getFreebies($idPerso);
 
 			$this->load->model('influence_model');
+
+			$data['contacts'] = $this->influence_model->getStartContactsBySecteur();
+			$data['idPerso'] = $idPerso;
+			
 			foreach ($_POST as $key => $value) {
 				if (substr($key, 0 ,7) == 'contact' ) {
 					$this->influence_model->addContact($idPerso ,$value);
 				}
 			}
+
+			$data['step'] = 5;
 			
 			$this->load->model('perso_model');
 			$this->perso_model->addBackground($idPerso);
@@ -150,7 +189,7 @@
 
 			$this->load->view('template/header');
 			$this->load->view('template/nav');
-			$this->load->view('perso/newPerso5',$data);
+			$this->load->view('perso/newPerso',$data);
 			$this->load->view('template/footer');
 		}
 

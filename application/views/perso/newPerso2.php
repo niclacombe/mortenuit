@@ -68,7 +68,7 @@
 				<a href="<?php echo site_url('perso/reroll/') . $disciplines[0]['idPerso'] . '/' . $userInfo->id; ?>"><button type="button" class="btn btn-success btn-block btn-lg"><span class="fa fa-save"></span> Relancer les Disciplines (<?php echo $disciplines[0]['reroll']; ?>)</button></a>
 			</div>
 			<div class="col-xs-6 col-md-4 col-xs-offset-3 col-md-offset-4">
-				<button id="submit" class="btn btn-primary btn-block btn-lg" disabled="disabled"><span class="fa fa-save"></span> Sauvegarder et continuer</button>
+				<button id="submit2" class="btn btn-primary btn-block btn-lg" disabled="disabled"><span class="fa fa-save"></span> Sauvegarder et continuer</button>
 			</div>
 		</div>
 
@@ -137,14 +137,14 @@
 
 			if($('.sub:checked').length >= 3){
 				$('.sub:not(":checked")').attr('disabled','disabled');
-				$('#submit').removeAttr('disabled');
+				$('#submit2').removeAttr('disabled');
 			} else {
 				var input = $('.sub:checked');
 				$.each(input, function(){
 					$(this).closest('.form-check').next('.form-check').children('label').children('input').removeAttr('disabled');
 					$('div .subContainer .form-check:first-child label input').removeAttr('disabled');
 				});
-				$('#submit').attr('disabled','disabled');
+				$('#submit2').attr('disabled','disabled');
 			}
 		})
 	})
