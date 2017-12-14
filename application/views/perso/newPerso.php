@@ -74,7 +74,14 @@
 									<?php endforeach; ?>
 								</select>
 							</div>
-							<div class="col-xs-6 col-md-4"></div>
+							<div class="col-xs-6 col-md-4">
+								<label for="age">Age :</label>
+								<select name="age" class="form-control">
+									<option value="1" >Nouveau-Né (après 2000)</option>
+									<option value="2" >Nouveau-Né (avant 2000)</option>
+									<option value="3" >Ancillae</option>
+								</select>
+							</div>
 						</div>
 					</div>
 					<div class="row">
@@ -159,25 +166,25 @@
 
 				<?php if($step >= 2 ) : ?>
 				<div id="step2" class="tab-pane fade in <?php if($step == 2) : echo 'active'; endif; ?>">
-					<?php include('newPerso2.php'); ?>
+					<?php if( $step == 2 ) : include('newPerso2.php'); endif;?>
 				</div>
 				<?php endif; ?>
 
 				<?php if( $step >= 3 ) : ?>
 				<div id="step3" class="tab-pane fade in <?php if($step == 3) : echo 'active'; endif; ?>">
-					<?php include('newPerso3.php'); ?>
+					<?php if( $step == 3 ) : include('newPerso3.php'); endif;?>
 				</div>
 				<?php endif; ?>
 
 				<?php if( $step >= 4 ) : ?>
 				<div id="step4" class="tab-pane fade in <?php if($step == 4) : echo 'active'; endif; ?>">
-					<?php include('newPerso4.php'); ?>
+					<?php if( $step == 4 ) : include('newPerso4.php'); endif;?>
 				</div>
 				<?php endif; ?>
 
 				<?php if( $step >= 5 ) : ?>
 				<div id="step4" class="tab-pane fade in <?php if($step == 5) : echo 'active'; endif; ?>">
-					<?php include('newPerso5.php'); ?>
+					<?php if( $step == 5 ) : include('newPerso5.php'); endif;?>
 				</div>
 				<?php endif; ?>
 			</div>

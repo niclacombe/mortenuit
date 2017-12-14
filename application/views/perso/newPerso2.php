@@ -58,6 +58,7 @@
 
 		<br><br>
 
+		<?php if($random == true) : ?>
 		<div class="row">
 			<?php if($disciplines[0]['reroll'] == 1): ?>
 				<div class="col-xs-6 col-md-4 text-right text-danger">
@@ -71,6 +72,13 @@
 				<button id="submit2" class="btn btn-primary btn-block btn-lg" disabled="disabled"><span class="fa fa-save"></span> Sauvegarder et continuer</button>
 			</div>
 		</div>
+		<?php else: ?>
+		<div class="row">
+			<div class="col-xs-6 col-md-4 col-xs-offset-6 col-md-offset-8">
+				<button id="submit2" class="btn btn-primary btn-block btn-lg" disabled="disabled"><span class="fa fa-save"></span> Sauvegarder et continuer</button>
+			</div>
+		</div>
+		<?php endif; ?>
 
 
 		<?php

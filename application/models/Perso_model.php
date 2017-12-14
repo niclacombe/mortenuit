@@ -57,7 +57,7 @@ class Perso_model extends CI_Model {
 		$this->db->insert('personnages', $data);
 	}
 
-	public function getStartDisciplines($idUser){
+	public function getRandStartDisciplines($idUser){
 		$this->db->db_select('mn_personnages');
 
 		$this->db->where('id_user', $idUser);
@@ -132,7 +132,46 @@ class Perso_model extends CI_Model {
 	public function reroll($idPerso){
 		$query = "UPDATE mn_personnages.personnages SET reroll = reroll-1 WHERE id = " .$idPerso .";";
 		$this->db->query($query);
+	}
 
+	public function getFixStartDisciplines($idUser){
+		$this->db->db_select('mn_personnages');
+
+		$this->db->where('id_user', $idUser);
+		$this->db->order_by('id', 'desc');
+		$query = $this->db->get('personnages', 1);
+
+		$perso = $query->row();
+
+		$this->db->db_select('mn_systeme');
+
+		$this->db->where('id_clan', $perso->clan);
+		$query = $this->db->get('clan_disciplines');
+
+		$result = $query->row();
+
+		$this->db->where('id', $result->id_disc1);
+		$this->db->or_where('id', $result->id_disc2);
+		$this->db->or_where('id', $result->id_disc3);
+		$query = $this->db->get('disciplines');
+		$vDisciplines = $query->result();
+
+		foreach ($vDisciplines as $vDisc) {
+			$this->db->where('id_parent', $vDisc->id);
+			$query = $this->db->get('sub_disciplines');
+
+			
+			$disciplines[] = array(
+				'reroll' => $perso->reroll,
+				'idPerso' => $perso->id,
+				'name' => $vDisc->name,
+				'id' => $vDisc->id,
+				'description' => $vDisc->description,
+				'sub_disciplines' => $query->result(),
+			);
+		}
+
+		return $disciplines;
 	}
 
 	public function addStartDisciplines($idPerso){
@@ -205,6 +244,8 @@ class Perso_model extends CI_Model {
 			$update = true;
 		}
 
+		$this->db->db_select('mn_personnages');
+
 		if($update){
 			$data['herd'] = $this->input->post('herd');
 			$this->db->where('id', $idPerso);
@@ -212,8 +253,17 @@ class Perso_model extends CI_Model {
 		}
 	}
 
-	public function updateFreebies($idPerso){
-		$data = array();
+	public function updateFreebies($idPerso, $freebies, $raison ){
+		$data = array(
+			'id_personnage' => $idPerso,
+			'freebies' => $freebies,
+			'raison' => $raison,
+			'date' => date('Y-m-d H:i:s', time()),
+		);
+
+		$this->db->db_select('mn_personnages');
+
+		$this->db->insert('freebies', $data);
 	}
 
 	public function getFreebies($idPerso){

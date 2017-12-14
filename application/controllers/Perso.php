@@ -66,7 +66,13 @@
 				$data['natures'] = $this->perso_model->getNatures();
 
 				//STEP 2
-            	$data['disciplines'] = 	$this->perso_model->getStartDisciplines($idUser);
+				if($this->input->post('age') == 1 ) :
+            		$data['disciplines'] = 	$this->perso_model->getRandStartDisciplines($idUser);
+            		$data['random'] = true;
+            	else:
+            		$data['disciplines'] = 	$this->perso_model->getFixStartDisciplines($idUser);
+            		$data['random'] = false;
+            	endif;
             	$data['step'] = 2;
 
 		        $this->load->view('template/header');
@@ -101,7 +107,7 @@
 			$data['natures'] = $this->perso_model->getNatures();
 
 			//STEP 2
-        	$data['disciplines'] = 	$this->perso_model->getStartDisciplines($idUser);
+        	$data['disciplines'] = 	$this->perso_model->getRandStartDisciplines($idUser);
 
         	//STEP 3
 			$data['habiletes'] = $this->perso_model->getStartSkills();
@@ -121,7 +127,7 @@
 			$data['natures'] = $this->perso_model->getNatures();
 
 			//STEP 2
-        	$data['disciplines'] = 	$this->perso_model->getStartDisciplines($idUser);
+        	$data['disciplines'] = 	$this->perso_model->getRandStartDisciplines($idUser);
 
         	//STEP 3
 			$data['habiletes'] = $this->perso_model->getStartSkills();
@@ -155,7 +161,7 @@
 			$data['natures'] = $this->perso_model->getNatures();
 
 			//STEP 2
-        	$data['disciplines'] = 	$this->perso_model->getStartDisciplines($idUser);
+        	$data['disciplines'] = 	$this->perso_model->getRandStartDisciplines($idUser);
 
         	//STEP 3
 			$data['habiletes'] = $this->perso_model->getStartSkills();
@@ -177,8 +183,10 @@
 			}
 
 			$data['step'] = 5;
+
+			echo var_dump($_POST);
 			
-			$this->load->model('perso_model');
+			/*$this->load->model('perso_model');
 			$this->perso_model->addBackground($idPerso);
 			$this->perso_model->updateFreebies($idPerso, intval( $_POST['freebiesCount'] ), 'Freebies départ' );
 
@@ -190,7 +198,7 @@
 			$this->load->view('template/header');
 			$this->load->view('template/nav');
 			$this->load->view('perso/newPerso',$data);
-			$this->load->view('template/footer');
+			$this->load->view('template/footer');*/
 		}
 
 		public function newPerso6($idPerso, $idUser){
