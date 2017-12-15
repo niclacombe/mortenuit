@@ -133,6 +133,8 @@
 <script>
 	$(function(){
 
+		var limit = 10;
+
 		$('a.info').on('click',function(e){
 			e.preventDefault();
 			$('#card .card-header').html($(this).attr('data-title'));
@@ -140,13 +142,13 @@
 		});
 
 		$("button[type='reset']").on('click', function(e){
-			$('#count').html(10);
+			$('#count').html(limit);
 			$('.form-check-inline label input:first-child').nextAll('.habilete').attr('disabled','disabled');
 		});
 
 		$('.habilete').on('change',function(){
 
-			$('#count').html(10 - $('.habilete:checked').length);		
+			$('#count').html(limit - $('.habilete:checked').length);		
 
 			if ( $(this).is(':checked') ) {
 				$(this).next('input').removeAttr('disabled');
@@ -158,7 +160,7 @@
 				});
 			}
 
-			if($('.habilete:checked').length >= 10){
+			if($('.habilete:checked').length >= limit){
 				$('.habilete:not(":checked")').attr('disabled','disabled');
 				$('#submit3').removeAttr('disabled');
 			} else {

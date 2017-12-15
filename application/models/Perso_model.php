@@ -176,29 +176,36 @@ class Perso_model extends CI_Model {
 
 	public function addStartDisciplines($idPerso){
 
-		$startDisc = array_slice($_POST,0,3);
+		foreach ($_POST as $post_key => $value) {
+			if(is_numeric($post_key) ):
+				$explode = explode('-', $value);
 
-		foreach ($startDisc as $disc) {
-			$explode = explode('-', $disc);
-			$data = array(
-				'id_personnage' => $idPerso,
-				'id_discipline' => $explode[0],
-				'niveau'		=> $explode[1],
-				'start_discipline' => 1
-			);
+				$data = array(
+					'id_personnage' => $idPerso,
+					'id_discipline' => $explode[0],
+					'niveau'		=> $explode[1],
+					'start_discipline' => 1,
+					'date'			=> date('Y-m-d H:i:s', time())
+				);
 
-			$this->db->insert('disciplines_acquises', $data);
+				$this->db->insert('disciplines_acquises', $data);
 
-			$disciplines = explode('-',$this->input->post('disciplines'));
+				$disciplines = explode('-',$this->input->post('disciplines'));
 
-			$data = array(
-				'startDisc_1' => $disciplines[0],
-				'startDisc_2' => $disciplines[1],
-				'startDisc_3' => $disciplines[2]
-			);
+			else :
 
-			$this->db->where('id', $idPerso);
-			$this->db->update('personnages', $data);
+				$disciplines = explode('-',$this->input->post('disciplines'));
+
+				$data = array(
+					'startDisc_1' => $disciplines[0],
+					'startDisc_2' => $disciplines[1],
+					'startDisc_3' => $disciplines[2]
+				);
+
+				$this->db->where('id', $idPerso);
+				$this->db->update('personnages', $data);
+
+			endif;
 		}
 	}
 
@@ -220,7 +227,8 @@ class Perso_model extends CI_Model {
 			$data = array(
 				'id_personnage' => $idPerso,
 				'id_habilete'	=> $explode[0],
-				'niveau'		=> $explode[1]
+				'niveau'		=> $explode[1],
+				'date'			=> date('Y-m-d H:i:s', time())
 			);
 
 			$this->db->insert('habiletes_acquises', $data);
@@ -233,21 +241,38 @@ class Perso_model extends CI_Model {
 
 		if($this->input->post('generation')){
 			$data['generation'] = $this->input->post('generation');
+			switch ($data['generation']) {
+				case 12:
+					$value = -1;
+					break;
+
+				case 11:
+					$value = -4;
+					break;
+
+				case 10:
+					$value = -9;
+					break;
+				
+
+			}
+			$this->updateFreebies($idPerso, $value, 'Achat BG Génération');
 			$update = true;
 		}
 		if($this->input->post('ressource')){
 			$data['ressources'] = $this->input->post('ressource');
+			$this->updateFreebies($idPerso, -$data['ressources'], 'Achat BG Ressources');
 			$update = true;
 		}
 		if($this->input->post('herd')){
 			$data['herd'] = $this->input->post('herd');
+			$this->updateFreebies($idPerso, -$data['herd'], 'Achat BG Herd');
 			$update = true;
 		}
 
 		$this->db->db_select('mn_personnages');
 
 		if($update){
-			$data['herd'] = $this->input->post('herd');
 			$this->db->where('id', $idPerso);
 			$this->db->update('personnages', $data);
 		}

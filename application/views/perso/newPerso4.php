@@ -215,7 +215,6 @@
 				});
 
 				var checkedBG = $('.checkBG:checkbox:checked');
-				//alert(checkedBG.length);
 				if(checkedBG.length > 0){
 						var currentFreebie = 0;
 					$.each(checkedBG, function(){

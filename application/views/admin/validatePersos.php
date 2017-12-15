@@ -7,6 +7,7 @@
 				<?php if(empty($persos)): ?>
 					<h3>Aucun personnage à valider</h3>
 				<?php else: ?>
+					<?php $perso = $perso['perso']; ?>
 					<h3>Personnages à valider</h3>
 					<table class="table table-responsive table-striped">
 						<tr>

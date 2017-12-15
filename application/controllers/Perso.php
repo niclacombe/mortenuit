@@ -75,7 +75,7 @@
             	endif;
             	$data['step'] = 2;
 
-		        $this->load->view('template/header');
+            	$this->load->view('template/header');
 				$this->load->view('template/nav');
 				$this->load->view('perso/newPerso',$data);
 				$this->load->view('template/footer');
@@ -91,6 +91,8 @@
 
 			//STEP 2
         	$data['disciplines'] = 	$this->perso_model->getStartDisciplines($idUser);
+
+        	$data['step'] = 2;
 
 	        $this->load->view('template/header');
 			$this->load->view('template/nav');
@@ -176,20 +178,22 @@
 			$data['contacts'] = $this->influence_model->getStartContactsBySecteur();
 			$data['idPerso'] = $idPerso;
 			
+			
+			$data['step'] = 5;
+			
+			$this->load->model('perso_model');
+			$this->perso_model->updateFreebies($idPerso, 15, 'Freebies départ' );
+			$this->perso_model->addBackground($idPerso);
+			
+			$this->load->model('influence_model');
+
 			foreach ($_POST as $key => $value) {
 				if (substr($key, 0 ,7) == 'contact' ) {
 					$this->influence_model->addContact($idPerso ,$value);
 				}
 			}
 
-			$data['step'] = 5;
-
-			echo var_dump($_POST);
-			
-			/*$this->load->model('perso_model');
-			$this->perso_model->addBackground($idPerso);
-			$this->perso_model->updateFreebies($idPerso, intval( $_POST['freebiesCount'] ), 'Freebies départ' );
-
+			$this->load->model('perso_model');
 
 			$data['freebies'] = $this->perso_model->getFreebies($idPerso);
 			$data['idPerso'] = $idPerso;
@@ -198,7 +202,7 @@
 			$this->load->view('template/header');
 			$this->load->view('template/nav');
 			$this->load->view('perso/newPerso',$data);
-			$this->load->view('template/footer');*/
+			$this->load->view('template/footer');
 		}
 
 		public function newPerso6($idPerso, $idUser){
@@ -223,17 +227,11 @@
 
 				$data['newPersoAttente'] = true;
 
-				$this->load->view('template/header');
-				$this->load->view('template/nav');
-				$this->load->view('perso/newPerso5',$data);
-				$this->load->view('template/footer');
+				redirect('perso/index/' .$idUser, 'refresh');
 
 
 			}
 		}
-
-		
-
 	}
 	
 	/* End of file Perso.php */

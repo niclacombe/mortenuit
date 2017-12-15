@@ -8,7 +8,7 @@
 	</tr>
 	<tr>
 		<th class="col-md-2">Clan</th>
-		<td class="col-md-4"><?php echo $perso->nom; ?></td>
+		<td class="col-md-4"><?php echo $perso->clanNom; ?></td>
 		<th class="col-md-2">Génération</th>
 		<td class="col-md-4"><?php echo $perso->generation; ?></td>
 	</tr>

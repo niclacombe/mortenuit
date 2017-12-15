@@ -99,10 +99,33 @@ class Admin_model extends CI_Model {
 	}
 
 	public function inspectPerso($idPerso){
-		$this->db->db_select('mn_personnages');
+		$this->db->select('perso.*, clan.name as clanNom ');
+		$this->db->from('mn_personnages.personnages perso');
+		$this->db->join('mn_systeme.clans clan', 'clan.id = perso.clan', 'left');
 
-		$this->db->where('id', $idPerso);
-		$query = $this->db->get('personnages');
+
+		$this->db->where('perso.id', $idPerso);
+		$query = $this->db->get();
+
+		$perso['perso'] = $query->row();
+
+		$idDisc = array($perso['perso']->startDisc3,$perso['perso']->startDisc2,$perso['perso']->startDisc3);
+
+		$this->db->select('id_discipline');
+		$this->db->where('id_personnage', $idPerso);
+		$this->db->where_not_in('id_discipline', $idDisc);
+		$query = $this->db->get('disciplines_acquises');
+		$results = $query->result();
+
+		foreach ($results as $result) {
+			array_push($idDisc, $result->id_discipline);
+		}
+
+		
+
+
+
+		return $perso;
 
 		return $query->row();
 	}
