@@ -99,38 +99,51 @@ class Admin_model extends CI_Model {
 	}
 
 	public function inspectPerso($idPerso){
-		$this->db->select('perso.*, clan.name as clanNom ');
+		$this->db->select('perso.*, clan.name as clanNom, nat.nom as natNom, att.nom as attNom');
 		$this->db->from('mn_personnages.personnages perso');
 		$this->db->join('mn_systeme.clans clan', 'clan.id = perso.clan', 'left');
-
+		$this->db->join('mn_systeme.natures nat', 'nat.id = perso.nature', 'left');
+		$this->db->join('mn_systeme.natures att ', 'att.id = perso.attitude', 'left');
 
 		$this->db->where('perso.id', $idPerso);
 		$query = $this->db->get();
 
 		$perso['perso'] = $query->row();
 
-		$idDisc = array($perso['perso']->startDisc3,$perso['perso']->startDisc2,$perso['perso']->startDisc3);
+		$idDisc = array($perso['perso']->startDisc_1,$perso['perso']->startDisc_2,$perso['perso']->startDisc_3);
 
-		$this->db->select('id_discipline');
-		$this->db->where('id_personnage', $idPerso);
-		$this->db->where_not_in('id_discipline', $idDisc);
-		$query = $this->db->get('disciplines_acquises');
-		$results = $query->result();
-
-		foreach ($results as $result) {
-			array_push($idDisc, $result->id_discipline);
-		}
-
-		
-
+		$this->db->select('discacq.*, disc.name as nomDisc');
+		$this->db->from('mn_personnages.disciplines_acquises discacq');
+		$this->db->join('mn_systeme.disciplines disc', 'disc.id = discacq.id_discipline', 'left');
+		$this->db->where('discacq.id_personnage', $idPerso);
+		$query = $this->db->get();
+		$perso['disciplines'] = $query->result();
 
 
 		return $perso;
-
-		return $query->row();
 	}
 
-	
+	public function confirmPerso($idPerso, $bool){
+		if ($bool) :
+			$data = array('etat' => 'ACTIF');
+		else :
+			$data = array('etat' => 'REFUS');
+		endif;
+		$this->db->where('id', $idPerso);
+		$this->db->update('mn_personnages.personnages', $data);
+	}
+
+	public function getEmailByPerso($idPerso){
+
+		$this->db->select('courriel');
+		$this->db->from('mn_mortenuit.users user');
+		$this->db->join('mn_personnages.personnages perso', 'perso.id_user = user.id', 'left');
+		$this->db->where('perso.id', $idPerso);
+
+		$query = $this->db->get();
+
+		return $query->row();
+	}	
 
 }
 

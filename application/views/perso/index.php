@@ -23,7 +23,11 @@
 							<td><?php echo $personnage->nom; ?></td>
 							<td><?php echo $personnage->concept; ?></td>
 							<td><?php echo $personnage->etat; ?></td>
-							<td></td>
+							<td>
+								<a href="#">
+									<button class="btn btn-primary"><span class="fa fa-edit"></span></button>
+								</a>
+							</td>
 						</tr>
 					<?php endforeach; ?>
 					</table>

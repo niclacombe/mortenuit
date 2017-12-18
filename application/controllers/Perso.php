@@ -5,8 +5,7 @@
 	
 		public function __construct() {
 			parent::__construct();
-			$this->load->model('perso_model');
-			
+			$this->load->model('perso_model');			
 		}
 
 		public function index($id_user)	{
@@ -21,6 +20,12 @@
 
 		public function newPerso($idUser) {
 			$data = array();
+
+			$this->load->model('user_model');
+
+			$data['infoJoueur'] = $this->user_model->readProfile($idUser);
+
+			$this->load->model('perso_model');
 
 			$data['clans'] = $this->perso_model->getClans();
 			$data['natures'] = $this->perso_model->getNatures();
@@ -49,6 +54,12 @@
 
 			if ($this->form_validation->run() == FALSE) {
 
+				$this->load->model('user_model');
+
+				$data['infoJoueur'] = $this->user_model->readProfile($idUser);
+
+				$this->load->model('perso_model');
+
 				$data['clans'] = $this->perso_model->getClans();
 				$data['natures'] = $this->perso_model->getNatures();
 				
@@ -62,6 +73,12 @@
             	$this->perso_model->newPerso($idUser);
 
             	//STEP 1
+            	$this->load->model('user_model');
+
+				$data['infoJoueur'] = $this->user_model->readProfile($idUser);
+
+				$this->load->model('perso_model');
+
             	$data['clans'] = $this->perso_model->getClans();
 				$data['natures'] = $this->perso_model->getNatures();
 
@@ -105,6 +122,12 @@
 			$this->perso_model->addStartDisciplines($idPerso);
 
 			//STEP 1
+			$this->load->model('user_model');
+
+			$data['infoJoueur'] = $this->user_model->readProfile($idUser);
+
+			$this->load->model('perso_model');
+
         	$data['clans'] = $this->perso_model->getClans();
 			$data['natures'] = $this->perso_model->getNatures();
 
@@ -125,6 +148,12 @@
 		public function newPerso4($idPerso,$idUser){
 
 			//STEP 1
+			$this->load->model('user_model');
+
+			$data['infoJoueur'] = $this->user_model->readProfile($idUser);
+
+			$this->load->model('perso_model');
+
         	$data['clans'] = $this->perso_model->getClans();
 			$data['natures'] = $this->perso_model->getNatures();
 
@@ -159,6 +188,12 @@
 		public function newPerso5($idPerso,$idUser){
 
 			//STEP 1
+			$this->load->model('user_model');
+
+			$data['infoJoueur'] = $this->user_model->readProfile($idUser);
+
+			$this->load->model('perso_model');
+			
         	$data['clans'] = $this->perso_model->getClans();
 			$data['natures'] = $this->perso_model->getNatures();
 
@@ -231,6 +266,22 @@
 
 
 			}
+		}
+
+		public function selectPlayer(){
+
+			$this->load->model('perso_model');
+
+			$data['joueurs'] = $this->perso_model->getPlayers();
+
+			$this->load->view('template/header');
+			$this->load->view('template/nav');
+			$this->load->view('perso/selectPlayer',$data);
+			$this->load->view('template/footer');
+		}
+
+		public function startNewPerso(){
+			redirect('perso/newPerso/' .$this->input->post('selectPlayer'),'refresh');
 		}
 	}
 	

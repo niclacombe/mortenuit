@@ -85,9 +85,11 @@
                                     <li>
                                         <a href="<?php echo site_url('perso/index') . '/' .$this->session->user_info->id; ?>">Mes Personnages</a>
                                     </li>
-                                    <li>
-                                        <a href="<?php echo site_url('perso/newPerso') . '/' .$this->session->user_info->id; ?>">Nouveau Personnage</a>
-                                    </li>
+                                    <?php if($this->session->user_info->is_admin) : ?>
+                                        <li>
+                                            <a href="<?php echo site_url('perso/selectPlayer') . '/' .$this->session->user_info->id; ?>">Nouveau Personnage</a>
+                                        </li>
+                                    <?php endif; ?>
                                 </ul>
                                 
                             </li>

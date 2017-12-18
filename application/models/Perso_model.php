@@ -41,6 +41,17 @@ class Perso_model extends CI_Model {
 		return $query->row();
 	}
 
+	public function getPlayers(){
+		$this->db->db_select('mn_mortenuit');
+
+		$this->db->where('is_confirmed', 1);
+		$this->db->where('is_deleted', 0);
+
+		$query = $this->db->get('users');
+
+		return $query->result();
+	}
+
 	public function newPerso($idUser){
 		$data = array(
 			'id_user'	=> $idUser,
@@ -176,6 +187,8 @@ class Perso_model extends CI_Model {
 
 	public function addStartDisciplines($idPerso){
 
+		$selectedDisc = array();
+
 		foreach ($_POST as $post_key => $value) {
 			if(is_numeric($post_key) ):
 				$explode = explode('-', $value);
@@ -188,25 +201,37 @@ class Perso_model extends CI_Model {
 					'date'			=> date('Y-m-d H:i:s', time())
 				);
 
+				$selectedDisc[] = $explode[0];
+
 				$this->db->insert('disciplines_acquises', $data);
-
-				$disciplines = explode('-',$this->input->post('disciplines'));
-
-			else :
-
-				$disciplines = explode('-',$this->input->post('disciplines'));
-
-				$data = array(
-					'startDisc_1' => $disciplines[0],
-					'startDisc_2' => $disciplines[1],
-					'startDisc_3' => $disciplines[2]
-				);
-
-				$this->db->where('id', $idPerso);
-				$this->db->update('personnages', $data);
 
 			endif;
 		}
+
+		$disciplines = explode('-',$this->input->post('disciplines'));
+
+		foreach($disciplines as $disc){
+			if(in_array($disc, $selectedDisc) == false){
+				$data = array(
+					'id_personnage' => $idPerso,
+					'id_discipline' => $disc,
+					'niveau'		=> 0,
+					'start_discipline' => 1,
+					'date'			=> date('Y-m-d H:i:s', time())
+				);
+
+				$this->db->insert('disciplines_acquises', $data);
+			}
+		}
+
+		$data = array(
+			'startDisc_1' => $disciplines[0],
+			'startDisc_2' => $disciplines[1],
+			'startDisc_3' => $disciplines[2]
+		);
+
+		$this->db->where('id', $idPerso);
+		$this->db->update('personnages', $data);
 	}
 
 	public function getStartSkills(){

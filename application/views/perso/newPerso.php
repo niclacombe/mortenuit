@@ -2,7 +2,7 @@
 	<div class="page-wrapper container-fluid">
 		<?php $userInfo = $this->session->user_info; ?>
 		<div class="row">
-			<h2>Créer un Personnage</h2>
+			<h2>Créer un Personnage pour <em><?php echo $infoJoueur->prenom .' ' .$infoJoueur->nom; ?></em></h2>
 		</div>
 
 		<div class="row"><?php echo validation_errors(); ?></div>

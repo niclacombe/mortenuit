@@ -124,6 +124,28 @@ class Admin extends CI_Controller {
 		$this->load->view('admin/ajax/inspectPerso', $data);
 	}
 
+	public function confirmPerso($idPerso,$bool){
+
+		$this->load->model('admin_model');
+
+		$this->admin_model->confirmPerso($idPerso,$bool);
+
+		$email = $this->admin_model->getEmailByPerso($idPerso);
+
+		if($bool == false):
+			$this->load->library('email');
+
+			$this->email->from('admin@malediction.com');
+			$this->email->to($email->courriel);
+			$this->email->subject('REFUS DE VOTRE PERSONNAGE');
+			$this->email->message($this->input->post('refusComment'));
+
+			$this->email->send();
+		endif;
+
+		redirect('admin/validatePersos', 'refresh');
+	}
+
 }
 
 /* End of file Admin.php */

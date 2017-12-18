@@ -51,7 +51,7 @@
 						<tr>
 							<td><?php echo $action['date_parution']; ?></td>
 							<td>
-								<?php if ($action['locked'] == false ) : ?>
+								<?php if ($action['locked'] == false || $action['contact_owned']) : ?>
 								<strong>
 										<?php if($action['contact_owned']) : ?>
 											<span class="fa fa-star"></span>&nbsp

@@ -47,6 +47,7 @@ class User_model extends CI_Model{
     }
 
     public function readProfile($idUser) {
+        $this->db->db_select('mn_mortenuit');
         $this->db->where('id', $idUser);
         $row = $this->db->get('users');
 
