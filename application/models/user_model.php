@@ -24,16 +24,16 @@ class User_model extends CI_Model{
             'nom'           => $this->input->post('nom'),
             'password'      => $encryptedPW,
             'courriel'      => $this->input->post('courriel'),
-            'created_at'    => time(),
+            'created_at'    => date('Y-m-d H:i:s', time()),
         );
         
         $this->db->insert('users', $infoNewUser);
 
         return true;
-        
     }
 
     public function validateUser($userEmail){
+        $this->db->db_select('mn_mortenuit');
         $this->db->set('is_confirmed',1);
         $this->db->where('courriel',$userEmail);
         $this->db->update('users');

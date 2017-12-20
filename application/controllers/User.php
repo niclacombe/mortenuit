@@ -56,14 +56,23 @@ class User extends CI_Controller {
 		else{
 
 			$this->load->library('encryption');
+			$this->load->helper('send_email_helper');
 
 			$data['registerSuccess'] = $this->user_model->addUser();
 
-			$this->email->from('niclacombe@gmail.com', 'Nicolas Lacombe');
+			$config['mailtype'] = 'html';
+			$this->email->initialize($config);
+
+			$this->email->from('admin@enfantsdecain.ca', 'Les Enfants de Cain');
 			$this->email->to( $this->input->post('courriel') );
 
 			$this->email->subject('La Morte Nuit - Confirmation d\'Inscription');
-			$this->email->message("Vous recevez ce courriel parce que vous vous êtes inscrit à l'activité La Morte Nuit.\nPour valider votre compte, veuillez cliquer sur le lien suivant : \n" . "http://www.niclacombe.ca/mortenuit/index.php/user/validateUser/" .$this->input->post('courriel'));
+
+			$msg = 'Vous recevez ce courriel parce que vous vous êtes inscrit à l\'activité La Morte Nuit. <br> Pour valider votre compte, veuillez cliquer sur le lien suivant : <br> <a href="enfantsdecain.ca/index.php/user/validateUser/' .$this->input->post('courriel') .'" target="_blank">Valider mon compte.</a>';
+
+			$message = formatEmail($msg);
+
+			$this->email->message($message);
 
 			$this->email->send();
 
@@ -83,7 +92,7 @@ class User extends CI_Controller {
 
 		$this->load->view('template/header');
 		$this->load->view('template/nav');
-		$this->load->view('user/register',$data);
+		$this->load->view('home/home',$data);
 		$this->load->view('template/footer');
 	}
 
@@ -106,7 +115,6 @@ class User extends CI_Controller {
 				if ($this->perso_model->getActivePerso($returned->id) != null) {
 					$array['activePerso'] = $this->perso_model->getActivePerso($returned->id)->id;
 				}
-				//$array['activePerso'] = $this->perso_model->getActivePerso($returned->id)->id;
 
 				$this->session->set_userdata( $array );
 
