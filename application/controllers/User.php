@@ -67,6 +67,8 @@ class User extends CI_Controller {
 
 			$this->email->send();
 
+			$data['courriel'] = $this->input->post('courriel');
+
 			$this->load->view('template/header');
 			$this->load->view('template/nav');
 			$this->load->view('user/register',$data);
@@ -101,7 +103,10 @@ class User extends CI_Controller {
 
 				$this->load->model('perso_model');
 
-				$array['activePerso'] = $this->perso_model->getActivePerso($returned->id)->id;
+				if ($this->perso_model->getActivePerso($returned->id) != null) {
+					$array['activePerso'] = $this->perso_model->getActivePerso($returned->id)->id;
+				}
+				//$array['activePerso'] = $this->perso_model->getActivePerso($returned->id)->id;
 
 				$this->session->set_userdata( $array );
 

@@ -92,14 +92,21 @@ class Admin extends CI_Controller {
 
 		$joueur = $this->admin_model->getJoueurFromContact($this->input->post('idContact'));
 
-		echo '<pre>' .var_dump($joueur) .'</pre>';
-
 		/* EMAIL JOUEUR */
 		if( $this->input->post('commentaires') != NULL ){
+			$this->load->library('email');
 
+			$this->email->from('admin@malediction.com');
+			$this->email->to($joueur->courriel);
+			$this->email->subject('REFUS DE VOTRE ACTION');
+
+			$msg = 'Votre action " ' .$this->input->post('actionDescription') .' "  a été refusée pour la raison suivante: \n " ' .$this->input->post('commentaires') .' ".'
+			$this->email->message($msg);
+
+			$this->email->send();
 		}
 
-		//redirect('admin/validateActions','refresh');
+		redirect('admin/validateActions','refresh');
 	}
 
 	public function validatePersos(){

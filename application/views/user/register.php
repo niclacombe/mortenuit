@@ -12,7 +12,7 @@
 				?>
 						<div class="row">
 							<div class="col-xs-12">
-								<h4><span class="fa fa-thumb-up"></span> Veuillez consulter vos courriels pour confirmer votre inscription.</h4>
+								<h4><span class="fa fa-thumb-up"></span> Un courriel à été envoyer à l'adresse <em><?php echo $courriel; ?></em> pour confirmer votre inscription.</h4>
 							</div>
 						</div>
 				<?php		

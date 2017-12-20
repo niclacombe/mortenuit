@@ -36,6 +36,7 @@ html,body{
 
 body{
 	font-family: "Josefin", Helvetica, Arial, sans-serif;
+	background: url("/mortenuit/assets/img/circles-and-roundabouts.png") !important;
 }
 
 h1,h2,h3,h4,h5{
@@ -45,6 +46,14 @@ h1,h2,h3,h4,h5{
 #login{
 	margin: 0;	
 	height: 100%;
+}
+
+#page-wrapper{
+	background-color: rgba(255,255,255,0.35);
+}
+
+.panel{
+	background-color: rgba(255,255,255,0.5);
 }
 
 .modalNic{

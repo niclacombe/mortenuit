@@ -89,8 +89,6 @@ class Influence extends CI_Controller {
 			$this->load->view('template/footer');
         }
         else {
-
-
  
         	$this->load->model('perso_model');
 

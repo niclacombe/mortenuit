@@ -57,7 +57,6 @@ class Admin_model extends CI_Model {
 		foreach ($this->input->post('secteurs') as $secteur) {
 			$this->db->insert('action_secteur', array('id_action' => $idAction, 'id_secteur' => $secteur ));
 		}
-
 	}
 
 	public function refusAction($idAction){
@@ -74,7 +73,6 @@ class Admin_model extends CI_Model {
 	}
 
 	public function getJoueurFromContact($idContact){
-
 		$this->db->select('jou.*');
 		$this->db->from('mn_personnages.personnages perso');
 		$this->db->join('mn_influence.contacts con', 'con.proprietaire = perso.id', 'left');
