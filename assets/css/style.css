@@ -1,18 +1,18 @@
 @font-face{
 	font-family: "Cargo";
-	src: url('../fonts/Cardo-Regular.ttf');
+	src: url('../fonts/GenBkBasR.ttf');
 }
 
 @font-face{
 	font-family: "Cargo";
 	font-style: italic;
-	src: url('../fonts/Cardo-Italic.ttf');
+	src: url('../fonts/GenBkBasI.ttf');
 }
 
 @font-face{
 	font-family: "Cargo";
 	font-weight: bold;
-	src: url('../fonts/Cardo-Bold.ttf');
+	src: url('../fonts/GenBkBasB.ttf');
 }
 
 @font-face{
@@ -56,11 +56,31 @@ h1,h2,h3,h4,h5{
 	background-color: rgba(255,255,255,0.5);
 }
 
+nav.navbar{
+	background-color: #4e4e4e;
+}
+
+nav.navbar li a{
+	color: #fff;
+}
+
+nav.navbar li a:hover{
+	color: #4e4e4e;
+}
+
+a{
+	color: inherit;
+}
+
 .modalNic{
 	border-radius: 4px;
 	background-color: #ffffff;
 	max-height: 40%;
 	text-align: center;
+}
+
+.navbar-brand{
+	padding: 3px 15px !important;
 }
 
 .toPop {
