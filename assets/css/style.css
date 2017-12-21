@@ -36,7 +36,7 @@ html,body{
 
 body{
 	font-family: "Josefin", Helvetica, Arial, sans-serif;
-	background: url("/mortenuit/assets/img/circles-and-roundabouts.png") !important;
+	background: url("/mortenuit/assets/img/enfant_bg.png") !important;
 }
 
 h1,h2,h3,h4,h5{
@@ -60,12 +60,21 @@ nav.navbar{
 	background-color: #4e4e4e;
 }
 
-nav.navbar li a{
+nav.navbar ul.navbar-top-links li a{
 	color: #fff;
 }
 
-nav.navbar li a:hover{
+nav.navbar ul.navbar-top-links li a:hover{
 	color: #4e4e4e;
+}
+
+.navbar-top-links li{
+	margin-top: 8px;
+	margin-bottom: -7px;
+}
+
+.navbar-top-links li:last-child{
+	top:-7px;
 }
 
 a{
@@ -113,10 +122,36 @@ a{
 									   color-stop(0.86, rgb(28,58,148)));
 }
 
+.sidebar .fa-angle-right{
+	float: right;
+}
+
 textarea[name="actionDescription"],
 textarea[name="note"],
 textarea[name="commentaires"],
 textarea[name="bg"]{
 	height: 150px; 
 	resize: vertical;
+}
+
+/* MOBILE */
+@media screen and (max-width: 576px){
+	.navbar-top-links li{
+		width: 100%;
+		text-align: center;
+	}
+
+	.navbar-top-links li:nth-child(2){
+		background-color: #888;
+	}
+
+	.navbar-top-links li.logout{
+		text-align: right;
+	}
+
+	.navbar-top-links li form input {
+		margin-top: 1em;
+		width: 100%;
+	}
+
 }

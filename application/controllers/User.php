@@ -134,6 +134,8 @@ class User extends CI_Controller {
 
 	}
 
+	
+
 	public function logOut(){
 		$this->session->set_userdata( array('is_logged_in' => false) );
 

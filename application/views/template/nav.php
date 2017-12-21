@@ -22,7 +22,7 @@
                         );
                         echo form_open('user/logIn',$args);
 
-                        echo '<div class="form-group">';
+                        echo '<div class="form-group col-xs-12">';
                             $args = array(
                                 'type'  => 'text',
                                 'name'  => 'logIn_courriel',
@@ -51,7 +51,7 @@
                 </li>
                 <li><a href="<?php echo base_url(); ?>user/register">Inscription</a></li>
                 <?php else: ?>
-                    <li><a href="<?php echo base_url(); ?>user/logOut"><span class="fa fa-sign-out"></span>Déconnexion</a></li>
+                    <li class="logout"><a href="<?php echo base_url(); ?>user/logOut"><span class="fa fa-sign-out"></span>Déconnexion</a></li>
                 <?php endif; ?>
             </ul>
             <!-- /.navbar-top-links -->
@@ -63,7 +63,7 @@
                             <li><a href="<?php echo base_url(); ?>user/readProfile/<?php echo $this->session->userdata['user_info']->id; ?>"><span class="fa fa-user"></span> Mon Profil</a></li>
                             <?php if($this->session->user_info->is_admin) : ?>
                                 <li>
-                                    <a href="#"><span class="fa fa-gavel"></span> Administration<span class="fa arrow"></span></a>
+                                    <a href="#"><span class="fa fa-gavel"></span> Administration<span class="fa fa-angle-right"></span></a>
                                     <ul class="nav nav-second-level">
                                         <li><a href="<?php echo site_url('admin/validateActions/'); ?>">Valider les actions</a></li>
                                         <li><a href="<?php echo site_url('admin/validatePersos'); ?>">Valider les personnages</a></li>
@@ -71,7 +71,7 @@
                                 </li>
                             <?php endif; ?>                      
                             <li>
-                                <a href="#"><span class="fa fa-newspaper-o"></span> Nouvelles<span class="fa arrow"></span></a>
+                                <a href="#"><span class="fa fa-newspaper-o"></span> Nouvelles<span class="fa fa-angle-right"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li><a href="#"><span class="fa fa-newspaper-o"></span> Lire les Nouvelles</a></li>
                                     <?php if($this->session->user_info->is_admin) : ?>
@@ -80,7 +80,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="<?php echo site_url('perso/index') . '/' .$this->session->user_info->id; ?>"><span class="fa fa-child"></span> Mes Personnages (à venir)<span class="fa arrow"></span></a>
+                                <a href="<?php echo site_url('perso/index') . '/' .$this->session->user_info->id; ?>"><span class="fa fa-child"></span> Mes Personnages (à venir)<span class="fa fa-angle-right"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
                                         <a href="<?php echo site_url('perso/index') . '/' .$this->session->user_info->id; ?>">Mes Personnages</a>
@@ -94,7 +94,7 @@
                                 
                             </li>
                             <li>
-                                <a href="#"><span class="fa fa-users"></span> Influence<span class="fa arrow"></span></a>
+                                <a href="#"><span class="fa fa-users"></span> Influence<span class="fa fa-angle-right"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>
                                         <a href="<?php echo site_url('influence/buyContact/') .$this->session->userdata['activePerso']; ?>"><span class="fa fa-user-plus"></span> Acheter des Contacts</a>
