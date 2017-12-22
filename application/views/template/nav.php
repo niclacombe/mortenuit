@@ -9,7 +9,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="<?php echo base_url(); ?>"><img src="/mortenuit/assets/img/enfantscain_logo_white.svg" style="max-height:44px;" alt="Logo"></a>
+                <a class="navbar-brand" href="<?php echo base_url(); ?>"><img src="<?php echo _IMG_; ?>/enfantscain_logo_white.svg" style="max-height:44px;" alt="Logo"></a>
             </div>
             <!-- /.navbar-header -->
 
@@ -58,7 +58,7 @@
 
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
-                    <?php if ($this->session->is_logged_in == true) : ?>
+                    <?php if ($this->session->is_logged_in == true && $this->session->user_info->is_confirmed == 1) : ?>
                         <ul class="nav" id="side-menu">                        
                             <li><a href="<?php echo base_url(); ?>user/readProfile/<?php echo $this->session->userdata['user_info']->id; ?>"><span class="fa fa-user"></span> Mon Profil</a></li>
                             <?php if($this->session->user_info->is_admin) : ?>

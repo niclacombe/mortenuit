@@ -85,6 +85,33 @@ class User extends CI_Controller {
 		}
 	}
 
+	public function resendValidateEmail($userEmail){
+
+		$this->load->helper('send_email_helper');
+		$config['mailtype'] = 'html';
+		$this->email->initialize($config);
+
+		$this->email->from('admin@enfantsdecain.ca', 'Les Enfants de Cain');
+		$this->email->to( $userEmail );
+
+		$this->email->subject('La Morte Nuit - Confirmation d\'Inscription');
+
+		$msg = 'Vous recevez ce courriel parce que vous vous êtes inscrit à l\'activité La Morte Nuit. <br> Pour valider votre compte, veuillez cliquer sur le lien suivant : <br> <a href="enfantsdecain.ca/index.php/user/validateUser/' .$userEmail .'" target="_blank">Valider mon compte.</a>';
+
+		$message = formatEmail($msg);
+
+		$this->email->message($message);
+
+		$this->email->send();
+
+		$data['courriel'] = $this->input->post('courriel');
+
+		$this->load->view('template/header');
+		$this->load->view('template/nav');
+		$this->load->view('home/home',$data);
+		$this->load->view('template/footer');
+	}
+
 	public function validateUser($userEmail) {
 
 		$this->load->model('user_model');

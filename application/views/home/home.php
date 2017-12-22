@@ -4,9 +4,16 @@
 			<div class="col-xs-12">
 				<h1>Accueil</h1>
 
-				<?php if (isset($_SESSION) && $this->session->userdata('is_logged_in') != NULL) : ?>
+				<?php if (isset($_SESSION) && $this->session->userdata('is_logged_in') != NULL && $this->session->userdata('user_info')->is_confirmed == 1 ) : ?>
 					<h2>Bonjour <?php echo $this->session->userdata['user_info']->prenom; ?></h2>
 				<?php endif; ?>
+
+				<?php if (isset($_SESSION) && $this->session->userdata('user_info')->is_confirmed == 0) : ?>
+					<h2>Votre compte n'a pas été activé.<br>Veuillez consulter vos courriels ( <?php echo $this->session->userdata('user_info')->courriel; ?> ) pour activer votre compte.</h2>
+					<h3><a href="<?php echo site_url('user/resendValidateEmail/') .$this->session->userdata('user_info')->courriel; ?>"><span class="fa fa-paper-plane"></span> Renvoyer le courriel</a></h3>
+					<h4>Si votre adresse courriel est inexacte, veuillez communiquer avec un organisateur au <em>admin@enfantsdecain.ca</em></h4>
+				<?php endif; ?>
+
 				<?php if (isset($userInfo) && $userInfo == false) : ?>
 					<h2>Erreur de connexion</h2>
 				<?php endif; ?>
@@ -16,7 +23,7 @@
 		<div class="row">
 			<div class="col-md-6 col-xs-12">
 				<?php 
-					if (isset($news) && isset($this->session->userdata['user_info'])): 
+					if (isset($news) && isset($this->session->userdata['user_info']) && $this->session->userdata('is_logged_in') == 1): 
 						foreach ($news as $new) { 
 				?>
 						<div class="panel panel-default">
